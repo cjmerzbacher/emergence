@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workshop Reading List</title>
+  <style>
+  :root {
+    --color-background: #F7F3E8; /* bone/cream */
+    --color-text: #1F3A8A;      /* deep notebook blue */
+    --color-accent: #E94D3D;       /* red/orange accent */
+    --color-outline: #4C5C9A;
+    --circle-blue: #4C5C9A;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--color-background);
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  header {
+    padding: 1.5rem 2rem;
+    text-align: center;
+    border-bottom: 2px solid var(--color-outline);
+  }
+  header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: .5px;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
+
+  h2 {
+    margin: 2rem 0 0.5rem;
+    font-size: 1.2rem;
+    border-bottom: 1px dashed var(--color-outline);
+    padding-bottom: 0.25rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    background: var(--color-background);
+  }
+  thead th {
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--color-text);
+    border-bottom: 2px solid var(--color-outline);
+    padding: 0.75rem;
+    text-align: left;
+  }
+  tbody td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--color-outline);
+  }
+  tbody tr:hover td {
+    background: #f7f3e7;
+  }
+
+  a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .btn {
+    font-family: inherit;
+    font-size: 0.9rem;
+    border: 1px solid var(--color-text);
+    background: transparent;
+    color: var(--color-text);
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  .btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: .8rem;
+    border: 1px solid var(--color-outline);
+    border-radius: 999px;
+    padding: 0.3rem 0.6rem;
+    background: #fff;
+    color: var(--color-text);
+  }
+
+  .circles { display: inline-flex; gap: .25rem; }
+  .circle { width: 14px; height: 14px; border: 2px solid var(--circle-blue); border-radius: 50%; background: transparent; }
+  .filled { background: var(--circle-blue); }
+
+  .login .fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  label { font-size: .85rem; }
+  input { width: 100%; padding: .55rem .6rem; border: 1px solid var(--color-outline); border-radius: 6px; background: #fff; color: var(--color-text); font-family: inherit; }
+  input:focus { outline: 2px solid var(--color-accent); }
+
+  footer { margin-top: 2rem; padding: 1rem; border-top: 2px solid var(--color-outline); text-align: center; font-size: .8rem; color: var(--color-text); }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Workshop Reading List</h1>
+  </header>
+  <div class="container">
+    <div id="login-panel"></div>
+    <div class="badge" style="margin: 10px 0 0">Legend: <span class="circles" style="margin-left:8px"><span class="circle"></span><span class="circle"></span><span class="circle"></span></span> 0/3 &nbsp; <span class="circles"><span class="circle filled"></span><span class="circle"></span><span class="circle"></span></span> 1/3 &nbsp; <span class="circles"><span class="circle filled"></span><span class="circle filled"></span><span class="circle"></span></span> 2/3 &nbsp; <span class="circles"><span class="circle filled"></span><span class="circle filled"></span><span class="circle filled"></span></span> Full</div>
+    <div id="app"></div>
+  </div>
+  <footer>© <span id="year"></span> Workshop Reading List</footer>
+
+  <script>
+    const works = [
+      {id:"anderson-1972",category:"Scientific work",title:"More Is Different",author:"Philip Anderson (1972)",link:"https://www.science.org/doi/10.1126/science.177.4047.393",description:"Seminal essay arguing that new laws emerge at higher levels of complexity."},
+      {id:"mitchell-complexity",category:"Scientific work",title:"Complexity: A Guided Tour",author:"Melanie Mitchell (2009)",description:"Clear overview of complex systems, networks, and self-organization."},
+      {id:"krakauer-intro",category:"Scientific work",title:"Intro to Complexity Papers",author:"David Krakauer",description:"Curated intro to foundational complexity papers."},
+      {id:"calvino-cosmicomics",category:"Fiction",title:"Cosmicomics",author:"Italo Calvino (1965)",description:"Playful stories imagining cosmic phenomena."},
+      {id:"tokarczuk-flights",category:"Fiction",title:"Flights",author:"Olga Tokarczuk (2007)",description:"Fragmentary novel with emergent meaning."},
+      {id:"leguin-dispossessed",category:"Fiction",title:"The Dispossessed",author:"Ursula K. Le Guin (1974)",description:"Anarchism, ecology, societal emergence."},
+      {id:"leguin-always-coming-home",category:"Fiction",title:"Always Coming Home",author:"Ursula K. Le Guin (1985)",description:"Anthropology-as-fiction about ecology and culture."},
+      {id:"denes-wheatfield",category:"Artworks",title:"Wheatfield — A Confrontation",author:"Agnes Denes (1982)",description:"Ecological, economic, political symbolism."},
+      {id:"turrell-skyspaces",category:"Artworks",title:"Skyspaces",author:"James Turrell",description:"Light and perception as emergent phenomena."},
+      {id:"generative-reas-mohr",category:"Artworks",title:"Generative Art",author:"Casey Reas / Manfred Mohr",description:"Code-based emergent systems."},
+      {id:"cunningham-cage",category:"Artworks",title:"Cunningham × Cage",author:"Merce Cunningham / John Cage",description:"Chance operations, emergent performance."}
+    ];
+
+    const maxPerWork = 3;
+    const maxPerUser = 3;
+
+    function loadState() { return JSON.parse(localStorage.getItem("signups")||"{}") || {}; }
+    function saveState(state) { localStorage.setItem("signups", JSON.stringify(state)); }
+    function getUser() { return JSON.parse(localStorage.getItem("user")||"null"); }
+    function setUser(user) { if(user) localStorage.setItem("user", JSON.stringify(user)); else localStorage.removeItem("user"); renderApp(); }
+
+    function renderLogin() {
+      const user = getUser();
+      const panel = document.getElementById("login-panel");
+      if(user) {
+        panel.innerHTML = `<div class=\"login\">Signed in as <b>${user.name}</b> <button onclick=\"setUser(null)\">Log out</button></div>`;
+      } else {
+        panel.innerHTML = `
+          <div class=\"login\">
+            <h3>Sign in to select works</h3>
+            <label>Name <input id=\"name\"/></label>
+            <label>Password <input type=\"password\" id=\"pass\"/></label>
+            <button id=\"enter\">Enter</button>
+          </div>`;
+        document.getElementById("enter").onclick = () => {
+          const name = document.getElementById("name").value.trim();
+          const pass = document.getElementById("pass").value.trim();
+          if(!name || !pass) return alert("Enter both fields");
+          setUser({name, pass});
+        };
+      }
+    }
+
+    function renderApp() {
+      const user = getUser();
+      const state = loadState();
+
+      const myChoices = user ? Object.entries(state).filter(([k,v]) => v.includes(user.name)).map(([k])=>k) : [];
+      const remaining = maxPerUser - myChoices.length;
+
+      let html = "";
+      const cats = [...new Set(works.map(w=>w.category))];
+      cats.forEach(cat => {
+        html += `<h2>${cat}</h2><table><tr><th>Work</th><th>Description</th><th>Sign-ups</th><th></th></tr>`;
+        works.filter(w=>w.category===cat).forEach(w => {
+          const signups = state[w.id]||[];
+          const hasMe = user && signups.includes(user.name);
+          const full = signups.length>=maxPerWork;
+          const disable = user ? (!hasMe && (remaining<=0 || full)) : true;
+
+          let circles = "<div class='circles'>";
+          for(let i=0;i<maxPerWork;i++){
+            circles += `<div class='circle ${i<signups.length?"filled":""}'></div>`;
+          }
+          circles += "</div>";
+
+          html += `<tr><td><b>${w.title}</b><br><small>${w.author}</small></td><td>${w.description}</td><td>${circles} ${signups.join(", ")}</td><td>${user?`<button onclick=\"toggle('${w.id}')\" ${disable?"disabled":""}>${hasMe?"Remove":"Choose"}</button>`:"<span class='badge'>Sign in to choose</span>"}</td></tr>`;
+        });
+        html += `</table>`;
+      });
+
+      document.getElementById("app").innerHTML = html;
+      renderLogin();
+    }
+
+    function toggle(id){
+      const user = getUser();
+      if(!user) return;
+      const state = loadState();
+      const arr = state[id]||[];
+      const hasMe = arr.includes(user.name);
+      if(hasMe){
+        state[id] = arr.filter(n=>n!==user.name);
+      } else {
+        const myChoices = Object.values(state).filter(a=>a.includes(user.name)).length;
+        if(myChoices>=maxPerUser) return;
+        if(arr.length>=maxPerWork) return;
+        arr.push(user.name);
+        state[id]=arr;
+      }
+      saveState(state);
+      renderApp();
+    }
+
+    renderApp();
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

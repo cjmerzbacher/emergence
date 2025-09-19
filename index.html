@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>emergence — Winter 2026 Workshop</title>
+  <meta name="description" content="A 10-day interdisciplinary residency on emergence at Stroanfreggan House, Dumfriesshire, Scotland. Artists, engineers, writers, scientists, and philosophers co-create new work." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0b0d10; --panel:#0f1318; --text:#e6ebf2; --muted:#9aa4b2;
+      --brand:#7dd3fc; --accent:#a78bfa; --ring:#334155;
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 70% -10%, #101522 10%, var(--bg) 60%);
+      line-height:1.6;
+    }
+    .site-header{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;background:linear-gradient(to bottom, rgba(11,13,16,.8), rgba(11,13,16,.2));backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.05)}
+    .logo{font-weight:800;letter-spacing:.2px;text-decoration:none;color:#fff}
+    .logo span{color:var(--brand)}
+    .site-nav a{color:var(--text);text-decoration:none;margin-left:18px;font-weight:600;padding:8px 12px;border-radius:999px;transition:opacity .2s,background .2s,transform .1s;opacity:.85}
+    .site-nav a:hover{opacity:1}
+    .site-nav .cta{background:linear-gradient(90deg,var(--brand),var(--accent));color:#0b0d10}
+    .hero{position:relative;min-height:70vh;display:grid;place-items:center;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.05)}
+    #emergenceCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+    .hero-content{position:relative;z-index:2;text-align:center;max-width:1000px;padding:72px 20px}
+    .hero h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:0 0 10px}
+    .kicker{color:var(--brand);font-weight:700;letter-spacing:.2px;margin:.25rem 0 1rem}
+    .subtitle{color:var(--muted);margin:0 0 1.5rem}
+    .btn{display:inline-block;border-radius:999px;padding:12px 18px;text-decoration:none;font-weight:700;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);color:var(--text);margin:.35rem .25rem;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--accent));color:#0b0d10;border:none}
+    .btn.ghost:hover{background:rgba(255,255,255,.06)}
+    .hint{font-size:.85rem;color:var(--muted);margin-top:10px}
+    .section{padding:72px 20px}
+    .section.alt{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0) 60%)}
+    .wrap{max-width:1000px;margin:0 auto}
+    .bullets{margin:1rem 0 0;padding-left:1.1rem}
+    .bullets li{margin:.4rem 0}
+    .timeline{display:grid;gap:12px;margin-top:1rem}
+    .slot{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+    .slot span{font-variant-numeric:tabular-nums;color:var(--brand);font-weight:800;width:60px}
+    .grid.cards{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:14px;display:grid;grid-template-columns:80px 1fr;gap:14px}
+    .card img{width:80px;height:80px;object-fit:cover;border-radius:12px}
+    .signup{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px}
+    .signup label{display:grid;gap:6px}
+    .signup input{padding:12px 12px;border-radius:12px;border:1px solid var(--ring);background:#0d1117;color:var(--text);outline:none;box-shadow:0 0 0 0 rgba(99,102,241,0);transition:box-shadow .15s,border-color .15s}
+    .signup input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(125,211,252,.25)}
+    .signup .privacy{grid-column:1 / -1;color:var(--muted);font-size:.9rem;margin:0}
+    .site-footer{border-top:1px solid rgba(255,255,255,.06);padding:30px 20px;color:var(--muted)}
+    .footer-nav a{color:var(--muted);text-decoration:none;margin-right:12px}
+    .toolbar{position:absolute;right:14px;bottom:14px;z-index:3;display:flex;gap:8px}
+    .toolbar button{font-size:.85rem}
+    @media (prefers-reduced-motion: reduce){
+      /* We’ll still allow play, but default paused handled in JS */
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <a class="logo" href="#home" aria-label="Home">emergence<span>—2026</span></a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#logistics">Logistics</a>
+      <a class="cta" href="#register">Register</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero" aria-label="Hero">
+    <canvas id="emergenceCanvas" aria-hidden="true"></canvas>
+    <div class="toolbar" aria-label="Animation controls">
+      <button id="toggleMotion" class="btn ghost" title="Pause/Play animation">⏸︎ Pause</button>
+      <button id="toggleMode" class="btn ghost" title="Toggle attract/repel">↔︎ Attract</button>
+    </div>
+    <div class="hero-content">
+      <h1>emergence</h1>
+      <p class="kicker">Winter Quarter 2026 • mid-February (10 days) • Stroanfreggan House, Dumfriesshire, Scotland, UK</p>
+      <p class="subtitle">An interdisciplinary residency exploring how simple rules become complex worlds—through making, reading, and living together.</p>
+      <a class="btn primary" href="#register">Express interest</a>
+      <a class="btn ghost" href="#about">Learn more</a>
+      <p class="hint">Move your mouse (click to attract/repel) to influence the system.</p>
+    </div>
+  </section>
+
+  <main id="content">
+    <section id="about" class="section">
+      <div class="wrap">
+        <h2>About</h2>
+        <p>We’re gathering artists, engineers, writers, scientists, philosophers, and cross-disciplinary thinkers to ask: when is a whole more than the sum of its parts? What does it look like when properties <em>emerge</em>?</p>
+        <h3>Outcomes</h3>
+        <ul class="bullets">
+          <li>Co-create a new work: art, performance, writing, music, or inquiry.</li>
+          <li>Contribute a short piece to a chapbook (due <strong>April 1, 2026</strong>).</li>
+          <li>After the residency, meet weekly for three months to curate a quarterly magazine documenting the work.</li>
+          <li>Each resident prepares a 1-page bio of prior work (text and/or visuals).</li>
+        </ul>
+
+        <h3>Preparatory Reading (bring one source for Reading Day)</h3>
+        <ul class="bullets">
+          <li>Philip Anderson — “More Is Different” (1972)</li>
+          <li>Melanie Mitchell — <em>Complexity: A Guided Tour</em> (or Krakauer’s Intro to Complexity Papers)</li>
+          <li>Italo Calvino — <em>Cosmicomics</em>; Olga Tokarczuk — <em>Flights</em>; Ursula K. Le Guin — <em>The Dispossessed</em> or <em>Always Coming Home</em></li>
+          <li>Agnes Denes — <em>Wheatfield — A Confrontation</em>; James Turrell — Skyspaces; generative artists Casey Reas / Manfred Mohr; Cunningham/Cage collaborations</li>
+        </ul>
+
+        <h3>Micro-experiments</h3>
+        <p>Each participant brings a small seed (algorithm, score, poem fragment, visual prompt) that others can iterate on. We’ll make emergent works in real time.</p>
+      </div>
+    </section>
+
+    <section id="schedule" class="section alt">
+      <div class="wrap">
+        <h2>Daily Rhythm</h2>
+        <div class="timeline">
+          <div class="slot"><span>08:00</span><b>Meditation (great room)</b></div>
+          <div class="slot"><span>08:45</span><b>Breakfast (optional)</b></div>
+          <div class="slot"><span>09:30</span><b>Collaboration begins</b> — lectures, outside work, discussions</div>
+          <div class="slot"><span>13:00</span><b>Lunch</b> (self-organized)</div>
+          <div class="slot"><span>PM</span><b>Self-guided work</b> — nature walks, art time, optional workshops</div>
+          <div class="slot"><span>18:30</span><b>Dinner</b> (communal)</div>
+          <div class="slot"><span>20:00</span><b>Meditation</b> → free time, quiet hours 23:00–07:00</div>
+        </div>
+
+        <h3 style="margin-top:28px">Weekly Arc</h3>
+        <p><b>Themes:</b> Pattern • Threshold • Agency • Unpredictability • Beauty</p>
+        <ul class="bullets">
+          <li><b>Fri (arrivals):</b> Nature walk to Stroanfreggan Cairn; observation practice. First dinner, intros, house rules.</li>
+          <li><b>Sat:</b> Lectures — science & society. <em>Dark evening</em> (no lights after dusk).</li>
+          <li><b>Sun:</b> Reading Day.</li>
+          <li><b>Mon:</b> Lectures.</li>
+          <li><b>Tue:</b> Silent day (08:00–20:00), silent forest walk.</li>
+          <li><b>Wed:</b> Collaborative time; possible trip (Dumfries / seaside / Wigtown).</li>
+          <li><b>Thu:</b> Collaborative time.</li>
+          <li><b>Fri:</b> Final presentations; plan ongoing work.</li>
+          <li><b>Sat–Sun:</b> Departures.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="logistics" class="section">
+      <div class="wrap">
+        <h2>Location & Logistics</h2>
+        <p><b>Stroanfreggan House</b> (converted 1930s school; Brander family since the 1970s) has a great room with wood-burning stove, a dining room and stocked kitchen, dorm-style housing (2–4 per room), and two bathrooms with showers. The surrounding area offers an Iron Age hill fort and woodsy walks; it’s in a Dark Sky Area—excellent winter stargazing.</p>
+        <p><b>Weather:</b> Cold, windy, and dark; rarely below freezing. Dress warmly. Underfloor heating throughout; great room is heated by wood stove.</p>
+
+        <h3>Travel</h3>
+        <ul class="bullets">
+          <li>Nearest airports: Edinburgh (EDI), Glasgow (GLA). Pickup from Dumfries train station or shuttle from Edinburgh depending on arrivals.</li>
+          <li>Car required for access; a rental car will be available for local trips (licensed drivers/registered visitors only).</li>
+          <li>Grocery delivery arranged day 1; additional runs as needed. Travel & fuel billed based on use.</li>
+        </ul>
+
+        <h3>Connectivity</h3>
+        <p>Limited-connectivity residency. No consistent internet at Stroanfreggan. Staff will keep hotspot phones for emergencies only. Resident phones collected on day 1 and returned 24h before departure.</p>
+
+        <h3>Budget (estimate)</h3>
+        <ul class="bullets">
+          <li>Stroanfreggan rental: £2,000</li>
+          <li>Rental car: £50/day → ~£650 incl. fuel</li>
+          <li>Food: £15/person/day → ~£150/person</li>
+          <li>15% contingency → <b>£5,115 total ≈ £511/person for 10 days</b> (travel to/from residency not included)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="register" class="section alt">
+      <div class="wrap">
+        <h2>Register interest</h2>
+        <p>Total residents: 10–12. Share your details and we’ll follow up with dates and logistics.</p>
+        <form class="signup" action="#" method="post" onsubmit="alert('Thanks! We will be in touch.'); return false" aria-label="Register your interest">
+          <label><span>Name</span><input required type="text" placeholder="Ada Lovelace" /></label>
+          <label><span>Email</span><input required type="email" placeholder="ada@example.com" /></label>
+          <label><span>Discipline(s)</span><input type="text" placeholder="Artist, engineer, philosopher…" /></label>
+          <p class="privacy">We’ll only email you about this workshop.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Accessibility</summary>
+          <p>The house is multi-room with shared facilities; please let us know about specific needs and we’ll coordinate.</p>
+        </details>
+        <details>
+          <summary>Can I be online?</summary>
+          <p>We’re intentionally offline to support focus. Emergency connectivity is available via staff phones.</p>
+        </details>
+        <details>
+          <summary>What should I bring?</summary>
+          <p>Warm layers, sturdy shoes, personal meds, and a small “micro-experiment” for others to build on.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span id="year"></span> emergence residency</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#about">About</a>
+        <a href="#register">Register</a>
+        <a href="#logistics">Logistics</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    /* ========= Helper ========= */
+    const $ = s => document.querySelector(s);
+    const canvas = $("#emergenceCanvas");
+    const ctx = canvas.getContext("2d", { alpha: true });
+    let width = 0, height = 0, dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    $("#year").textContent = new Date().getFullYear();
+
+    function resize(){
+      width = canvas.clientWidth || window.innerWidth;
+      height = canvas.clientHeight || Math.max(400, window.innerHeight * 0.7);
+      // Fallback ensures non-zero size even if CSS hasn’t laid out yet.
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    window.addEventListener("resize", resize, { passive:true });
+    // Force a layout pass before reading clientWidth/Height:
+    requestAnimationFrame(resize);
+
+    /* ========= Animation state ========= */
+    const particles = [];
+    const MAX_PARTICLES = 240;
+    let paused = false; // default running even if prefers-reduced-motion set
+    let mouse = { x: 0, y: 0, down: false, repel: false };
+
+    function rand(min,max){ return Math.random()*(max-min)+min; }
+
+    class Particle{
+      constructor(){
+        const s = rand(.2,.8);
+        this.x = rand(0,width); this.y = rand(0,height);
+        this.vx = rand(-s,s); this.vy = rand(-s,s);
+      }
+    }
+
+    function seed(){
+      particles.length = 0;
+      const area = Math.max(1, width*height);
+      const density = Math.min(MAX_PARTICLES, Math.floor(area / 9000));
+      for(let i=0;i<density;i++) particles.push(new Particle());
+    }
+
+    /* ========= Interaction ========= */
+    function updateMouseFromEvent(clientX, clientY){
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = clientX - rect.left;
+      mouse.y = clientY - rect.top;
+    }
+    canvas.addEventListener("mousemove", e => updateMouseFromEvent(e.clientX, e.clientY), { passive:true });
+    canvas.addEventListener("touchmove", e => { const t = e.touches[0]; if(t) updateMouseFromEvent(t.clientX, t.clientY); }, { passive:true });
+    canvas.addEventListener("mousedown", () => mouse.down = true);
+    canvas.addEventListener("mouseup",   () => mouse.down = false);
+    canvas.addEventListener("mouseleave",() => mouse.down = false);
+    canvas.addEventListener("click", () => { mouse.repel = !mouse.repel; updateModeLabel(); });
+
+    $("#toggleMode").addEventListener("click", () => { mouse.repel = !mouse.repel; updateModeLabel(); });
+    $("#toggleMotion").addEventListener("click", () => { paused = !paused; updatePauseLabel(); });
+
+    function updateModeLabel(){
+      $("#toggleMode").textContent = mouse.repel ? "↔︎ Repel" : "↔︎ Attract";
+    }
+    function updatePauseLabel(){
+      $("#toggleMotion").textContent = paused ? "▶︎ Play" : "⏸︎ Pause";
+    }
+
+    /* ========= Simulation ========= */
+    const P = {
+      perception: 55, separationDist: 16,
+      maxSpeed: 2.2, maxForce: 0.045,
+      cohesionWeight: 0.4, alignmentWeight: 0.8, separationWeight: 1.2,
+      mouseWeight: 1.0
+    };
+
+    function step(){
+      for(const p of particles){
+        let n=0, cohX=0, cohY=0, aliX=0, aliY=0, sepX=0, sepY=0;
+
+        for(const o of particles){
+          if(o===p) continue;
+          const dx=o.x-p.x, dy=o.y-p.y;
+          const d = Math.hypot(dx,dy);
+          if(d>0 && d<P.perception){
+            cohX += o.x; cohY += o.y;
+            aliX += o.vx; aliY += o.vy;
+            if(d < P.separationDist){ const inv = 1/(d*d+1e-4); sepX -= dx*inv; sepY -= dy*inv; }
+            n++;
+          }
+        }
+
+        let ax=0, ay=0;
+        if(n){
+          cohX = (cohX/n - p.x); cohY = (cohY/n - p.y);
+          aliX /= n; aliY /= n;
+          ax += cohX * P.cohesionWeight; ay += cohY * P.cohesionWeight;
+          ax += aliX * P.alignmentWeight; ay += aliY * P.alignmentWeight;
+        }
+        ax += sepX * P.separationWeight; ay += sepY * P.separationWeight;
+
+        // mouse
+        const mdx = mouse.x - p.x, mdy = mouse.y - p.y;
+        const md = Math.hypot(mdx, mdy) || 1;
+        const mFactor = Math.min(1, 140 / md);
+        const mx = (mouse.repel ? -mdx : mdx) / md * mFactor;
+        const my = (mouse.repel ? -mdy : mdy) / md * mFactor;
+        const mScale = mouse.down ? 1.8 : 0.6;
+        ax += mx * P.mouseWeight * mScale; ay += my * P.mouseWeight * mScale;
+
+        // limit force
+        const aMag = Math.hypot(ax,ay);
+        if(aMag > P.maxForce){ ax = ax/aMag*P.maxForce; ay = ay/aMag*P.maxForce; }
+
+        p.vx += ax; p.vy += ay;
+        const s = Math.hypot(p.vx,p.vy);
+        if(s > P.maxSpeed){ p.vx = p.vx/s*P.maxSpeed; p.vy = p.vy/s*P.maxSpeed; }
+
+        p.x += p.vx; p.y += p.vy;
+
+        // wrap
+        if(p.x < -10) p.x = width+10; if(p.x > width+10) p.x = -10;
+        if(p.y < -10) p.y = height+10; if(p.y > height+10) p.y = -10;
+      }
+    }
+
+    function draw(){
+      // gentle trail
+      ctx.fillStyle = "rgba(11,13,16,0.12)";
+      ctx.fillRect(0,0,width,height);
+
+      ctx.globalCompositeOperation = "lighter";
+      for(const p of particles){
+        const sp = Math.hypot(p.vx,p.vy);
+        const glow = Math.min(1, (sp / P.maxSpeed) * 0.9 + 0.1);
+        ctx.strokeStyle = `rgba(125,211,252,${0.18 + glow*0.2})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x - p.vx*4, p.y - p.vy*4);
+        ctx.stroke();
+      }
+      ctx.globalCompositeOperation = "source-over";
+    }
+
+    function loop(){
+      if(!paused){ step(); draw(); }
+      requestAnimationFrame(loop);
+    }
+
+    // Initial boot: ensure size exists before seeding
+    function boot(){
+      resize();
+      seed();
+      // center mouse to avoid NaNs when off screen
+      mouse.x = width/2; mouse.y = height/2;
+      // If user prefers reduced motion, start paused but allow play
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      paused = prefersReduced ? true : false;
+      updatePauseLabel(); updateModeLabel();
+      console.info("[emergence] Animation booted.",
+        { width, height, dpr, particles: particles.length, prefersReduced });
+      loop();
+    }
+    // Wait a tick for layout, then boot
+    window.addEventListener("load", boot);
+
+    // Reseed on resize for consistent density
+    window.addEventListener("resize", () => { resize(); seed(); });
+
+    // Pause when tab is hidden
+    document.addEventListener("visibilitychange", () => { paused = document.hidden ? true : paused; updatePauseLabel(); });
+  </script>
+</body>
+</html>
