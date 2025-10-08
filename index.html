@@ -3,385 +3,476 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>emergence — Winter 2026 Workshop</title>
-  <meta name="description" content="A 10-day interdisciplinary residency on emergence at Stroanfreggan House, Dumfriesshire, Scotland. Artists, engineers, writers, scientists, and philosophers co-create new work." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <title>Emergence Workshop</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0d10; --panel:#0f1318; --text:#e6ebf2; --muted:#9aa4b2;
-      --brand:#7dd3fc; --accent:#a78bfa; --ring:#334155;
+      --sapin:#262c00;     /* deep green for text */
+      --mousse:#53582f;    /* olive */
+      --lichen:#c3c49f;    /* light moss */
+      --acajou:#5e2418;    /* dark red-brown */
+      --ete:#d54315;       /* indian summer orange */
+      --ciel:#adbcc3;      /* misty blue */
+      --paper:#f5f6ee;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.12);
     }
-    *{box-sizing:border-box} html,body{height:100%}
-    body{
-      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:var(--text);
-      background: radial-gradient(1200px 800px at 70% -10%, #101522 10%, var(--bg) 60%);
-      line-height:1.6;
+
+    html,body{height:100%;scroll-behavior:smooth}
+    body{margin:0; color:var(--sapin); background:var(--lichen); font-family:"Lora",serif; line-height:1.6}
+
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none; opacity:.18; mix-blend-mode:multiply;
+      background-image: radial-gradient(rgba(0,0,0,.06) 1px, transparent 1px);
+      background-size: 3px 3px; z-index:0;
     }
-    .site-header{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;background:linear-gradient(to bottom, rgba(11,13,16,.8), rgba(11,13,16,.2));backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.05)}
-    .logo{font-weight:800;letter-spacing:.2px;text-decoration:none;color:#fff}
-    .logo span{color:var(--brand)}
-    .site-nav a{color:var(--text);text-decoration:none;margin-left:18px;font-weight:600;padding:8px 12px;border-radius:999px;transition:opacity .2s,background .2s,transform .1s;opacity:.85}
-    .site-nav a:hover{opacity:1}
-    .site-nav .cta{background:linear-gradient(90deg,var(--brand),var(--accent));color:#0b0d10}
-    .hero{position:relative;min-height:70vh;display:grid;place-items:center;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.05)}
-    #emergenceCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-    .hero-content{position:relative;z-index:2;text-align:center;max-width:1000px;padding:72px 20px}
-    .hero h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:0 0 10px}
-    .kicker{color:var(--brand);font-weight:700;letter-spacing:.2px;margin:.25rem 0 1rem}
-    .subtitle{color:var(--muted);margin:0 0 1.5rem}
-    .btn{display:inline-block;border-radius:999px;padding:12px 18px;text-decoration:none;font-weight:700;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);color:var(--text);margin:.35rem .25rem;cursor:pointer}
-    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--accent));color:#0b0d10;border:none}
-    .btn.ghost:hover{background:rgba(255,255,255,.06)}
-    .hint{font-size:.85rem;color:var(--muted);margin-top:10px}
-    .section{padding:72px 20px}
-    .section.alt{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0) 60%)}
-    .wrap{max-width:1000px;margin:0 auto}
-    .bullets{margin:1rem 0 0;padding-left:1.1rem}
-    .bullets li{margin:.4rem 0}
-    .timeline{display:grid;gap:12px;margin-top:1rem}
-    .slot{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:12px 14px;display:flex;gap:12px;align-items:center}
-    .slot span{font-variant-numeric:tabular-nums;color:var(--brand);font-weight:800;width:60px}
-    .grid.cards{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .card{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:14px;display:grid;grid-template-columns:80px 1fr;gap:14px}
-    .card img{width:80px;height:80px;object-fit:cover;border-radius:12px}
-    .signup{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px}
-    .signup label{display:grid;gap:6px}
-    .signup input{padding:12px 12px;border-radius:12px;border:1px solid var(--ring);background:#0d1117;color:var(--text);outline:none;box-shadow:0 0 0 0 rgba(99,102,241,0);transition:box-shadow .15s,border-color .15s}
-    .signup input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(125,211,252,.25)}
-    .signup .privacy{grid-column:1 / -1;color:var(--muted);font-size:.9rem;margin:0}
-    .site-footer{border-top:1px solid rgba(255,255,255,.06);padding:30px 20px;color:var(--muted)}
-    .footer-nav a{color:var(--muted);text-decoration:none;margin-right:12px}
-    .toolbar{position:absolute;right:14px;bottom:14px;z-index:3;display:flex;gap:8px}
-    .toolbar button{font-size:.85rem}
-    @media (prefers-reduced-motion: reduce){
-      /* We’ll still allow play, but default paused handled in JS */
+
+    a{ color:var(--acajou); text-decoration:none; }
+    a:hover{ color:var(--ete); }
+
+    /* Header / Nav */
+    /* header{ position:sticky; top:0; z-index:50; backdrop-filter:saturate(150%) blur(8px);
+      background:color-mix(in oklab, var(--lichen) 80%, white 20% /.7);
+      border-bottom:1px solid color-mix(in oklab, var(--mousse) 30%, white 70%);
+    } */
+    .wrap{ max-width:1080px; margin:0 auto; padding:0 20px; }
+    .nav{ display:flex; align-items:center; justify-content:center; padding:14px 0; }
+    
+    nav a{ 
+      margin:0 12px; 
+      padding:6px 10px; 
+      border-radius:14px;
+      font-family:"IM Fell English", serif; 
+      color:var(--lichen); 
+      font-size: large;
+      font-weight:100; 
+      letter-spacing:.2em;
+      background:color-mix(in oklab, var(--sapin) 80%, white 20%); 
+      transition:background .3s, color .3s; 
+      text-shadow: 0 0px 0px rgba(0,0,0,.7);
     }
+
+    nav a:hover{ background:color-mix(in oklab, var(--paper) 35%, white 65%); }
+    
+    header{
+      position:fixed; top:0; left:0; right:0; width:100%;
+      z-index:1000;
+      background:transparent;
+      border-bottom:0;
+      backdrop-filter:saturate(150%) blur(8px);
+      pointer-events:auto;
+    }
+    
+    /* Hero */
+    .hero{ position:relative; height:72vh; min-height:820px; overflow:hidden; display:grid; place-items:center; background:#0e1726; }
+    #boids{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+    .hero h1{
+      font-family:"Fraunces", serif; font-weight:400;
+      font-size: clamp(40px, 7vw, 84px); line-height:1.02; margin:0;
+      letter-spacing:.2em; text-transform:lowercase; color:#fff; text-align:center;
+    }
+
+    /* Sections */
+    section{ position:relative; z-index:1;}
+    .section{ padding:72px 0; }
+    .section.alt{ background:var(--paper); }
+    .section .wrap{ display:grid; grid-template-columns: 1.1fr .9fr; gap:40px; }
+    .section h2{ font-family:"Fraunces", serif; font-weight:400; font-size: clamp(26px, 3vw, 40px); margin:0 0 12px; letter-spacing:.02em; }
+    .lede{ font-size:1.05rem; color:color-mix(in oklab, var(--sapin) 85%, black 15%); }
+
+    /* Cards */
+    .card{
+      background:linear-gradient(180deg, white, color-mix(in oklab, var(--ciel) 10%, white 100%));
+      border:1px solid color-mix(in oklab, var(--mousse) 20%, white 80%);
+      border-radius:var(--radius); padding:20px; box-shadow:var(--shadow);
+    }
+    .card.flat{ box-shadow:none; }
+
+    /* Lists */
+    .grid{ display:grid; gap:16px; }
+    .two{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .three{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+    @media (max-width:900px){ .section .wrap{ grid-template-columns:1fr; } .two,.three{ grid-template-columns:1fr; } }
+
+    /* Tables */
+    table{ width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:14px; }
+    th, td{ text-align:left; padding:12px 14px; border-bottom:1px solid color-mix(in oklab, var(--mousse) 20%, white 80%); }
+    thead th{ background:color-mix(in oklab, var(--ciel) 25%, white 75%); font-family:"Fraunces", serif; }
+    tbody tr:nth-child(even){ background:color-mix(in oklab, var(--ciel) 12%, white 88%); }
+
+    /* Buttons */
+    .btn{ display:inline-block; padding:10px 16px; border-radius:999px; background:var(--acajou); color:white; border:1px solid transparent; font-weight:600; letter-spacing:.02em; }
+    .btn:hover{ background:var(--ete); color:var(--sapin);}
+
+    footer{ padding:50px 0; text-align:center; color:color-mix(in oklab, var(--sapin) 70%, black 30%); }
+
+    /* Schedule single column override */
+    #schedule .wrap{ display:block; }
+
+    /* Organizers: make this section a single column container (not the 1.1fr/.9fr grid) */
+#who .wrap{ display:block; }
+
+/* Full-width feel (optional). Remove or adjust if you want to keep global 1080px wrap */
+#who .wrap{ max-width:1000px; }
+
+/* Evenly spaced bios on the green background */
+#who .people{ display:grid; gap:24px; }
+#who .people.three{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+@media (max-width:400px){ #who .people.three{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width:640px){ #who .people.three{ grid-template-columns: 1fr; } }
+
+/* Strip card styles so bios sit directly on the background */
+#who .person{
+  background:transparent; border:none; box-shadow:none; padding:0;
+  display:flex; flex-direction:column;
+}
+
+/* Keep nice image treatment */
+#who .avatar {
+  width: clamp(160px, 20vw, 240px);
+  height: clamp(160px, 20vw, 240px);
+  border-radius: 50%;
+  object-fit: cover;
+  /* border: 2px solid color-mix(in oklab, var(--mousse) 25%, white 75%); */
+  background: color-mix(in oklab, var(--ciel) 20%, white 80%);
+  display: block;
+  margin: 0 auto 16px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2), 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+/* Typography polish for names/roles */
+#who .person-name{ font-family:"Fraunces", serif; margin:10px 0 2px; font-size:1.25rem; }
+#who .person-role{ margin:0 0 8px; font-style:italic; color:color-mix(in oklab, var(--sapin) 70%, black 30%); }
+#who .person-links a{ color:var(--acajou); }
+#who .person-links a:hover{ color:var(--ete); }
+
+/* Apply button in navbar */
+nav a.apply-btn {
+  background: var(--acajou);           /* your deep red-brown */
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-shadow: none;
+  mix-blend-mode: normal;              /* avoid inversion on light sections */
+  transition: background .2s ease, transform .2s ease;
+}
+
+nav a.apply-btn:hover {
+  background: var(--ete);              /* lighter orange-red hover */
+  transform: translateY(-1px);
+}
+
+
   </style>
 </head>
 <body>
-  <header class="site-header" role="banner">
-    <a class="logo" href="#home" aria-label="Home">emergence<span>—2026</span></a>
-    <nav class="site-nav" aria-label="Primary">
-      <a href="#about">About</a>
-      <a href="#schedule">Schedule</a>
-      <a href="#logistics">Logistics</a>
-      <a class="cta" href="#register">Register</a>
-    </nav>
+  <header>
+    <div class="wrap nav">
+      <nav>
+        <a href="#intro">Intro</a>
+        <a href="#reading">Reading List</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#travel">Travel & Logistics</a>
+        <a href="#who">Organizers</a>
+        <a class="apply-btn" 
+         href="https://docs.google.com/forms/d/e/1FAIpQLSeiE2x4-IGLn6A3ggvS43uie0rbZOSAF6Tm0TbRwqWcc4l8Xw/viewform?usp=header"
+         target="_blank" rel="noopener">Apply</a>
+      </nav>
+    </div>
   </header>
 
-  <section id="home" class="hero" aria-label="Hero">
-    <canvas id="emergenceCanvas" aria-hidden="true"></canvas>
-    <div class="toolbar" aria-label="Animation controls">
-      <button id="toggleMotion" class="btn ghost" title="Pause/Play animation">⏸︎ Pause</button>
-      <button id="toggleMode" class="btn ghost" title="Toggle attract/repel">↔︎ Attract</button>
-    </div>
-    <div class="hero-content">
-      <h1>emergence</h1>
-      <p class="kicker">Winter Quarter 2026 • mid-February (10 days) • Stroanfreggan House, Dumfriesshire, Scotland, UK</p>
-      <p class="subtitle">An interdisciplinary residency exploring how simple rules become complex worlds—through making, reading, and living together.</p>
-      <a class="btn primary" href="#register">Express interest</a>
-      <a class="btn ghost" href="#about">Learn more</a>
-      <p class="hint">Move your mouse (click to attract/repel) to influence the system.</p>
-    </div>
-  </section>
+  <main>
+    <!-- Hero with dark glowing flock -->
+    <section class="hero" aria-label="Hero">
+      <canvas id="boids" aria-hidden="true"></canvas>
+      <div class="overlay" style="position:relative;z-index:2;text-align:center;max-width:860px;padding:0 20px">
+        <h1>emergence</h1>
+        <div class="meta-box" style="display:inline-block;margin-top:14px; padding:10px 14px; border-radius:7px; border:0px solid rgba(255,255,255,.35); color:#fff; font-size:20px;">
+          February 16–26, 2026 · Stroanfreggan House, Dumfriesshire · 10–12 residents
+        </div>
+        <div class="meta-box" style="display:inline-block;margin-top:14px; padding:10px 14px; border-radius:0px; border:0px solid rgba(255,255,255,.35); color:#fff; font-size:18px;">
+            An interdisciplinary residency exploring how simple connections become complex worlds by making, reading, and living together.
+        </div>
+        <p style="margin-top:16px">
+          <a class="btn" target="_blank" rel="noopener"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeiE2x4-IGLn6A3ggvS43uie0rbZOSAF6Tm0TbRwqWcc4l8Xw/viewform?usp=header">
+            Apply now
+          </a>
+        </p>
 
-  <main id="content">
-    <section id="about" class="section">
-      <div class="wrap">
-        <h2>About</h2>
-        <p>We’re gathering artists, engineers, writers, scientists, philosophers, and cross-disciplinary thinkers to ask: when is a whole more than the sum of its parts? What does it look like when properties <em>emerge</em>?</p>
-        <h3>Outcomes</h3>
-        <ul class="bullets">
-          <li>Co-create a new work: art, performance, writing, music, or inquiry.</li>
-          <li>Contribute a short piece to a chapbook (due <strong>April 1, 2026</strong>).</li>
-          <li>After the residency, meet weekly for three months to curate a quarterly magazine documenting the work.</li>
-          <li>Each resident prepares a 1-page bio of prior work (text and/or visuals).</li>
-        </ul>
-
-        <h3>Preparatory Reading (bring one source for Reading Day)</h3>
-        <ul class="bullets">
-          <li>Philip Anderson — “More Is Different” (1972)</li>
-          <li>Melanie Mitchell — <em>Complexity: A Guided Tour</em> (or Krakauer’s Intro to Complexity Papers)</li>
-          <li>Italo Calvino — <em>Cosmicomics</em>; Olga Tokarczuk — <em>Flights</em>; Ursula K. Le Guin — <em>The Dispossessed</em> or <em>Always Coming Home</em></li>
-          <li>Agnes Denes — <em>Wheatfield — A Confrontation</em>; James Turrell — Skyspaces; generative artists Casey Reas / Manfred Mohr; Cunningham/Cage collaborations</li>
-        </ul>
-
-        <h3>Micro-experiments</h3>
-        <p>Each participant brings a small seed (algorithm, score, poem fragment, visual prompt) that others can iterate on. We’ll make emergent works in real time.</p>
       </div>
     </section>
 
+    <!-- Intro / Outcomes -->
+    <section id="intro" class="section alt">
+      <div class="wrap">
+        <div>
+          <h2>Purpose</h2>
+          <p>We share the intuition behind the old idea that the whole can be greater than the sum of its parts. This residency asks what it really means for properties to <em>emerge</em>: What is the process? What does it look like? How does it happen across media, systems, and scales?</p>
+          <p>We aim to bring together artists, engineers, writers, scientists, philosophers, and people of multiple disciplines to explore these questions. Expect a mix of lectures, collaborative sessions, quiet work, and time outdoors.</p>
+          <h2 style="margin-top:28px">Outcomes</h2>
+          <ul>
+            <li>Co-create one or more collective works — anything from an artwork to a scientific or philosophical inquiry, performance, story, or piece of music.</li>
+            <li>Contribute a one-page bio of previous work (format flexible: images, text, links).</li>
+            <li>Meet weekly online for three months afterwards to curate a quarterly magazine documenting outcomes.</li>
+            <li>Submit a short essay, artwork, article, musical piece, or other creative work for a post-residency <strong>chapbook</strong> (deadline: <strong>April 1, 2026</strong>).</li>
+          </ul>
+        </div>
+        <aside>
+          <div class="card">
+            <h3 style="font-family:'Fraunces',serif;margin-top:0">Where We’ll Be</h3>
+            <p><strong>Stroanfreggan House</strong> is a converted 1930s school in rural Dumfriesshire, kept in the Brander family since the 1970s. It has a great room with a wood-burning stove, a dining room and kitchen, and dorm-style bedrooms (2–4 residents per room). Two bathrooms with showers.</p>
+            <p>The surrounding landscape includes an Iron Age hill fort, wooded walks, and access to a Dark Sky area ideal for winter stargazing.</p>
+          </div>
+            <div class="card" style="margin-top:16px">
+            <!-- <h3 style="font-family:'Fraunces',serif;margin-top:0">Stroanfreggan Landscape</h3> -->
+            <img src="dumfries.jpg" alt="Landscape near Stroanfreggan House, Dumfriesshire" style="width:100%;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.13);margin-top:8px;">
+            </div>
+      </div>
+    </section>
+
+<section id="reading" class="section alt">
+      <div class="wrap">
+        <div>
+          <h2>Reading List</h2>
+          <p>In order to give us a common ground to work from, we have prepared a reading list which will be distributed ahead of time. These works span disciplines (science, theory, fiction, and art) and are deliberately meant to be unfamiliar at least in part to everyone.  
+            We ask that participants make a good-faith effort to read and engage with each of these works including noting down points of confusion, disagreement, and interest. 
+            In addition, we would like each participant to bring a micro-experiment (algorithm, improvisation score, poem fragment, visual seed) that others can iterate on. Our goal is to create emergent works in real time.</p>  
+        </div>
+          <div class="card">
+             <h3 style="font-family:'Fraunces',serif;margin:0 0 6px">Sample Texts and Artworks</h3>
+              <ul>
+                <li>Philip Anderson — <em>More Is Different</em> (1972)</li>
+                <li>Anna Lowenhaupt Tsing — <em>The Mushroom at the End of the World</em> (ecologies and economies in entanglement).</li>
+                <li>Jane Bennett — <em>Vibrant Matter</em> (the agency of non-living things).</li>
+                <li>Toni Morrison — “The Site of Memory”</li>
+                <li>Agnes Denes — <em>Wheatfield — A Confrontation</em></li>
+                <li>Merce Cunningham & John Cage — chance and emergent performance</li>
+              </ul>
+          </div>
+      
+      </div>
+    </section>
+
+    <!-- Schedule (single column; connectivity below) -->
     <section id="schedule" class="section alt">
       <div class="wrap">
-        <h2>Daily Rhythm</h2>
-        <div class="timeline">
-          <div class="slot"><span>08:00</span><b>Meditation (great room)</b></div>
-          <div class="slot"><span>08:45</span><b>Breakfast (optional)</b></div>
-          <div class="slot"><span>09:30</span><b>Collaboration begins</b> — lectures, outside work, discussions</div>
-          <div class="slot"><span>13:00</span><b>Lunch</b> (self-organized)</div>
-          <div class="slot"><span>PM</span><b>Self-guided work</b> — nature walks, art time, optional workshops</div>
-          <div class="slot"><span>18:30</span><b>Dinner</b> (communal)</div>
-          <div class="slot"><span>20:00</span><b>Meditation</b> → free time, quiet hours 23:00–07:00</div>
+        <div>
+          <h2>Schedule</h2>
+          <p class="lede">A steady rhythm with room for surprise. One silent day, one dark evening, and a gentle cadence between shared and solo time.</p>
+          <div class="card" style="margin-top:10px">
+            <h3 style="font-family:'Fraunces',serif;margin-top:0">Daily Rhythm</h3>
+            <table>
+              <thead><tr><th>Time</th><th>Activity</th></tr></thead>
+              <tbody>
+                <tr><td>08:00</td><td>Meditation in the great room</td></tr>
+                <tr><td>08:45</td><td>Breakfast laid out in the kitchen; optional.</td></tr>
+                <tr><td>09:30</td><td>Collaborative work begins; lectures, discussion, or outside work</td></tr>
+                <tr><td>13:00</td><td>Lunch (self-organized)</td></tr>
+                <tr><td>Afternoon</td><td>Self-guided work · nature walks · art time · optional workshops</td></tr>
+                <tr><td>18:30</td><td>Dinner; cooked on a communal schedule</td></tr>
+                <tr><td>20:00</td><td>Meditation</td></tr>
+                <tr><td>Evening</td><td>Reading, stargazing, or social time · quiet hours 23:00–07:00</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+<div style="margin-top:16px">
+  <h3 style="font-family:'Fraunces',serif;margin-top:0">Week at a Glance</h3>
+  <p><strong>Themes:</strong> Pattern · Threshold · Agency · Unpredictability · Beauty</p>
+  <ul style="list-style-type:disc; padding-left:1.5em; line-height:1.7;">
+    <li><strong>Friday:</strong> Arrivals · Walk to the cairn · Observation practice · First dinner and introductions</li>
+    <li><strong>Saturday:</strong> Lectures — science & society · Art workshop · Dark evening</li>
+    <li><strong>Sunday:</strong> Reading Day · Collaborations begin</li>
+    <li><strong>Monday:</strong> Lectures · Silent forest walk</li>
+    <li><strong>Tuesday:</strong> Silent day (8 am – 8 pm)</li>
+    <li><strong>Wednesday:</strong> Collaborative time · Optional trip to Dumfries or the seaside (Wigtown?)</li>
+    <li><strong>Thursday:</strong> Collaborative time · Independent work</li>
+    <li><strong>Friday:</strong> Final presentations · Discussion of ongoing work</li>
+    <li><strong>Saturday:</strong> Closing reflections</li>
+    <li><strong>Sunday:</strong> Departures</li>
+  </ul>
+</div>
+
+
+          <div class="card" style="margin-top:16px">
+            <h3 style="font-family:'Fraunces',serif;margin-top:0">Connectivity</h3>
+            <p>The residency will be limited-connectivity. Stroanfreggan has no consistent internet connection; staff will have phones with hotspots and service but these will be turned off except for emergencies. Resident phones will be collected upon arrival on the first day and returned 24 hours before departure.</p>
+          </div>
         </div>
-
-        <h3 style="margin-top:28px">Weekly Arc</h3>
-        <p><b>Themes:</b> Pattern • Threshold • Agency • Unpredictability • Beauty</p>
-        <ul class="bullets">
-          <li><b>Fri (arrivals):</b> Nature walk to Stroanfreggan Cairn; observation practice. First dinner, intros, house rules.</li>
-          <li><b>Sat:</b> Lectures — science & society. <em>Dark evening</em> (no lights after dusk).</li>
-          <li><b>Sun:</b> Reading Day.</li>
-          <li><b>Mon:</b> Lectures.</li>
-          <li><b>Tue:</b> Silent day (08:00–20:00), silent forest walk.</li>
-          <li><b>Wed:</b> Collaborative time; possible trip (Dumfries / seaside / Wigtown).</li>
-          <li><b>Thu:</b> Collaborative time.</li>
-          <li><b>Fri:</b> Final presentations; plan ongoing work.</li>
-          <li><b>Sat–Sun:</b> Departures.</li>
-        </ul>
       </div>
     </section>
 
-    <section id="logistics" class="section">
-      <div class="wrap">
-        <h2>Location & Logistics</h2>
-        <p><b>Stroanfreggan House</b> (converted 1930s school; Brander family since the 1970s) has a great room with wood-burning stove, a dining room and stocked kitchen, dorm-style housing (2–4 per room), and two bathrooms with showers. The surrounding area offers an Iron Age hill fort and woodsy walks; it’s in a Dark Sky Area—excellent winter stargazing.</p>
-        <p><b>Weather:</b> Cold, windy, and dark; rarely below freezing. Dress warmly. Underfloor heating throughout; great room is heated by wood stove.</p>
-
-        <h3>Travel</h3>
-        <ul class="bullets">
-          <li>Nearest airports: Edinburgh (EDI), Glasgow (GLA). Pickup from Dumfries train station or shuttle from Edinburgh depending on arrivals.</li>
-          <li>Car required for access; a rental car will be available for local trips (licensed drivers/registered visitors only).</li>
-          <li>Grocery delivery arranged day 1; additional runs as needed. Travel & fuel billed based on use.</li>
-        </ul>
-
-        <h3>Connectivity</h3>
-        <p>Limited-connectivity residency. No consistent internet at Stroanfreggan. Staff will keep hotspot phones for emergencies only. Resident phones collected on day 1 and returned 24h before departure.</p>
-
-        <h3>Budget (estimate)</h3>
-        <ul class="bullets">
-          <li>Stroanfreggan rental: £2,000</li>
-          <li>Rental car: £50/day → ~£650 incl. fuel</li>
-          <li>Food: £15/person/day → ~£150/person</li>
-          <li>15% contingency → <b>£5,115 total ≈ £511/person for 10 days</b> (travel to/from residency not included)</li>
-        </ul>
+<section id="travel" class="section alt">
+  <div class="wrap">
+    <div>
+      <h2>Travel & Logistics</h2>
+      <div class="grid" style="margin-top:12px">
+        <div class="card">
+          <h3 style="font-family:'Fraunces',serif;margin:0 0 6px">Getting There</h3>
+          <p>Getting to Stroanfreggan from Edinburgh (airport: EDI) or Glasgow (airport: GLA) requires a car. We will arrange pickup from Glasgow city center on the first day of the residency. A rental car will be available for the duration of the residency for local trips to the nearest town, the sea, etc. A grocery delivery will be arranged for the first day and additional trips can be arranged. 
+            All travel and gas costs will be billed to residents based on use. You must travel with a licensed UK driver or visitor registered with the rental car company.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-family:'Fraunces',serif;margin:0 0 6px">Living</h3>
+          <p>Stroanfreggan House is a converted school building from the 1930s, kept in the Brander family since the 1970s. It has a great room with a wood-burning fireplace, a dining room and fully stocked kitchen, and a series of bedrooms. Housing will be dorm-style, with 2–4 people per room. There are two equipped bathrooms with showers.</p>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section id="register" class="section alt">
-      <div class="wrap">
-        <h2>Register interest</h2>
-        <p>Total residents: 10–12. Share your details and we’ll follow up with dates and logistics.</p>
-        <form class="signup" action="#" method="post" onsubmit="alert('Thanks! We will be in touch.'); return false" aria-label="Register your interest">
-          <label><span>Name</span><input required type="text" placeholder="Ada Lovelace" /></label>
-          <label><span>Email</span><input required type="email" placeholder="ada@example.com" /></label>
-          <label><span>Discipline(s)</span><input type="text" placeholder="Artist, engineer, philosopher…" /></label>
-          <p class="privacy">We’ll only email you about this workshop.</p>
-        </form>
+    <!-- RIGHT COLUMN -->
+    <aside>
+      <div class="card">
+        <h3 style="font-family:'Fraunces',serif;margin-top:0">Cost</h3>
+        <p>The residency fee is <strong>£600 per person</strong>, which covers housing, food, and programming. Travel to Scotland is not included.</p>
+        <p>We aim to have access to funds to offset the cost of travel or workshop fees for some participants; please note if you would like to request a grant on the application.</p>
       </div>
-    </section>
 
-    <section class="section">
-      <div class="wrap">
-        <h2>FAQ</h2>
-        <details>
-          <summary>Accessibility</summary>
-          <p>The house is multi-room with shared facilities; please let us know about specific needs and we’ll coordinate.</p>
-        </details>
-        <details>
-          <summary>Can I be online?</summary>
-          <p>We’re intentionally offline to support focus. Emergency connectivity is available via staff phones.</p>
-        </details>
-        <details>
-          <summary>What should I bring?</summary>
-          <p>Warm layers, sturdy shoes, personal meds, and a small “micro-experiment” for others to build on.</p>
-        </details>
+      <div class="card" style="margin-top:16px">
+        <h3 style="font-family:'Fraunces',serif;margin-top:0">Weather</h3>
+        <p>Scotland in the winter is dark and can be cold although it rarely drops too far below freezing. Expect winds and possible storms, and dress warmly. Expect temperatures between 1°C and 7°C (34°F to 45°F), with occasional frost or light snow. Days are short, with sunrise around 8:00 AM and sunset around 5:00 PM.
+          The house has newly installed underfloor heating, but the great room (where much of the collaboration will take place) is heated by wood stove.</p>
       </div>
-    </section>
-  </main>
+    </aside>
+  </div>
+</section>
 
-  <footer class="site-footer">
+<section id="who" class="section">
+  <div class="wrap">
+    <div>
+      <h2>Organizers & Participants</h2>
+      <p class="lede">The team coordinating the residency and shaping the week’s themes. Participants will be added below as they commit.</p>
+
+      <div class="people two">
+        <!-- Person 1 -->
+        <article class="person">
+          <img class="avatar" src="charlotte.jpg" alt="Charlotte Merzbacher" loading="lazy" width="600" height="600">
+          <div class="person-body">
+            <h3 class="person-name">Dr. Charlotte Merzbacher</h3>
+            <p class="person-role">Speculative Fiction · Artificial Intelligence · Bioengineering</p>
+            <p class="person-bio">Charlotte recently completed a PhD in Biomedical Artificial Intelligence at the University of Edinburgh focused on the application of machine learning to mathematical models of engineered cells. 
+              She writes the newsletter <a href="https://cjmarten.substack.com/">Speculation Lab</a> along with fantasy and science fiction. She was a 2024 Resident Artist at Arteles Creative Center, and has published papers in various peer-reviewed scientific journals.</p>
+            <p class="person-links">
+              <a href="https://cjmerzbacher.github.io/">Learn More</a>
+            </p>
+          </div>
+        </article>
+
+        <!-- Person 2 -->
+        <article class="person">
+          <img class="avatar" src="andy.png" alt="Andrew Pelos" loading="lazy" width="600" height="600">
+          <div class="person-body">
+            <h3 class="person-name">Andrew Pelos</h3>
+            <p class="person-role">Neuroscience · Gender Studies</p>
+            <p class="person-bio">Andy holds a Masters in neuroscience from the University of Washington and a double degree in molecular biology and gender studies from Pomona College.</p>
+            <p class="person-links">
+              <a href="https://www.linkedin.com/in/andypelos/" target="_blank" rel="noopener">Learn More</a>
+            </p>
+          </div>
+        </article>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <footer>
     <div class="wrap">
-      <p>© <span id="year"></span> emergence residency</p>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="#about">About</a>
-        <a href="#register">Register</a>
-        <a href="#logistics">Logistics</a>
-      </nav>
+      <p>© <span id="year"></span> C. J. Merzbacher</p>
     </div>
   </footer>
 
   <script>
-    /* ========= Helper ========= */
-    const $ = s => document.querySelector(s);
-    const canvas = $("#emergenceCanvas");
-    const ctx = canvas.getContext("2d", { alpha: true });
-    let width = 0, height = 0, dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-    $("#year").textContent = new Date().getFullYear();
+  // util
+  document.getElementById('year').textContent = new Date().getFullYear();
 
+  // Dark, glowing boids on hero — classic flocking without center pull
+  (function(){
+    const canvas = document.getElementById('boids');
+    const ctx = canvas.getContext('2d');
     function resize(){
-      width = canvas.clientWidth || window.innerWidth;
-      height = canvas.clientHeight || Math.max(400, window.innerHeight * 0.7);
-      // Fallback ensures non-zero size even if CSS hasn’t laid out yet.
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
+      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio||1));
+      const r = canvas.getBoundingClientRect();
+      canvas.width = Math.floor(r.width*dpr); canvas.height = Math.floor(r.height*dpr);
       ctx.setTransform(dpr,0,0,dpr,0,0);
     }
-    window.addEventListener("resize", resize, { passive:true });
-    // Force a layout pass before reading clientWidth/Height:
-    requestAnimationFrame(resize);
+    window.addEventListener('resize', resize, {passive:true});
+    resize();
 
-    /* ========= Animation state ========= */
-    const particles = [];
-    const MAX_PARTICLES = 240;
-    let paused = false; // default running even if prefers-reduced-motion set
-    let mouse = { x: 0, y: 0, down: false, repel: false };
+    const W = ()=>canvas.width/ctx.getTransform().a, H = ()=>canvas.height/ctx.getTransform().d;
 
-    function rand(min,max){ return Math.random()*(max-min)+min; }
+    const N = 100;
+    const MAX_SPEED = 1.2;
+    const NEIGHBOR_RADIUS = 72;
+    const AVOID_RADIUS = 20;
+    const ALIGN = 0.05, COHERE = 0.01, SEPARATE = 0.12;
 
-    class Particle{
-      constructor(){
-        const s = rand(.2,.8);
-        this.x = rand(0,width); this.y = rand(0,height);
-        this.vx = rand(-s,s); this.vy = rand(-s,s);
-      }
-    }
-
-    function seed(){
-      particles.length = 0;
-      const area = Math.max(1, width*height);
-      const density = Math.min(MAX_PARTICLES, Math.floor(area / 9000));
-      for(let i=0;i<density;i++) particles.push(new Particle());
-    }
-
-    /* ========= Interaction ========= */
-    function updateMouseFromEvent(clientX, clientY){
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = clientX - rect.left;
-      mouse.y = clientY - rect.top;
-    }
-    canvas.addEventListener("mousemove", e => updateMouseFromEvent(e.clientX, e.clientY), { passive:true });
-    canvas.addEventListener("touchmove", e => { const t = e.touches[0]; if(t) updateMouseFromEvent(t.clientX, t.clientY); }, { passive:true });
-    canvas.addEventListener("mousedown", () => mouse.down = true);
-    canvas.addEventListener("mouseup",   () => mouse.down = false);
-    canvas.addEventListener("mouseleave",() => mouse.down = false);
-    canvas.addEventListener("click", () => { mouse.repel = !mouse.repel; updateModeLabel(); });
-
-    $("#toggleMode").addEventListener("click", () => { mouse.repel = !mouse.repel; updateModeLabel(); });
-    $("#toggleMotion").addEventListener("click", () => { paused = !paused; updatePauseLabel(); });
-
-    function updateModeLabel(){
-      $("#toggleMode").textContent = mouse.repel ? "↔︎ Repel" : "↔︎ Attract";
-    }
-    function updatePauseLabel(){
-      $("#toggleMotion").textContent = paused ? "▶︎ Play" : "⏸︎ Pause";
-    }
-
-    /* ========= Simulation ========= */
-    const P = {
-      perception: 55, separationDist: 16,
-      maxSpeed: 2.2, maxForce: 0.045,
-      cohesionWeight: 0.4, alignmentWeight: 0.8, separationWeight: 1.2,
-      mouseWeight: 1.0
-    };
+    const boids = Array.from({length:N}, ()=>({
+      x: Math.random()*W(), y: Math.random()*H(),
+      vx: (Math.random()*2-1)*MAX_SPEED, vy:(Math.random()*2-1)*MAX_SPEED,
+      r: 2 + Math.random()*2
+    }));
 
     function step(){
-      for(const p of particles){
-        let n=0, cohX=0, cohY=0, aliX=0, aliY=0, sepX=0, sepY=0;
-
-        for(const o of particles){
-          if(o===p) continue;
-          const dx=o.x-p.x, dy=o.y-p.y;
-          const d = Math.hypot(dx,dy);
-          if(d>0 && d<P.perception){
-            cohX += o.x; cohY += o.y;
-            aliX += o.vx; aliY += o.vy;
-            if(d < P.separationDist){ const inv = 1/(d*d+1e-4); sepX -= dx*inv; sepY -= dy*inv; }
-            n++;
-          }
+      for(const a of boids){
+        let cx=0, cy=0, avx=0, avy=0, count=0, sx=0, sy=0;
+        for(const b of boids){
+          if(a===b) continue;
+          const dx=b.x-a.x, dy=b.y-a.y;
+          const d2=dx*dx+dy*dy;
+          if(d2>NEIGHBOR_RADIUS*NEIGHBOR_RADIUS) continue;
+          const d=Math.sqrt(d2);
+          count++; cx+=b.x; cy+=b.y; avx+=b.vx; avy+=b.vy;
+          if(d<AVOID_RADIUS){ sx-=dx/(d||1); sy-=dy/(d||1); }
         }
-
-        let ax=0, ay=0;
-        if(n){
-          cohX = (cohX/n - p.x); cohY = (cohY/n - p.y);
-          aliX /= n; aliY /= n;
-          ax += cohX * P.cohesionWeight; ay += cohY * P.cohesionWeight;
-          ax += aliX * P.alignmentWeight; ay += aliY * P.alignmentWeight;
+        if(count){
+          a.vx += (avx/count - a.vx)*ALIGN;
+          a.vy += (avy/count - a.vy)*ALIGN;
+          a.vx += ((cx/count - a.x))*COHERE;
+          a.vy += ((cy/count - a.y))*COHERE;
+          a.vx += sx*SEPARATE; a.vy += sy*SEPARATE;
         }
-        ax += sepX * P.separationWeight; ay += sepY * P.separationWeight;
-
-        // mouse
-        const mdx = mouse.x - p.x, mdy = mouse.y - p.y;
-        const md = Math.hypot(mdx, mdy) || 1;
-        const mFactor = Math.min(1, 140 / md);
-        const mx = (mouse.repel ? -mdx : mdx) / md * mFactor;
-        const my = (mouse.repel ? -mdy : mdy) / md * mFactor;
-        const mScale = mouse.down ? 1.8 : 0.6;
-        ax += mx * P.mouseWeight * mScale; ay += my * P.mouseWeight * mScale;
-
-        // limit force
-        const aMag = Math.hypot(ax,ay);
-        if(aMag > P.maxForce){ ax = ax/aMag*P.maxForce; ay = ay/aMag*P.maxForce; }
-
-        p.vx += ax; p.vy += ay;
-        const s = Math.hypot(p.vx,p.vy);
-        if(s > P.maxSpeed){ p.vx = p.vx/s*P.maxSpeed; p.vy = p.vy/s*P.maxSpeed; }
-
-        p.x += p.vx; p.y += p.vy;
-
-        // wrap
-        if(p.x < -10) p.x = width+10; if(p.x > width+10) p.x = -10;
-        if(p.y < -10) p.y = height+10; if(p.y > height+10) p.y = -10;
+        const sp=Math.hypot(a.vx,a.vy); if(sp>MAX_SPEED){ a.vx=a.vx/sp*MAX_SPEED; a.vy=a.vy/sp*MAX_SPEED; }
+        a.x += a.vx; a.y += a.vy;
+        if(a.x< -10) a.x = W()+10; if(a.x> W()+10) a.x=-10; if(a.y< -10) a.y= H()+10; if(a.y> H()+10) a.y=-10;
       }
     }
 
     function draw(){
-      // gentle trail
-      ctx.fillStyle = "rgba(11,13,16,0.12)";
-      ctx.fillRect(0,0,width,height);
+      // dark background
+      const w=W(), h=H();
+      const g=ctx.createLinearGradient(0,0,0,h); g.addColorStop(0,'#0b0f10'); g.addColorStop(1,'#0e1726');
+      ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
 
-      ctx.globalCompositeOperation = "lighter";
-      for(const p of particles){
-        const sp = Math.hypot(p.vx,p.vy);
-        const glow = Math.min(1, (sp / P.maxSpeed) * 0.9 + 0.1);
-        ctx.strokeStyle = `rgba(125,211,252,${0.18 + glow*0.2})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x - p.vx*4, p.y - p.vy*4);
-        ctx.stroke();
+      // faint grid (map vibe)
+      ctx.save(); ctx.globalAlpha=0.15; ctx.strokeStyle='rgba(173,188,195,.15)';
+      const step=60;
+      for(let x=0;x<w;x+=step){ ctx.beginPath(); ctx.moveTo(x+.5,0); ctx.lineTo(x+.5,h); ctx.stroke(); }
+      for(let y=0;y<h;y+=step){ ctx.beginPath(); ctx.moveTo(0,y+.5); ctx.lineTo(w,y+.5); ctx.stroke(); }
+      ctx.restore();
+
+      // glow boids
+      for(const a of boids){
+        ctx.save();
+        ctx.shadowBlur = 14; ctx.shadowColor = 'rgba(197,199,168,.95)';
+        ctx.fillStyle = 'rgba(197,199,168,.88)';
+        ctx.beginPath(); ctx.arc(a.x, a.y, a.r+0.8, 0, Math.PI*2); ctx.fill();
+        ctx.restore();
       }
-      ctx.globalCompositeOperation = "source-over";
     }
 
-    function loop(){
-      if(!paused){ step(); draw(); }
-      requestAnimationFrame(loop);
-    }
-
-    // Initial boot: ensure size exists before seeding
-    function boot(){
-      resize();
-      seed();
-      // center mouse to avoid NaNs when off screen
-      mouse.x = width/2; mouse.y = height/2;
-      // If user prefers reduced motion, start paused but allow play
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      paused = prefersReduced ? true : false;
-      updatePauseLabel(); updateModeLabel();
-      console.info("[emergence] Animation booted.",
-        { width, height, dpr, particles: particles.length, prefersReduced });
-      loop();
-    }
-    // Wait a tick for layout, then boot
-    window.addEventListener("load", boot);
-
-    // Reseed on resize for consistent density
-    window.addEventListener("resize", () => { resize(); seed(); });
-
-    // Pause when tab is hidden
-    document.addEventListener("visibilitychange", () => { paused = document.hidden ? true : paused; updatePauseLabel(); });
+    (function loop(){ step(); draw(); requestAnimationFrame(loop); })();
+  })();
   </script>
 </body>
 </html>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Boids — Minimal</title>
+  <style>
+    html,body{height:100%;margin:0}
+    body{background:#0e1726; /* deep blue */}
+    canvas{display:block; width:100%; height:100%}
+  </style>
+</head>
+<body>
+<canvas id="boids"></canvas>
+<script>
+(()=>{
+  const canvas = document.getElementById('boids');
+  const ctx = canvas.getContext('2d');
+  let W=0,H=0,dpr=1;  
+  const resize=()=>{
+    dpr = Math.max(1, Math.min(2, window.devicePixelRatio||1));
+    const {clientWidth:w, clientHeight:h} = canvas;
+    W = w; H = h; canvas.width = Math.floor(w*dpr); canvas.height = Math.floor(h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  };
+  window.addEventListener('resize', resize, {passive:true});
+  resize();
+
+  // --- Parameters tuned for slower, smoother motion reminiscent of eater.net/boids
+  const params = {
+    count: Math.min(480, Math.round((W*H)/4500)),
+    maxSpeed: 2.0,        // slower
+    maxForce: 0.04,       // gentle turning
+    radius: 70,           // neighbor detection
+    sepRadius: 26,        // personal space
+    alignW: 1.0,
+    cohesionW: 0.7,
+    separationW: 1.1,
+    mouseInfluence: 0.06, // small steering toward mouse (like the demo)
+    fade: 0.12,           // motion trails
+    dot: 3.2              // circle radius (css px)
+  };
+
+  // dynamic count on resize
+  const recomputeCount = ()=> Math.min(600, Math.round((W*H)/4500));
+
+  const rand = (a,b)=>a + Math.random()*(b-a);
+  class Boid{
+    constructor(){
+      this.x = rand(0,W); this.y = rand(0,H);
+      const a = rand(0,Math.PI*2), s = rand(0.3, params.maxSpeed);
+      this.vx = Math.cos(a)*s; this.vy = Math.sin(a)*s;
+      this.ax = 0; this.ay = 0;
+    }
+    apply(ax,ay){ this.ax += ax; this.ay += ay; }
+    limit(max){
+      const m = Math.hypot(this.ax,this.ay) || 0; if(m>max){ this.ax = this.ax/m*max; this.ay = this.ay/m*max; }
+    }
+    step(){
+      // integrate
+      this.vx += this.ax; this.vy += this.ay;
+      // limit speed
+      const s = Math.hypot(this.vx,this.vy) || 0;
+      if(s>params.maxSpeed){ this.vx = this.vx/s*params.maxSpeed; this.vy = this.vy/s*params.maxSpeed; }
+      this.x += this.vx; this.y += this.vy;
+      this.ax = 0; this.ay = 0;
+      // wrap edges (torus) like classic demos
+      if(this.x<-10) this.x=W+10; else if(this.x>W+10) this.x=-10;
+      if(this.y<-10) this.y=H+10; else if(this.y>H+10) this.y=-10;
+    }
+  }
+
+  // init
+  let boids=[];
+  const init = ()=>{
+    params.count = recomputeCount();
+    boids = Array.from({length: params.count}, ()=> new Boid());
+  };
+  init();
+
+  // mouse steering (gentle)
+  const mouse = {x: W/2, y: H/2, active:false};
+  window.addEventListener('pointermove', e=>{
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.active = true;
+  }, {passive:true});
+  window.addEventListener('pointerleave', ()=>mouse.active=false);
+
+  function step(){
+    const r2 = params.radius*params.radius;
+    const sr2 = params.sepRadius*params.sepRadius;
+    for(let i=0;i<boids.length;i++){
+      const b = boids[i];
+      let cx=0, cy=0, vx=0, vy=0, n=0; // neighbors
+      let sx=0, sy=0, sn=0;           // separation accum
+      for(let j=0;j<boids.length;j++){
+        if(i===j) continue;
+        const o = boids[j];
+        const dx = o.x - b.x, dy = o.y - b.y; // toroidal distance
+        let ddx=dx, ddy=dy;
+        // account for wrap-around (choose shortest vector across edges)
+        if(Math.abs(dx) > W*0.5) ddx = dx - Math.sign(dx)*W;
+        if(Math.abs(dy) > H*0.5) ddy = dy - Math.sign(dy)*H;
+        const d2 = ddx*ddx + ddy*ddy;
+        if(d2 < r2){
+          n++; cx += (b.x + ddx); cy += (b.y + ddy); // neighbor pos in local wrap frame
+          vx += o.vx; vy += o.vy;
+          if(d2 < sr2){
+            const inv = 1/(Math.sqrt(d2)||1e-6); // ~1/d
+            sx -= ddx*inv; sy -= ddy*inv; sn++;
+          }
+        }
+      }
+      let ax=0, ay=0;
+      if(n>0){
+        // alignment
+        vx/=n; vy/=n; const vmag = Math.hypot(vx,vy)||1e-6; vx = vx/vmag*params.maxSpeed; vy = vy/vmag*params.maxSpeed;
+        ax += (vx - b.vx)*params.alignW; ay += (vy - b.vy)*params.alignW;
+        // cohesion
+        cx/=n; cy/=n; let cdx=cx-b.x, cdy=cy-b.y; const cm = Math.hypot(cdx,cdy)||1e-6; cdx=cdx/cm*params.maxSpeed; cdy=cdy/cm*params.maxSpeed;
+        ax += (cdx - b.vx)*params.cohesionW; ay += (cdy - b.vy)*params.cohesionW;
+      }
+      if(sn>0){
+        sx/=sn; sy/=sn; const sm = Math.hypot(sx,sy)||1e-6; sx=sx/sm*params.maxSpeed; sy=sy/sm*params.maxSpeed;
+        ax += (sx - b.vx)*params.separationW; ay += (sy - b.vy)*params.separationW;
+      }
+      if(mouse.active){
+        const mdx = mouse.x - b.x; const mdy = mouse.y - b.y;
+        const mm = Math.hypot(mdx,mdy)||1e-6;
+        ax += (mdx/mm*params.maxSpeed - b.vx) * params.mouseInfluence;
+        ay += (mdy/mm*params.maxSpeed - b.vy) * params.mouseInfluence;
+      }
+      b.apply(ax,ay); b.limit(params.maxForce);
+    }
+    for(const b of boids) b.step();
+  }
+
+  // aesthetic render — soft circles with glow + trails
+  const bgA = 1 - params.fade; // e.g. .88 opacity clear to keep trails
+  function draw(){
+    // fade the previous frame to create trails
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = `rgba(14,23,38,${bgA.toFixed(3)})`;
+    ctx.fillRect(0,0,W,H);
+
+    // subtle starry shimmer
+    ctx.globalAlpha = 0.6;
+    ctx.globalCompositeOperation = 'lighter';
+    for(const b of boids){
+      const r = params.dot;
+      const gx = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, r*4);
+      gx.addColorStop(0, 'rgba(160,220,255,0.85)');
+      gx.addColorStop(1, 'rgba(160,220,255,0)');
+      ctx.fillStyle = gx;
+      ctx.beginPath(); ctx.arc(b.x, b.y, r*4, 0, Math.PI*2); ctx.fill();
+
+      // core
+      ctx.globalAlpha = 1;
+      ctx.beginPath(); ctx.arc(b.x, b.y, r, 0, Math.PI*2); ctx.fillStyle = '#a0dcff'; ctx.fill();
+      ctx.globalAlpha = 0.6;
+    }
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  }
+
+  function loop(){
+    // keep population proportional to viewport
+    const target = recomputeCount();
+    if(target !== boids.length){
+      if(target > boids.length){ boids.push(...Array.from({length: target - boids.length}, ()=>new Boid())); }
+      else{ boids.length = target; }
+    }
+    step(); draw(); requestAnimationFrame(loop);
+  }
+  loop();
+})();
+</script>
+</body>
+</html>
