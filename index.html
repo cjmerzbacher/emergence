@@ -65,6 +65,59 @@
       backdrop-filter:saturate(150%) blur(8px);
       pointer-events:auto;
     }
+
+    /* Layout container */
+.nav { position: relative; }
+
+/* Toggle button — hidden on desktop */
+.nav-toggle{
+  display:none;
+  margin-right:12px;
+  border:0; background:transparent; padding:6px;
+  line-height:0; border-radius:12px; cursor:pointer;
+  color:var(--sapin);
+}
+.nav-toggle:focus-visible{ outline:2px solid var(--acajou); outline-offset:2px; }
+
+/* Ensure links are laid out inline on desktop */
+.nav-menu{ display:flex; align-items:center; justify-content:center; gap:0; }
+
+/* --- Mobile styles --- */
+@media (max-width: 820px){
+  .nav{ justify-content:space-between; }
+  .nav-toggle{ display:inline-flex; align-items:center; justify-content:center; }
+
+  /* Collapse menu by default */
+  .nav-menu{
+    position:absolute;
+    top:100%; left:0; right:0;
+    display:none;            /* hidden until opened */
+    flex-direction:column;
+    align-items:stretch;
+    gap:6px;
+    padding:10px 12px 12px;
+    border-bottom:1px solid color-mix(in oklab, var(--mousse) 30%, white 70%);
+    backdrop-filter:saturate(150%) blur(8px);
+    background:color-mix(in oklab, var(--lichen) 80%, white 20% /.85);
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+  }
+
+  /* Full-width tappable links */
+  .nav-menu a{
+    margin:0;               /* override desktop margin */
+    display:block;
+    text-align:center;
+  }
+
+  /* When open */
+  .nav-menu.open{ display:flex; }
+
+  /* Keep the Apply button prominent */
+  .nav-menu a.apply-btn{
+    width:100%;
+    letter-spacing:.18em;
+  }
+}
     
     /* Hero */
     .hero{ position:relative; height:72vh; min-height:820px; overflow:hidden; display:grid; place-items:center; background:#0e1726; }
@@ -174,19 +227,29 @@ nav a.apply-btn:hover {
 </head>
 <body>
   <header>
-    <div class="wrap nav">
-      <nav>
-        <a href="#intro">Intro</a>
-        <a href="#reading">Reading List</a>
-        <a href="#schedule">Schedule</a>
-        <a href="#travel">Travel & Logistics</a>
-        <a href="#who">Organizers</a>
-        <a class="apply-btn" 
+  <div class="wrap nav">
+    <!-- Mobile toggle button -->
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+      <!-- simple hamburger icon -->
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- Primary nav -->
+    <nav id="site-nav" class="nav-menu">
+      <a href="#intro">Intro</a>
+      <a href="#reading">Reading List</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#travel">Travel & Logistics</a>
+      <a href="#who">Organizers</a>
+      <a class="apply-btn" 
          href="https://docs.google.com/forms/d/e/1FAIpQLSeiE2x4-IGLn6A3ggvS43uie0rbZOSAF6Tm0TbRwqWcc4l8Xw/viewform?usp=header"
          target="_blank" rel="noopener">Apply</a>
-      </nav>
-    </div>
-  </header>
+    </nav>
+  </div>
+</header>
+
 
   <main>
     <!-- Hero with dark glowing flock -->
@@ -195,7 +258,7 @@ nav a.apply-btn:hover {
       <div class="overlay" style="position:relative;z-index:2;text-align:center;max-width:860px;padding:0 20px">
         <h1>emergence</h1>
         <div class="meta-box" style="display:inline-block;margin-top:14px; padding:10px 14px; border-radius:7px; border:0px solid rgba(255,255,255,.35); color:#fff; font-size:20px;">
-          February 16–26, 2026 · Stroanfreggan House, Dumfriesshire · 10–12 residents
+          February 20–March 1, 2026 · Stroanfreggan House, Dumfriesshire · 10–12 residents
         </div>
         <div class="meta-box" style="display:inline-block;margin-top:14px; padding:10px 14px; border-radius:0px; border:0px solid rgba(255,255,255,.35); color:#fff; font-size:18px;">
             An interdisciplinary residency exploring how simple connections become complex worlds by making, reading, and living together.
@@ -228,7 +291,7 @@ nav a.apply-btn:hover {
         <aside>
           <div class="card">
             <h3 style="font-family:'Fraunces',serif;margin-top:0">Where We’ll Be</h3>
-            <p><strong>Stroanfreggan House</strong> is a converted 1930s school in rural Dumfriesshire, kept in the Brander family since the 1970s. It has a great room with a wood-burning stove, a dining room and kitchen, and dorm-style bedrooms (2–4 residents per room). Two bathrooms with showers.</p>
+            <p><strong>Stroanfreggan House</strong> is a converted 1930s school in rural Dumfriesshire, kept in the Brander family since the 1970s. It has a great room with a wood-burning stove, a dining room and kitchen, and dorm-style bedrooms (2–4 residents per room).</p>
             <p>The surrounding landscape includes an Iron Age hill fort, wooded walks, and access to a Dark Sky area ideal for winter stargazing.</p>
           </div>
             <div class="card" style="margin-top:16px">
@@ -266,7 +329,6 @@ nav a.apply-btn:hover {
       <div class="wrap">
         <div>
           <h2>Schedule</h2>
-          <p class="lede">A steady rhythm with room for surprise. One silent day, one dark evening, and a gentle cadence between shared and solo time.</p>
           <div class="card" style="margin-top:10px">
             <h3 style="font-family:'Fraunces',serif;margin-top:0">Daily Rhythm</h3>
             <table>
@@ -358,7 +420,7 @@ nav a.apply-btn:hover {
             <h3 class="person-name">Dr. Charlotte Merzbacher</h3>
             <p class="person-role">Speculative Fiction · Artificial Intelligence · Bioengineering</p>
             <p class="person-bio">Charlotte recently completed a PhD in Biomedical Artificial Intelligence at the University of Edinburgh focused on the application of machine learning to mathematical models of engineered cells. 
-              She writes the newsletter <a href="https://cjmarten.substack.com/">Speculation Lab</a> along with fantasy and science fiction. She was a 2024 Resident Artist at Arteles Creative Center, and has published papers in various peer-reviewed scientific journals.</p>
+              She writes the newsletter <a href="https://cjmarten.substack.com/">Speculation Lab</a> along with fantasy and science fiction. She was a 2025 Resident Artist at Arteles Creative Center, and has published papers in various peer-reviewed scientific journals.</p>
             <p class="person-links">
               <a href="https://cjmerzbacher.github.io/">Learn More</a>
             </p>
@@ -367,11 +429,11 @@ nav a.apply-btn:hover {
 
         <!-- Person 2 -->
         <article class="person">
-          <img class="avatar" src="andy.png" alt="Andrew Pelos" loading="lazy" width="600" height="600">
+          <img class="avatar" src="andy.jpg" alt="Andrew Pelos" loading="lazy" width="600" height="600">
           <div class="person-body">
             <h3 class="person-name">Andrew Pelos</h3>
-            <p class="person-role">Neuroscience · Gender Studies</p>
-            <p class="person-bio">Andy holds a Masters in neuroscience from the University of Washington and a double degree in molecular biology and gender studies from Pomona College.</p>
+            <p class="person-role">Neuroscience · Queer Theory</p>
+            <p class="person-bio">Andy has experience across the scientific and discursive worlds of academia and biotechnology, primarily focused on systems and circuit Neuroscience of pain. Interested in how novel techniques that elucidate connectivity within the body influence how we organize community, he holds an MS in Neuroscience from the University of Washington and a BA in Molecular Biology and Gender Studies from Pomona College.</p>
             <p class="person-links">
               <a href="https://www.linkedin.com/in/andypelos/" target="_blank" rel="noopener">Learn More</a>
             </p>
@@ -395,6 +457,40 @@ nav a.apply-btn:hover {
   <script>
   // util
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  (function(){
+    const btn = document.querySelector('.nav-toggle');
+    const menu = document.getElementById('site-nav');
+
+    function closeOnEscape(e){
+      if(e.key === 'Escape'){
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+        btn.focus();
+        document.removeEventListener('keydown', closeOnEscape);
+      }
+    }
+
+    btn.addEventListener('click', ()=>{
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if(open){
+        // close on Esc
+        document.addEventListener('keydown', closeOnEscape);
+      }else{
+        document.removeEventListener('keydown', closeOnEscape);
+      }
+    });
+
+    // Optional: close menu when a link is tapped
+    menu.addEventListener('click', (e)=>{
+      if(e.target.tagName === 'A'){
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+    });
+  })();
 
   // Dark, glowing boids on hero — classic flocking without center pull
   (function(){
