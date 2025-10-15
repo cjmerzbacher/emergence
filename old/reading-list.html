@@ -4,18 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Workshop Reading List</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-  :root {
-    --color-background: #F7F3E8; /* bone/cream */
-    --color-text: #1F3A8A;      /* deep notebook blue */
-    --color-accent: #E94D3D;       /* red/orange accent */
-    --color-outline: #4C5C9A;
-    --circle-blue: #4C5C9A;
+  :root{
+    --color-text:#262c00;     /* deep green for text */
+    --color-outline:#53582f;    /* olive */
+    --lichen:#c3c49f;    /* light moss */
+    --circle-blue:#5e2418;    /* dark red-brown */
+    --color-accent:#d54315;       /* indian summer orange */
+    --ciel:#adbcc3;      /* misty blue */
+    --color-background:#f5f6ee;
+    --radius:18px;
+    --shadow:0 10px 30px rgba(0,0,0,.12);
   }
 
   * { box-sizing: border-box; }
   body {
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Lora', 'Times New Roman', serif;
     background: var(--color-background);
     color: var(--color-text);
     margin: 0;
@@ -28,6 +33,7 @@
     border-bottom: 2px solid var(--color-outline);
   }
   header h1 {
+    font-family: 'Fraunces', serif;
     margin: 0;
     font-size: 1.8rem;
     font-weight: 600;
@@ -67,7 +73,7 @@
     border-bottom: 1px solid var(--color-outline);
   }
   tbody tr:hover td {
-    background: #f7f3e7;
+    background: var(--lichen);
   }
 
   a {
