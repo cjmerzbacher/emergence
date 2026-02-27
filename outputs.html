@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Outputs — Emergence</title>
+  <title>Artifacts — Emergence</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
   <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
@@ -84,6 +84,73 @@
     footer p { margin: 0; }
 
     .width-min { width: 0%; white-space: nowrap; }
+
+    /* Workshop output gallery */
+    .output-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(24ch, 1fr));
+      gap: calc(var(--line-height) * 2) 2ch;
+      margin-top: var(--line-height);
+    }
+
+    .output {
+      display: flex;
+      flex-direction: column;
+      border: var(--border-thickness) solid var(--text-color);
+      margin-top: 0; /* override * + * so grid rows stay equal height */
+      text-decoration: none;
+      color: var(--text-color);
+    }
+    .output:hover { background: var(--background-color-alt); }
+    .output:visited { color: var(--text-color); }
+
+    .output-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      background: var(--background-color-alt);
+      margin: 0;
+    }
+
+    /* placeholder when no real image yet */
+    .output-img-placeholder {
+      width: 100%;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--background-color-alt);
+      color: var(--text-color-alt);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+
+    .output-body {
+      padding: var(--line-height) 2ch;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--line-height) * 0.5);
+    }
+
+    .output-body h3 {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .output-body p {
+      font-size: 0.875rem;
+      color: var(--text-color-alt);
+      margin: 0;
+      flex: 1;
+    }
+
+    .output-body .output-link {
+      font-size: 0.875rem;
+      color: var(--text-color);
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -98,107 +165,87 @@
   </nav>
 
   <div class="header">
-    <h1>Outputs</h1>
-    <p>What we are making together — before, during, and after the residency.</p>
+    <h1>Artifacts</h1>
+    <p>Products, as in those of a reaction. Yield, as in what's given by the ground.</p>
   </div>
 
   <hr>
 
-  <!-- ── The Book ─────────────────────────────────────────────── -->
-  <section id="book">
-    <h2>The Book</h2>
-    <p>Following the residency, we are gathering submissions for a post-residency chapbook. The book will document the work, ideas, and questions that emerged from our ten days together at Stroanfreggan House. It is open to all participants and collaborators.</p>
+  <p>A week in the Scottish countryside is certainly enough time to learn, think, read, and take the first steps toward making things.
+    We've documented those first steps below — but first, we have an invitation.</p>
+
+  <hr>
+
+  <!-- ── The Catalogue ─────────────────────────────────────────── -->
+  <section id="catalogue">
+    <h1>The Catalogue</h1>
+    <p>What's more delightful than a little book? Museum curators have known this for decades — that's why they package images and ideas from their exhibits into catalogs you can pick up in the gift shop. We're doing the same thing: collecting finished pieces, unfinished pieces, loose thoughts, ambitious ideas, rants/raves, reviews, revues, cool rocks, and insights into something we can share. We'd like you to contribute.</p>
 
     <div class="callout">
       <h3>Call for Submissions</h3>
       <p>We welcome contributions in any form that engages with the themes of the residency: emergence, complexity, the relationship between parts and wholes, generativity, and the conditions under which something new comes into being.</p>
 
-      <p style="margin-top: var(--line-height)"><strong>Accepted formats</strong></p>
+      <p style="margin-top: var(--line-height)"><strong>Example submissions</strong></p>
       <ul>
-        <li>Short essay or critical writing (up to 3,000 words)</li>
+        <li>Short essay or critical writing</li>
         <li>Fiction, poetry, or other literary work</li>
         <li>Artwork, photographs, or visual documentation</li>
         <li>Musical score, audio notation, or written description of a musical work</li>
         <li>Technical or scientific writing</li>
-        <li>Hybrid, experimental, or other formats — please get in touch first</li>
       </ul>
 
       <p style="margin-top: var(--line-height)"><strong>Guidelines</strong></p>
       <ul>
-        <li>Submissions may be new work made during or after the residency, or existing work you feel speaks to the themes.</li>
-        <li>All contributors will retain rights to their own work.</li>
-        <li>Contributions will be lightly edited for consistency. Significant editorial changes will be made in conversation with you.</li>
-        <li>Images should be submitted at 300 dpi or higher where possible.</li>
+        <li>You will retain all rights to your work.</li>
+        <li>Contributions will be edited (in conversation with you).</li>
+        <li>Images should be submitted at 300 dpi or higher.</li>
+        <li>If your work is primarily digital, please also submit something we can put in print.</li>
       </ul>
 
-      <p style="margin-top: var(--line-height)" class="deadline">Deadline: April 1, 2026</p>
-      <p>Submit via email to the organisers, or drop files into the shared folder distributed during the residency.</p>
+      <p style="margin-top: var(--line-height)" class="deadline">Deadline: 1 May 2026</p>
+      <p>Submit via email to cjmerzbacher at gmail dot com</p>
     </div>
+
+    <p>The catalogue will live both online and in print. The print edition will be limited run, so please reach out if you want to reserve a copy.</p>
   </section>
 
   <hr>
 
-  <!-- ── The Magazine ──────────────────────────────────────────── -->
-  <section id="magazine">
-    <h2>The Magazine</h2>
-    <p>Beginning in March 2026, we are meeting weekly online for three months to curate a quarterly magazine documenting ongoing work and outcomes from the residency. The magazine will be published digitally and distributed to all participants.</p>
-    <p>If you are a participant and want to contribute to the editorial process, please let the organisers know.</p>
-  </section>
+  <!-- ── The Workshop Outputs ───────────────────────────────────── -->
+  <section id="workshop-outputs">
+    <h1>The Workshop Outputs</h1>
 
-  <hr>
+    <div class="output-grid">
 
-  <!-- ── From the Residency ────────────────────────────────────── -->
-  <section id="residency-work">
-    <h2>From the Residency</h2>
-    <p>Work made during our ten days at Stroanfreggan House.</p>
-
-    <div class="projects">
-
-      <div class="project">
-        <h3>Striding Arches — Colour Walk</h3>
-        <p class="author">All participants · February 27, 2026</p>
-        <p>Three collages of 16 photographs each — green, brown, and gray — taken during a walk to Andy Goldsworthy's Striding Arches at Cairnhead. Each person photographed only objects of one colour, tracing the emergence of form and texture across a single landscape.</p>
-        <p style="margin-top: calc(var(--line-height) * 0.5)"><a href="striding-arches.html">View collages →</a></p>
+      <div class="output" id="striding-arches-output">
+        <img class="output-img" src="icons/striding-arches.JPG" alt="Striding Arches colour walk">
+        <div class="output-body">
+          <h3>Striding Arches — Colour Walk</h3>
+          <p>Three collages — green, brown, and gray — from a walk to Andy Goldsworthy's Striding Arches at Cairnhead. Each person photographed only objects of one colour.</p>
+          <p><a href="striding-arches.html">View collages →</a></p>
+        </div>
       </div>
 
-    </div>
-  </section>
-
-  <hr>
-
-  <!-- ── Existing Work ─────────────────────────────────────────── -->
-  <section id="projects">
-    <h2>Existing Work</h2>
-    <p>Projects and practices that participants and organisers bring to the residency. This page will grow as contributors add their own listings.</p>
-
-    <div class="projects">
-
-      <div class="project">
-        <h3>Speculation Lab</h3>
-        <p class="author">Charlotte Merzbacher</p>
-        <p>A newsletter at the intersection of science, technology, and speculative fiction. Explores how we imagine and misunderstand the future through the lens of biology and AI.</p>
-        <p style="margin-top: calc(var(--line-height) * 0.5)"><a href="https://cjmarten.substack.com/" target="_blank" rel="noopener">substack →</a></p>
+      <div class="output" id="protein-weaving">
+        <img class="output-img" src="icons/protein-weaving.JPG" alt="Protein weaving">
+        <div class="output-body">
+          <h3>Protein Weaving</h3>
+          <p>Kagome weaving, crochet proteins, and topology-shifting surfaces — an experiment in making something <em>really</em> organic.</p>
+          <p><a href="protein-weaving.html">Read more →</a></p>
+        </div>
       </div>
 
-      <div class="project">
-        <h3>Loose Δ</h3>
-        <p class="author">Liam Carpenter-Urquhart</p>
-        <p>A newsletter on futuring, forecasting, and the plurality of ways people relate to the future and to nature. Intermittently updated; consistently surprising.</p>
-        <p style="margin-top: calc(var(--line-height) * 0.5)"><a href="https://loose-change.ghost.io/" target="_blank" rel="noopener">ghost →</a></p>
-      </div>
-
-      <div class="project">
-        <h3>PhD Research</h3>
-        <p class="author">Andrew Pelos</p>
-        <p>Graduate research in systems and circuit neuroscience of pain at the University of Washington. Interested in how internal connectivity can organise community and experience.</p>
-        <p style="margin-top: calc(var(--line-height) * 0.5)"><a href="https://www.linkedin.com/in/andypelos/" target="_blank" rel="noopener">linkedin →</a></p>
+      <div class="output" id="zettelkasten-output">
+        <img class="output-img" src="icons/zettelkasten.jpg" alt="Zettelkasten notes graph">
+        <div class="output-body">
+          <h3>Zettelkasten</h3>
+          <p>A shared network of notes, annotations, and connections built before and during the residency.</p>
+          <p><a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">Browse notes ↗</a></p>
+        </div>
       </div>
 
     </div>
 
-    <p style="margin-top: calc(var(--line-height) * 2); color: var(--text-color-alt); font-size: 0.875rem;">
-      Participants: to add your work here, send a short description and link to the organisers.
-    </p>
   </section>
 
   <footer>

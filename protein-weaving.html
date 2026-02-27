@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Protein Weaving — Emergence</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.classList.add(t);})()</script>
+  <style>
+    html.light { --text-color: #000; --text-color-alt: #666; --background-color: #fff; --background-color-alt: #eee; }
+    html.dark  { --text-color: #fff; --text-color-alt: #aaa; --background-color: #000; --background-color-alt: #111; }
+    .theme-toggle {
+      margin-left: auto; background: none; border: none; cursor: pointer;
+      font: inherit; font-weight: var(--font-weight-medium); color: var(--text-color); padding: 0;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 2ch;
+      margin-bottom: 0;
+      padding-bottom: var(--line-height);
+      border-bottom: calc(var(--border-thickness) * 3) double var(--text-color);
+    }
+    nav a { font-weight: var(--font-weight-medium); }
+
+    section { margin-top: calc(var(--line-height) * 3); }
+    section h2:first-child { margin-top: 0; }
+
+    .label {
+      font-weight: var(--font-weight-bold);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-color-alt);
+      margin: calc(var(--line-height) * 2) 0 calc(var(--line-height) * 0.5);
+    }
+    .label:first-child { margin-top: 0; }
+
+    footer {
+      margin-top: calc(var(--line-height) * 4);
+      padding-top: var(--line-height);
+      border-top: calc(var(--border-thickness) * 3) double var(--text-color);
+      color: var(--text-color-alt);
+      font-size: 0.825rem;
+    }
+    footer p { margin: 0; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">← emergence</a>
+    <a href="reading.html">reading</a>
+    <a href="schedule.html">schedule</a>
+    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">notes ↗</a>
+    <a href="outputs.html">outputs</a>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour scheme">◐</button>
+  </nav>
+
+  <div class="header">
+    <h1>Protein Weaving</h1>
+    <p>Workshop Output · Emergence, February 2026</p>
+  </div>
+
+  <hr>
+
+  <p class="label">The Idea</p>
+  <p>Kagome weaving is a traditional tri-axial weaving technique from Japan that, frankly, looks really cool. Even cooler: slight changes in the pattern can change the topology of the weave — some architects have used this property to create structures that feel almost organic. We thought, hey, wouldn't it be cool to make something <em>really</em> organic.</p>
+
+  <hr>
+
+  <section id="made">
+    <h2>We Made</h2>
+    <ul>
+      <li>A few simple shapes (with both flat and curving weaves) out of paper and pipe cleaners. It might evoke a grade-school project, but the math is actually pretty complicated.</li>
+      <li>A program that converts any closed surface to a crochet pattern and/or a weaving pattern. Thanks, Claude.</li>
+      <li>A crochet 1CRN (aka Crambin) protein. It's not quite as cute as a cuttlefish, but when you hold it in your hand, you can clearly see its globular structure (Charlotte tells me that's a technical term).</li>
+      <li>A program that visualizes a weaving pattern's surface curvature as you introduce changes in the pattern. The idea is to eventually make an animation that shows how a surface morphs to accommodate new topologies.</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <section id="inspirations">
+    <h2>Our Inspirations</h2>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> C. J. Merzbacher</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){var root=document.documentElement,btn=document.getElementById('theme-toggle');if(!localStorage.getItem('theme'))root.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');btn.addEventListener('click',function(){var d=root.classList.contains('dark');root.classList.toggle('dark',!d);root.classList.toggle('light',d);localStorage.setItem('theme',root.classList.contains('dark')?'dark':'light');});})()
+  </script>
+</body>
+</html>
