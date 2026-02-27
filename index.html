@@ -29,7 +29,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #0b0f10;
+      background: var(--background-color);
       overflow: hidden;
     }
 
@@ -46,11 +46,11 @@
       z-index: 2;
       text-align: center;
       padding: calc(var(--line-height) * 4) 4ch;
-      color: #fff;
+      color: var(--text-color);
     }
 
     .hero-content h1 {
-      color: #fff;
+      color: var(--text-color);
       font-size: clamp(1.8rem, 5vw, 3rem);
       line-height: 1;
       margin: 0;
@@ -77,16 +77,15 @@
       display: inline-block;
       margin-top: calc(var(--line-height) * 2);
       padding: calc(var(--line-height) * 0.5) 3ch;
-      border: var(--border-thickness) solid rgba(255,255,255,0.7);
-      color: #fff;
+      border: var(--border-thickness) solid var(--text-color);
+      color: var(--text-color);
       font-weight: var(--font-weight-bold);
       font-size: 0.875rem;
       letter-spacing: 0.1em;
       text-decoration: none;
     }
-    .hero-apply:hover,
-    .hero-apply:visited { color: #fff; }
-    .hero-apply:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+    .hero-apply:visited { color: var(--text-color); }
+    .hero-apply:hover { background: var(--background-color-alt); }
 
     /* ── Section spacing ─────────────────────────────────────── */
     section { margin-top: calc(var(--line-height) * 3); }
@@ -196,7 +195,8 @@
   <nav>
     <a href="index.html">emergence</a>
     <a href="reading.html">reading</a>
-    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">zettelkasten ↗</a>
+    <a href="schedule.html">schedule</a>
+    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">notes ↗</a>
     <a href="outputs.html">outputs</a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSeiE2x4-IGLn6A3ggvS43uie0rbZOSAF6Tm0TbRwqWcc4l8Xw/viewform?usp=header"
        target="_blank" rel="noopener">apply →</a>
@@ -351,27 +351,18 @@
 
     function draw() {
       const w = W(), h = H();
-      const g = ctx.createLinearGradient(0, 0, 0, h);
-      g.addColorStop(0, '#0b0f10');
-      g.addColorStop(1, '#0e1726');
-      ctx.fillStyle = g;
+      const style  = getComputedStyle(document.documentElement);
+      const bg     = style.getPropertyValue('--background-color').trim();
+      const fg     = style.getPropertyValue('--text-color').trim();
+      ctx.fillStyle = bg;
       ctx.fillRect(0, 0, w, h);
-
-      // faint grid
-      ctx.save();
-      ctx.globalAlpha = 0.15;
-      ctx.strokeStyle = 'rgba(173,188,195,.15)';
-      const gs = 60;
-      for (let x = 0; x < w; x += gs) { ctx.beginPath(); ctx.moveTo(x + .5, 0); ctx.lineTo(x + .5, h); ctx.stroke(); }
-      for (let y = 0; y < h; y += gs) { ctx.beginPath(); ctx.moveTo(0, y + .5); ctx.lineTo(w, y + .5); ctx.stroke(); }
-      ctx.restore();
 
       // glowing boids
       for (const a of boids) {
         ctx.save();
         ctx.shadowBlur   = 14;
-        ctx.shadowColor  = 'rgba(255,255,255,.95)';
-        ctx.fillStyle    = 'rgba(255,255,255,.88)';
+        ctx.shadowColor  = fg;
+        ctx.fillStyle    = fg;
         ctx.beginPath();
         ctx.arc(a.x, a.y, a.r + 0.8, 0, Math.PI * 2);
         ctx.fill();

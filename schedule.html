@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Schedule — Emergence</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
+  <style>
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 2ch;
+      margin-bottom: 0;
+      padding-bottom: var(--line-height);
+      border-bottom: calc(var(--border-thickness) * 3) double var(--text-color);
+    }
+    nav a { font-weight: var(--font-weight-medium); }
+
+    /* Day blocks */
+    .day {
+      margin-top: calc(var(--line-height) * 2);
+    }
+
+    .day-header {
+      font-weight: var(--font-weight-bold);
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      letter-spacing: 0.08em;
+      border-bottom: var(--border-thickness) solid var(--text-color);
+      padding-bottom: calc(var(--line-height) * 0.5);
+      margin-bottom: var(--line-height);
+      margin-top: 0;
+    }
+
+    .day table {
+      margin-top: 0;
+    }
+
+    .day table + p {
+      margin-top: var(--line-height);
+      font-size: 0.875rem;
+      color: var(--text-color-alt);
+      font-style: italic;
+    }
+
+    .width-min { width: 0%; white-space: nowrap; }
+
+    /* Daily rhythm summary box */
+    .rhythm {
+      border: var(--border-thickness) solid var(--text-color);
+      padding: var(--line-height) 2ch;
+      margin-top: var(--line-height);
+    }
+    .rhythm h3 {
+      font-size: 0.875rem;
+      font-weight: var(--font-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 0 0 var(--line-height);
+    }
+    .rhythm table { margin-top: 0; }
+
+    footer {
+      margin-top: calc(var(--line-height) * 4);
+      padding-top: var(--line-height);
+      border-top: calc(var(--border-thickness) * 3) double var(--text-color);
+      color: var(--text-color-alt);
+      font-size: 0.825rem;
+    }
+    footer p { margin: 0; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">← emergence</a>
+    <a href="reading.html">reading</a>
+    <a href="schedule.html"><strong>schedule</strong></a>
+    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">notes ↗</a>
+    <a href="outputs.html">outputs</a>
+  </nav>
+
+  <div class="header">
+    <h1>Schedule</h1>
+    <p>February 21–March 1, 2026 · Stroanfreggan House, Dumfriesshire</p>
+  </div>
+
+  <hr>
+
+  <div class="rhythm">
+    <h3>Sample Daily Rhythm</h3>
+    <table>
+      <tbody>
+        <tr><td class="width-min">08:00</td><td>Morning meditation</td></tr>
+        <tr><td>08:30</td><td>Breakfast</td></tr>
+        <tr><td>09:00</td><td>Session 1</td></tr>
+        <tr><td>10:30</td><td>Break for tea</td></tr>
+        <tr><td>11:00</td><td>Session 2</td></tr>
+        <tr><td>12:30</td><td>Lunch</td></tr>
+        <tr><td>13:30</td><td>Session 3 (mostly experiential)</td></tr>
+        <tr><td>15:00</td><td>Break for fika / tea</td></tr>
+        <tr><td>15:30</td><td>Solo work time</td></tr>
+        <tr><td>17:00</td><td>Dinner prep begins</td></tr>
+        <tr><td>18:30</td><td>Dinner</td></tr>
+        <tr><td>20:00</td><td>Evening meditation</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- Day 1 -->
+  <div class="day" id="day-1">
+    <p class="day-header">Day 1 — Saturday, February 21 · Arrivals</p>
+    <table>
+      <tbody>
+        <tr><td class="width-min">10:00</td><td>Pick up rental car from Edinburgh airport</td></tr>
+        <tr><td>10:30</td><td>Grocery shopping at Morrisons</td></tr>
+        <tr><td>11:30</td><td>Brunch with Claire</td></tr>
+        <tr><td>13:00</td><td>Drive to Glasgow; drop Claire; then on to Stroanfreggan</td></tr>
+        <tr><td>16:00</td><td>Arrive at Stroanfreggan · unpacking · walk to cairn if light</td></tr>
+        <tr><td>18:30</td><td>First dinner &amp; introductions</td></tr>
+        <tr><td>20:00</td><td>Evening meditation · overview of the week</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day" id="day-2">
+    <p class="day-header">Day 2 — Sunday, February 22 · Foundations</p>
+    <table>
+      <tbody>
+        <tr><td class="width-min">Session 1</td><td>Review of reading list · dividing reading work and starting</td></tr>
+        <tr><td>Session 2</td><td>Scoping desired outputs — zine, art, white paper?</td></tr>
+        <tr><td>Session 3</td><td>Walk to cairn and woods circle</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day" id="day-3">
+    <p class="day-header">Day 3 — Monday, February 23 · Making</p>
+    <table>
+      <tbody>
+        <tr><td class="width-min">Session 1</td><td>Cosy reading time</td></tr>
+        <tr><td>Session 2</td><td>Co-creation workshop — visual art</td></tr>
+        <tr><td>Session 3</td><td>Continued co-creation workshop (or walk)</td></tr>
+        <tr><td>Evening</td><td>Dark sky stargazing (if clear)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="day" id="day-4">
+    <p class="day-header">Day 4 — Tuesday, February 24 · Emergence in Practice</p>
+    <table>
+      <tbody>
+        <tr><td class="width-min">Session 1</td><td>Teach-out from reading list</td></tr>
+        <tr><td>Session 2</td><td>Visit Striding Arches</td></tr>
+        <tr><td>Session 3</td><td>Co-creation workshop — coding &amp; generative art</td></tr>
+        <tr><td>Evening</td><td>Alternate stargazing time</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Day 5 -->
+  <div class="day" id="day-5">
+    <p class="day-header">Day 5 — Wednesday, February 25 · Wigtown</p>
+    <table>
+      <tbody>
+        <tr><td class="width-min">All day</td><td>Day trip to Wigtown — Scotland's National Book Town</td></tr>
+        <tr><td>Evening</td><td>Scoping final outputs from the workshop</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Day 6 -->
+  <div class="day" id="day-6">
+    <p class="day-header">Day 6 — Thursday, February 26 · Open Day</p>
+    <table>
+      <tbody>
+        <tr><td class="width-min">Morning</td><td>Silent forest walk</td></tr>
+        <tr><td>Afternoon</td><td>Independent work time</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Day 7 -->
+  <div class="day" id="day-7">
+    <p class="day-header">Day 7 — Friday, February 27 · Open Day</p>
+    <p style="color: var(--text-color-alt); font-size: 0.875rem;">Schedule to be confirmed.</p>
+  </div>
+
+  <!-- Day 8 -->
+  <div class="day" id="day-8">
+    <p class="day-header">Day 8 — Saturday, February 28 · Synthesis</p>
+    <table>
+      <tbody>
+        <tr><td class="width-min">Session 1</td><td>Final presentations of solo works</td></tr>
+        <tr><td>Session 2</td><td>Follow-up organisation
+          <ul style="margin: calc(var(--line-height) * 0.5) 0 0; padding-left: 2ch;">
+            <li>Set up quarterly magazine workflow</li>
+            <li>Assign roles for 3-month check-ins</li>
+            <li>Chapbook submission guidelines</li>
+          </ul>
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Day 9 -->
+  <div class="day" id="day-9">
+    <p class="day-header">Day 9 — Sunday, March 1 · Departures</p>
+    <table>
+      <tbody>
+        <tr><td class="width-min">07:00</td><td>Final breakfast</td></tr>
+        <tr><td>08:00</td><td>Leave for Edinburgh</td></tr>
+        <tr><td>12:00</td><td>Fly / train out</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>© <span id="year"></span> C. J. Merzbacher</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
