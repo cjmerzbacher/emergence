@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "node scripts/build-graph.js"
+  },
+  "dependencies": {
+    "@owickstrom/the-monospace-web": "^0.1.5",
+    "gray-matter": "^4.0.3"
+  }
+}

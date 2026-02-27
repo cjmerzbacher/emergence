@@ -3,588 +3,385 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Emergence Workshop</title>
+  <title>Emergence</title>
   <link rel="icon" type="image/png" href="favicon.png">
-
-  <!-- Typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
   <style>
-    :root{
-      --sapin:#262c00;     /* deep green for text */
-      --mousse:#53582f;    /* olive */
-      --lichen:#c3c49f;    /* light moss */
-      --acajou:#5e2418;    /* dark red-brown */
-      --ete:#d54315;       /* indian summer orange */
-      --ciel:#adbcc3;      /* misty blue */
-      --paper:#f5f6ee;
-      --radius:18px;
-      --shadow:0 10px 30px rgba(0,0,0,.12);
+    /* ── Navigation ─────────────────────────────────────────── */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 2ch;
+      margin-bottom: 0;
+      padding-bottom: var(--line-height);
+      border-bottom: calc(var(--border-thickness) * 3) double var(--text-color);
+    }
+    nav a { font-weight: var(--font-weight-medium); }
+    nav a:first-child { font-weight: var(--font-weight-bold); margin-right: 1ch; }
+
+    /* ── Boids hero ──────────────────────────────────────────── */
+    .hero {
+      margin-top: 0;
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0b0f10;
+      overflow: hidden;
     }
 
-    html,body{height:100%;scroll-behavior:smooth}
-    body{margin:0; color:var(--sapin); background:var(--lichen); font-family:"Lora",serif; line-height:1.6}
-
-    body::before{
-      content:""; position:fixed; inset:0; pointer-events:none; opacity:.18; mix-blend-mode:multiply;
-      background-image: radial-gradient(rgba(0,0,0,.06) 1px, transparent 1px);
-      background-size: 3px 3px; z-index:0;
+    #boids {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
-    a{ color:var(--acajou); text-decoration:none; }
-    a:hover{ color:var(--ete); }
-
-    /* Header / Nav */
-    /* header{ position:sticky; top:0; z-index:50; backdrop-filter:saturate(150%) blur(8px);
-      background:color-mix(in oklab, var(--lichen) 80%, white 20% /.7);
-      border-bottom:1px solid color-mix(in oklab, var(--mousse) 30%, white 70%);
-    } */
-    .wrap{ max-width:1080px; margin:0 auto; padding:0 20px; }
-    .nav{ display:flex; align-items:center; justify-content:center; padding:14px 0; }
-    
-    nav a{ 
-      margin:0 12px; 
-      padding:6px 10px; 
-      border-radius:14px;
-      font-family:"IM Fell English", serif; 
-      color:var(--lichen); 
-      font-size: large;
-      font-weight:100; 
-      letter-spacing:.2em;
-      background:color-mix(in oklab, var(--sapin) 80%, white 20%); 
-      transition:background .3s, color .3s; 
-      text-shadow: 0 0px 0px rgba(0,0,0,.7);
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: calc(var(--line-height) * 4) 4ch;
+      color: #fff;
     }
 
-    nav a:hover{ background:color-mix(in oklab, var(--paper) 35%, white 65%); }
-    
-    header{
-      position:fixed; top:0; left:0; right:0; width:100%;
-      z-index:1000;
-      background:transparent;
-      border-bottom:0;
-      backdrop-filter:saturate(150%) blur(8px);
-      pointer-events:auto;
+    .hero-content h1 {
+      color: #fff;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      line-height: 1;
+      margin: 0;
+      letter-spacing: 0.25em;
     }
 
-    /* Layout container */
-.nav { position: relative; }
-
-/* Toggle button — hidden on desktop */
-.nav-toggle{
-  display:none;
-  margin-right:12px;
-  border:0; background:transparent; padding:6px;
-  line-height:0; border-radius:12px; cursor:pointer;
-  color:var(--sapin);
-}
-.nav-toggle:focus-visible{ outline:2px solid var(--acajou); outline-offset:2px; }
-
-/* Ensure links are laid out inline on desktop */
-.nav-menu{ display:flex; align-items:center; justify-content:center; gap:0; }
-
-/* --- Mobile styles --- */
-@media (max-width: 820px){
-  .nav{ justify-content:space-between; }
-  .nav-toggle{ display:inline-flex; align-items:center; justify-content:center; }
-
-  /* Collapse menu by default */
-  .nav-menu{
-    position:absolute;
-    top:100%; left:0; right:0;
-    display:none;            /* hidden until opened */
-    flex-direction:column;
-    align-items:stretch;
-    gap:6px;
-    padding:10px 12px 12px;
-    border-bottom:1px solid color-mix(in oklab, var(--mousse) 30%, white 70%);
-    backdrop-filter:saturate(150%) blur(8px);
-    background:color-mix(in oklab, var(--lichen) 80%, white 20% /.85);
-    box-shadow:0 12px 30px rgba(0,0,0,.12);
-  }
-
-  /* Full-width tappable links */
-  .nav-menu a{
-    margin:0;               /* override desktop margin */
-    display:block;
-    text-align:center;
-  }
-
-  /* When open */
-  .nav-menu.open{ display:flex; }
-
-  /* Keep the Apply button prominent */
-  .nav-menu a.apply-btn{
-    width:100%;
-    letter-spacing:.18em;
-  }
-}
-    
-    /* Hero */
-    .hero{ position:relative; height:72vh; min-height:820px; overflow:hidden; display:grid; place-items:center; background:#0e1726; }
-    #boids{ position:absolute; inset:0; width:100%; height:100%; display:block; }
-    .hero h1{
-      font-family:"Fraunces", serif; font-weight:400;
-      font-size: clamp(40px, 7vw, 84px); line-height:1.02; margin:0;
-      letter-spacing:.2em; text-transform:lowercase; color:#fff; text-align:center;
+    .hero-content .meta {
+      margin-top: calc(var(--line-height) * 1.5);
+      opacity: 0.75;
+      font-size: 0.875rem;
+      letter-spacing: 0.06em;
     }
 
-    /* Sections */
-    section{ position:relative; z-index:1;}
-    .section{ padding:72px 0; }
-    .section.alt{ background:var(--paper); }
-    .section .wrap{ display:grid; grid-template-columns: 1.1fr .9fr; gap:40px; }
-    .section h2{ font-family:"Fraunces", serif; font-weight:400; font-size: clamp(26px, 3vw, 40px); margin:0 0 12px; letter-spacing:.02em; }
-    .lede{ font-size:1.05rem; color:color-mix(in oklab, var(--sapin) 85%, black 15%); }
-
-    /* Cards */
-    .card{
-      background:linear-gradient(180deg, white, color-mix(in oklab, var(--ciel) 10%, white 100%));
-      border:1px solid color-mix(in oklab, var(--mousse) 20%, white 80%);
-      border-radius:var(--radius); padding:20px; box-shadow:var(--shadow);
+    .hero-content .desc {
+      margin-top: var(--line-height);
+      opacity: 0.7;
+      max-width: 56ch;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 0.9rem;
     }
-    .card.flat{ box-shadow:none; }
 
-    /* Lists */
-    .grid{ display:grid; gap:16px; }
-    .two{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .three{ grid-template-columns: repeat(3, minmax(0,1fr)); }
-    @media (max-width:900px){ .section .wrap{ grid-template-columns:1fr; } .two,.three{ grid-template-columns:1fr; } }
+    .hero-apply {
+      display: inline-block;
+      margin-top: calc(var(--line-height) * 2);
+      padding: calc(var(--line-height) * 0.5) 3ch;
+      border: var(--border-thickness) solid rgba(255,255,255,0.7);
+      color: #fff;
+      font-weight: var(--font-weight-bold);
+      font-size: 0.875rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+    .hero-apply:hover,
+    .hero-apply:visited { color: #fff; }
+    .hero-apply:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
 
-    /* Tables */
-    table{ width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:14px; }
-    th, td{ text-align:left; padding:12px 14px; border-bottom:1px solid color-mix(in oklab, var(--mousse) 20%, white 80%); }
-    thead th{ background:color-mix(in oklab, var(--ciel) 25%, white 75%); font-family:"Fraunces", serif; }
-    tbody tr:nth-child(even){ background:color-mix(in oklab, var(--ciel) 12%, white 88%); }
+    /* ── Section spacing ─────────────────────────────────────── */
+    section { margin-top: calc(var(--line-height) * 3); }
+    section h2:first-child { margin-top: 0; }
 
-    /* Buttons */
-    .btn{ display:inline-block; padding:10px 16px; border-radius:999px; background:var(--acajou); color:white; border:1px solid transparent; font-weight:600; letter-spacing:.02em; }
-    .btn:hover{ background:var(--ete); color:var(--sapin);}
+    /* ── Explore page-links grid ─────────────────────────────── */
+    .page-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--line-height) 2ch;
+      margin-top: var(--line-height);
+      align-items: stretch;
+    }
+    @media (max-width: 480px) {
+      .page-links { grid-template-columns: 1fr; }
+    }
 
-    footer{ padding:50px 0; text-align:center; color:color-mix(in oklab, var(--sapin) 70%, black 30%); }
+    .page-link {
+      display: block;
+      margin-top: 0; /* override * + * rule so all three stretch equally */
+      border: var(--border-thickness) solid var(--text-color);
+      padding: var(--line-height) 2ch;
+      text-decoration: none;
+      color: var(--text-color);
+    }
+    .page-link:visited { color: var(--text-color); }
+    .page-link:hover { background: var(--background-color-alt); }
 
-    /* Schedule single column override */
-    #schedule .wrap{ display:block; }
+    .page-link-title {
+      display: block;
+      font-weight: var(--font-weight-bold);
+      margin-bottom: calc(var(--line-height) * 0.5);
+      margin-top: 0;
+    }
 
-    /* Organizers: make this section a single column container (not the 1.1fr/.9fr grid) */
-#who .wrap{ display:block; }
+    .page-link-desc {
+      display: block;
+      font-size: 0.825rem;
+      color: var(--text-color-alt);
+      margin: 0;
+    }
 
-/* Full-width feel (optional). Remove or adjust if you want to keep global 1080px wrap */
-#who .wrap{ max-width:1000px; }
+    /* ── Organizer list ──────────────────────────────────────── */
+    .people {
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--line-height) * 2);
+      margin-top: var(--line-height);
+    }
 
-/* Evenly spaced bios on the green background */
-#who .people{ display:grid; gap:24px; }
-#who .people.three{ grid-template-columns: repeat(3, minmax(0,1fr)); }
-@media (max-width:400px){ #who .people.three{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width:640px){ #who .people.three{ grid-template-columns: 1fr; } }
+    .person {
+      display: flex;
+      gap: 3ch;
+      align-items: flex-start;
+    }
 
-/* Strip card styles so bios sit directly on the background */
-#who .person{
-  background:transparent; border:none; box-shadow:none; padding:0;
-  display:flex; flex-direction:column;
-}
+    .person img {
+      flex-shrink: 0;
+      width: 22ch;
+      height: 22ch;
+      object-fit: cover;
+      border: var(--border-thickness) solid var(--text-color);
+      display: block;
+    }
 
-/* Keep nice image treatment */
-#who .avatar {
-  width: clamp(160px, 20vw, 240px);
-  height: clamp(160px, 20vw, 240px);
-  border-radius: 50%;
-  object-fit: cover;
-  /* border: 2px solid color-mix(in oklab, var(--mousse) 25%, white 75%); */
-  background: color-mix(in oklab, var(--ciel) 20%, white 80%);
-  display: block;
-  margin: 0 auto 16px;
-  box-shadow: 0 0 15px rgba(255,255,255,0.2), 0 2px 6px rgba(0,0,0,0.2);
-}
+    .person-body { flex: 1; }
 
+    .person h3 {
+      font-size: 1rem;
+      margin: 0 0 calc(var(--line-height) * 0.5);
+    }
 
-/* Typography polish for names/roles */
-#who .person-name{ font-family:"Fraunces", serif; margin:10px 0 2px; font-size:1.25rem; }
-#who .person-role{ margin:0 0 8px; font-style:italic; color:color-mix(in oklab, var(--sapin) 70%, black 30%); }
-#who .person-links a{ color:var(--acajou); }
-#who .person-links a:hover{ color:var(--ete); }
+    .person .role {
+      font-style: italic;
+      color: var(--text-color-alt);
+      font-size: 0.825rem;
+      margin: 0 0 var(--line-height);
+    }
 
-/* Apply button in navbar */
-nav a.apply-btn {
-  background: var(--acajou);           /* your deep red-brown */
-  color: #fff;
-  padding: 6px 18px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  font-weight: 600;
-  letter-spacing: .2em;
-  text-shadow: none;
-  mix-blend-mode: normal;              /* avoid inversion on light sections */
-  transition: background .2s ease, transform .2s ease;
-}
+    .person .bio {
+      font-size: 0.875rem;
+      margin: 0 0 calc(var(--line-height) * 0.5);
+    }
 
-nav a.apply-btn:hover {
-  background: var(--ete);              /* lighter orange-red hover */
-  transform: translateY(-1px);
-}
+    @media (max-width: 480px) {
+      .person { flex-direction: column; }
+      .person img { width: 100%; height: auto; aspect-ratio: 1; }
+    }
 
+    /* ── Footer ──────────────────────────────────────────────── */
+    footer {
+      margin-top: calc(var(--line-height) * 4);
+      padding-top: var(--line-height);
+      border-top: calc(var(--border-thickness) * 3) double var(--text-color);
+      color: var(--text-color-alt);
+      font-size: 0.825rem;
+    }
+    footer p { margin: 0; }
 
+    /* ── Table tweaks ────────────────────────────────────────── */
+    .width-min { width: 0%; white-space: nowrap; }
   </style>
 </head>
 <body>
-  <header>
-  <div class="wrap nav">
-    <!-- Mobile toggle button -->
-    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
-      <!-- simple hamburger icon -->
-      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-        <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
 
-    <!-- Primary nav -->
-    <nav id="site-nav" class="nav-menu">
-      <a href="#intro">Intro</a>
-      <a href="#reading">Reading List</a>
-      <a href="#schedule">Schedule</a>
-      <a href="#travel">Travel & Logistics</a>
-      <a href="#who">Organizers</a>
-      <a class="apply-btn" 
-         href="https://docs.google.com/forms/d/e/1FAIpQLSeiE2x4-IGLn6A3ggvS43uie0rbZOSAF6Tm0TbRwqWcc4l8Xw/viewform?usp=header"
-         target="_blank" rel="noopener">Apply</a>
-    </nav>
-  </div>
-</header>
+  <!-- ── Navigation ──────────────────────────────────────────── -->
+  <nav>
+    <a href="index.html">emergence</a>
+    <a href="reading.html">reading</a>
+    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">zettelkasten ↗</a>
+    <a href="outputs.html">outputs</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeiE2x4-IGLn6A3ggvS43uie0rbZOSAF6Tm0TbRwqWcc4l8Xw/viewform?usp=header"
+       target="_blank" rel="noopener">apply →</a>
+  </nav>
 
-
-  <main>
-    <!-- Hero with dark glowing flock -->
-    <section class="hero" aria-label="Hero">
-      <canvas id="boids" aria-hidden="true"></canvas>
-      <div class="overlay" style="position:relative;z-index:2;text-align:center;max-width:860px;padding:0 20px">
-        <h1>emergence</h1>
-        <div class="meta-box" style="display:inline-block;margin-top:14px; padding:10px 14px; border-radius:7px; border:0px solid rgba(255,255,255,.35); color:#fff; font-size:20px;">
-          February 20–March 1, 2026 · Stroanfreggan House, Dumfriesshire · 10–12 residents
-        </div>
-        <div class="meta-box" style="display:inline-block;margin-top:14px; padding:10px 14px; border-radius:0px; border:0px solid rgba(255,255,255,.35); color:#fff; font-size:18px;">
-            An interdisciplinary residency exploring how simple connections become complex worlds by making, reading, and living together. 
-        </div>
-        <div class="meta-box" style="display:inline-block;margin-top:14px; padding:10px 14px; border-radius:0px; border:0px solid rgba(255,255,255,.35); color:#fff; font-size:18px;">
-            Apply by December 15 for rolling admission.
-        </div>
-
-        <p style="margin-top:16px">
-          <a class="btn" target="_blank" rel="noopener"
-            href="https://docs.google.com/forms/d/e/1FAIpQLSeiE2x4-IGLn6A3ggvS43uie0rbZOSAF6Tm0TbRwqWcc4l8Xw/viewform?usp=header">
-            Apply now
-          </a>
-        </p>
-      </div>
-    </section>
-
-    <!-- Intro / Outcomes -->
-    <section id="intro" class="section alt">
-      <div class="wrap">
-        <div>
-          <h2>Purpose</h2>
-          <p>We share the intuition behind the old idea that the whole can be greater than the sum of its parts. This residency asks what it really means for properties to <em>emerge</em>: What is the process? What does it look like? How does it happen across media, systems, and scales?</p>
-          <p>We aim to bring together artists, engineers, writers, scientists, philosophers, and people of multiple disciplines to explore these questions. Expect a mix of lectures, collaborative sessions, quiet work, and time outdoors.</p>
-          <h2 style="margin-top:28px">Outcomes</h2>
-          <ul>
-            <li>Co-create one or more collective works — anything from an artwork to a scientific or philosophical inquiry, performance, story, or piece of music.</li>
-            <li>Contribute a one-page bio of previous work (format flexible: images, text, links).</li>
-            <li>Meet weekly online for three months afterwards to curate a quarterly magazine documenting outcomes.</li>
-            <li>Submit a short essay, artwork, article, musical piece, or other creative work for a post-residency <strong>chapbook</strong> (deadline: <strong>April 1, 2026</strong>).</li>
-          </ul>
-        </div>
-        <aside>
-          <div class="card">
-            <h3 style="font-family:'Fraunces',serif;margin-top:0">Where We’ll Be</h3>
-            <p><strong>Stroanfreggan House</strong> is a converted 1930s school in rural Dumfriesshire, kept in the Brander family since the 1970s. It has a great room with a wood-burning stove, a dining room and kitchen, and dorm-style bedrooms (2–4 residents per room).</p>
-            <p>The surrounding landscape includes an Iron Age hill fort, wooded walks, and access to a Dark Sky area ideal for winter stargazing.</p>
-          </div>
-            <div class="card" style="margin-top:16px">
-            <!-- <h3 style="font-family:'Fraunces',serif;margin-top:0">Stroanfreggan Landscape</h3> -->
-            <img src="dumfries.jpg" alt="Landscape near Stroanfreggan House, Dumfriesshire" style="width:100%;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.13);margin-top:8px;">
-            </div>
-      </div>
-    </section>
-
-<section id="reading" class="section alt">
-      <div class="wrap">
-        <div>
-          <h2>Reading List</h2>
-          <p>In order to give us a common ground to work from, we have prepared a reading list which will be distributed ahead of time. These works span disciplines (science, theory, fiction, and art) and are deliberately meant to be unfamiliar at least in part to everyone.  
-            We ask that participants make a good-faith effort to read and engage with each of these works including noting down points of confusion, disagreement, and interest. 
-            In addition, we would like each participant to bring a micro-experiment (algorithm, improvisation score, poem fragment, visual seed) that others can iterate on. Our goal is to create emergent works in real time.</p>  
-        </div>
-          <div class="card">
-             <h3 style="font-family:'Fraunces',serif;margin:0 0 6px">Sample Texts and Artworks</h3>
-              <ul>
-                <li>Philip Anderson — <em>More Is Different</em> (1972)</li>
-                <li>Anna Lowenhaupt Tsing — <em>The Mushroom at the End of the World</em> (ecologies and economies in entanglement).</li>
-                <li>Jane Bennett — <em>Vibrant Matter</em> (the agency of non-living things).</li>
-                <li>Toni Morrison — “The Site of Memory”</li>
-                <li>Agnes Denes — <em>Wheatfield — A Confrontation</em></li>
-                <li>Merce Cunningham & John Cage — chance and emergent performance</li>
-              </ul>
-          </div>
-      
-      </div>
-    </section>
-
-    <!-- Schedule (single column; connectivity below) -->
-    <section id="schedule" class="section alt">
-      <div class="wrap">
-        <div>
-          <h2>Schedule</h2>
-          <div class="card" style="margin-top:10px">
-            <h3 style="font-family:'Fraunces',serif;margin-top:0">Daily Rhythm</h3>
-            <table>
-              <thead><tr><th>Time</th><th>Activity</th></tr></thead>
-              <tbody>
-                <tr><td>08:00</td><td>Meditation in the great room</td></tr>
-                <tr><td>08:45</td><td>Breakfast laid out in the kitchen; optional.</td></tr>
-                <tr><td>09:30</td><td>Collaborative work begins; lectures, discussion, or outside work</td></tr>
-                <tr><td>13:00</td><td>Lunch (self-organized)</td></tr>
-                <tr><td>Afternoon</td><td>Self-guided work · nature walks · art time · optional workshops</td></tr>
-                <tr><td>18:30</td><td>Dinner; cooked on a communal schedule</td></tr>
-                <tr><td>20:00</td><td>Meditation</td></tr>
-                <tr><td>Evening</td><td>Reading, stargazing, or social time · quiet hours 23:00–07:00</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-<div style="margin-top:16px">
-  <h3 style="font-family:'Fraunces',serif;margin-top:0">Week at a Glance</h3>
-  <p><strong>Themes:</strong> Pattern · Threshold · Agency · Unpredictability · Beauty</p>
-  <ul style="list-style-type:disc; padding-left:1.5em; line-height:1.7;">
-    <li><strong>Friday:</strong> Arrivals · Walk to the cairn · Observation practice · First dinner and introductions</li>
-    <li><strong>Saturday:</strong> Lectures — science & society · Art workshop · Dark evening</li>
-    <li><strong>Sunday:</strong> Reading Day · Collaborations begin</li>
-    <li><strong>Monday:</strong> Lectures · Silent forest walk</li>
-    <li><strong>Tuesday:</strong> Silent day (8 am – 8 pm)</li>
-    <li><strong>Wednesday:</strong> Collaborative time · Optional trip to Dumfries or the seaside (Wigtown?)</li>
-    <li><strong>Thursday:</strong> Collaborative time · Independent work</li>
-    <li><strong>Friday:</strong> Final presentations · Discussion of ongoing work</li>
-    <li><strong>Saturday:</strong> Closing reflections</li>
-    <li><strong>Sunday:</strong> Departures</li>
-  </ul>
-</div>
-
-
-          <div class="card" style="margin-top:16px">
-            <h3 style="font-family:'Fraunces',serif;margin-top:0">Connectivity</h3>
-            <p>The residency will be limited-connectivity. Stroanfreggan has no consistent internet connection; staff will have phones with hotspots and service but these will be turned off except for emergencies. Resident phones will be collected upon arrival on the first day and returned 24 hours before departure.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-<section id="travel" class="section alt">
-  <div class="wrap">
-    <div>
-      <h2>Travel & Logistics</h2>
-      <div class="grid" style="margin-top:12px">
-        <div class="card">
-          <h3 style="font-family:'Fraunces',serif;margin:0 0 6px">Getting There</h3>
-          <p>Getting to Stroanfreggan from Edinburgh (airport: EDI) or Glasgow (airport: GLA) requires a car. We will arrange pickup from Glasgow city center on the first day of the residency. A rental car will be available for the duration of the residency for local trips to the nearest town, the sea, etc. A grocery delivery will be arranged for the first day and additional trips can be arranged. 
-            All travel and gas costs will be billed to residents based on use. You must travel with a licensed UK driver or visitor registered with the rental car company.</p>
-        </div>
-        <div class="card">
-          <h3 style="font-family:'Fraunces',serif;margin:0 0 6px">Living</h3>
-          <p>Stroanfreggan House is a converted school building from the 1930s, kept in the Brander family since the 1970s. It has a great room with a wood-burning fireplace, a dining room and fully stocked kitchen, and a series of bedrooms. Housing will be dorm-style, with 2–4 people per room. There are two equipped bathrooms with showers.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT COLUMN -->
-    <aside>
-      <div class="card">
-        <h3 style="font-family:'Fraunces',serif;margin-top:0">Cost</h3>
-        <p>The residency fee is <strong>£499 per person</strong>, which covers housing, food, and programming. Travel to Scotland is not included.</p>
-        <p>We aim to have access to funds to offset the cost of travel or workshop fees for some participants; please note if you would like to request a grant on the application.</p>
-      </div>
-
-      <div class="card" style="margin-top:16px">
-        <h3 style="font-family:'Fraunces',serif;margin-top:0">Weather</h3>
-        <p>Scotland in the winter is dark and can be cold although it rarely drops too far below freezing. Expect winds and possible storms, and dress warmly. Expect temperatures between 1°C and 7°C (34°F to 45°F), with occasional frost or light snow. Days are short, with sunrise around 8:00 AM and sunset around 5:00 PM.
-          The house has newly installed underfloor heating, but the great room (where much of the collaboration will take place) is heated by wood stove.</p>
-      </div>
-    </aside>
-  </div>
-</section>
-
-<section id="who" class="section">
-  <div class="wrap">
-    <div>
-      <h2>Organizers & Participants</h2>
-      <p class="lede">The team coordinating the residency and shaping the week’s themes. Participants will be added below as they commit.</p>
-
-      <div class="people three">
-        <!-- Person 1 -->
-        <article class="person">
-          <img class="avatar" src="charlotte.jpg" alt="Charlotte Merzbacher" loading="lazy" width="600" height="600">
-          <div class="person-body">
-            <h3 class="person-name">Dr. Charlotte Merzbacher</h3>
-            <p class="person-role">Speculative Fiction · Artificial Intelligence · Bioengineering</p>
-            <p class="person-bio">Charlotte recently completed a PhD in Biomedical Artificial Intelligence at the University of Edinburgh focused on the application of machine learning to mathematical models of engineered cells. 
-              She writes the newsletter <a href="https://cjmarten.substack.com/">Speculation Lab</a> along with fantasy and science fiction. She was a 2025 Resident Artist at Arteles Creative Center, and has published papers in various peer-reviewed scientific journals.</p>
-            <p class="person-links">
-              <a href="https://cjmerzbacher.github.io/">Learn More</a>
-            </p>
-          </div>
-        </article>
-
-        <!-- Person 2 -->
-        <article class="person">
-          <img class="avatar" src="andy.jpg" alt="Andrew Pelos" loading="lazy" width="600" height="600">
-          <div class="person-body">
-            <h3 class="person-name">Andrew Pelos</h3>
-            <p class="person-role">Neuroscience · Queer Theory</p>
-            <p class="person-bio">Andy has experience across the scientific and discursive worlds of academia and biotechnology, primarily focused on the systems and circuit Neuroscience of pain in the body. Interested in how novel techniques that elucidate internal connectivity can influence and organize community, he is a graduate student in Neuroscience at the University of Washington and holds a BA in Molecular Biology and Gender Studies from Pomona College.</p>
-            <p class="person-links">
-              <a href="https://www.linkedin.com/in/andypelos/" target="_blank" rel="noopener">Learn More</a>
-            </p>
-          </div>
-        </article>
-
-         <article class="person">
-          <img class="avatar" src="liam.jpg" alt="Liam Carpenter-Urquhart" loading="lazy" width="600" height="600">
-          <div class="person-body">
-            <h3 class="person-name">Liam Carpenter-Urquhart</h3>
-            <p class="person-role">Transformative Futures · Speculative Fiction · Collective Storytelling</p>
-            <p class="person-bio">Liam is a student and writer living in Stockholm. During business hours, he studies futuring and forecasting methods as a PhD student at the Stockholm Resilience Centre, with a particular focus on approaches to the future that foreground the diversity of ways that people connect to nature. 
-              Liam also (intermittently) updates the newsletter <a href="https://loose-change.ghost.io/">Loose Δ</a>, writes poetry and science fiction, and talks to anyone who will listen about tabletop roleplaying games.</p>
-            <p class="person-links">
-              <a href="https://www.linkedin.com/in/liam-carpenter-urquhart/" target="_blank" rel="noopener">Learn More</a>
-            </p>
-          </div>
-        </article>
-
-
-      </div>
+  <!-- ── Hero: boids vignette ────────────────────────────────── -->
+  <div class="hero">
+    <canvas id="boids" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <h1>EMERGENCE</h1>
+      <p class="meta">February 20 – March 1, 2026 &nbsp;·&nbsp; Stroanfreggan House, Dumfriesshire</p>
+      <p class="desc">An interdisciplinary collaboration exploring complexity, self-organization, and causation through art and science.</p>
+      <a class="hero-apply" href="outputs.html">Outputs →</a>
     </div>
   </div>
-</section>
 
+  <!-- ── Purpose ─────────────────────────────────────────────── -->
+  <section id="about">
+    <h2>Purpose</h2>
+    <p>We share the intuition behind the old idea that the whole can be greater than the sum of its parts. This residency asks what it really means for properties to <em>emerge</em>: what is the process? what does it look like? how does it happen across media, systems, and scales?</p>
+    <p>We aim to bring together artists, engineers, writers, scientists, philosophers, and people of multiple disciplines to explore these questions together.</p>
+  </section>
 
+  <hr>
+
+  <!-- ── Explore ──────────────────────────────────────────────── -->
+  <section id="explore">
+    <h2>Explore</h2>
+    <div class="page-links">
+      <a class="page-link" href="reading.html">
+        <span class="page-link-title">Reading List →</span>
+        <span class="page-link-desc">Papers, essays, and artworks spanning science, theory, and art.</span>
+      </a>
+      <a class="page-link" href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">
+        <span class="page-link-title">Notes ↗</span>
+        <span class="page-link-desc">A shared network of notes and annotations built before and during the residency.</span>
+      </a>
+      <a class="page-link" href="outputs.html">
+        <span class="page-link-title">Outputs →</span>
+        <span class="page-link-desc">Continuing </span>
+      </a>
+    </div>
+  </section>
+
+  <hr>
+  <!-- ── Organizers ───────────────────────────────────────────── -->
+  <section id="organizers">
+    <h2>Organisers</h2>
+    <div class="people">
+
+      <article class="person">
+        <img src="charlotte.jpg" alt="Charlotte Merzbacher" width="400" height="400" loading="lazy">
+        <div class="person-body">
+          <h3>Dr. Charlotte Merzbacher</h3>
+          <p class="role">Speculative Fiction · Artificial Intelligence · Bioengineering</p>
+          <p class="bio">Charlotte recently completed a PhD in Biomedical Artificial Intelligence at the University of Edinburgh, focused on machine learning applied to mathematical models of engineered cells. She writes the newsletter <a href="https://cjmarten.substack.com/">Speculation Lab</a> and fantasy and science fiction. She was a 2025 Resident Artist at Arteles Creative Center, and has published in peer-reviewed scientific journals.</p>
+          <p><a href="https://cjmerzbacher.github.io/">cjmerzbacher.github.io →</a></p>
+        </div>
+      </article>
+
+      <article class="person">
+        <img src="andy.jpg" alt="Andrew Pelos" width="400" height="400" loading="lazy">
+        <div class="person-body">
+          <h3>Andrew Pelos</h3>
+          <p class="role">Neuroscience · Queer Theory</p>
+          <p class="bio">Andy has experience across the scientific and discursive worlds of academia and biotechnology, primarily focused on systems and circuit neuroscience of pain. A graduate student in Neuroscience at the University of Washington, he holds a BA in Molecular Biology and Gender Studies from Pomona College.</p>
+          <p><a href="https://www.linkedin.com/in/andypelos/" target="_blank" rel="noopener">linkedin →</a></p>
+        </div>
+      </article>
+
+      <article class="person">
+        <img src="liam.jpg" alt="Liam Carpenter-Urquhart" width="400" height="400" loading="lazy">
+        <div class="person-body">
+          <h3>Liam Carpenter-Urquhart</h3>
+          <p class="role">Transformative Futures · Speculative Fiction · Collective Storytelling</p>
+          <p class="bio">Liam is a student and writer living in Stockholm, studying futuring and forecasting methods as a PhD student at the Stockholm Resilience Centre. He focuses on approaches to the future that foreground the diversity of ways people connect to nature. He also (intermittently) updates the newsletter <a href="https://loose-change.ghost.io/">Loose Δ</a>.</p>
+          <p><a href="https://www.linkedin.com/in/liam-carpenter-urquhart/" target="_blank" rel="noopener">linkedin →</a></p>
+        </div>
+      </article>
+
+    </div>
+  </section>
 
   <footer>
-    <div class="wrap">
-      <p>© <span id="year"></span> C. J. Merzbacher</p>
-    </div>
+    <p>© <span id="year"></span> C. J. Merzbacher</p>
   </footer>
 
   <script>
-  // util
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Mobile nav toggle
-  (function(){
-    const btn = document.querySelector('.nav-toggle');
-    const menu = document.getElementById('site-nav');
-
-    function closeOnEscape(e){
-      if(e.key === 'Escape'){
-        menu.classList.remove('open');
-        btn.setAttribute('aria-expanded','false');
-        btn.focus();
-        document.removeEventListener('keydown', closeOnEscape);
-      }
-    }
-
-    btn.addEventListener('click', ()=>{
-      const open = menu.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if(open){
-        // close on Esc
-        document.addEventListener('keydown', closeOnEscape);
-      }else{
-        document.removeEventListener('keydown', closeOnEscape);
-      }
-    });
-
-    // Optional: close menu when a link is tapped
-    menu.addEventListener('click', (e)=>{
-      if(e.target.tagName === 'A'){
-        menu.classList.remove('open');
-        btn.setAttribute('aria-expanded','false');
-      }
-    });
-  })();
-
-  // Dark, glowing boids on hero — classic flocking without center pull
-  (function(){
+  // ── Boids: dark glowing flock ──────────────────────────────────
+  (function () {
     const canvas = document.getElementById('boids');
-    const ctx = canvas.getContext('2d');
-    function resize(){
-      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio||1));
-      const r = canvas.getBoundingClientRect();
-      canvas.width = Math.floor(r.width*dpr); canvas.height = Math.floor(r.height*dpr);
-      ctx.setTransform(dpr,0,0,dpr,0,0);
+    const ctx    = canvas.getContext('2d');
+
+    function resize() {
+      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      const r   = canvas.getBoundingClientRect();
+      canvas.width  = Math.floor(r.width  * dpr);
+      canvas.height = Math.floor(r.height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
-    window.addEventListener('resize', resize, {passive:true});
+    window.addEventListener('resize', resize, { passive: true });
     resize();
 
-    const W = ()=>canvas.width/ctx.getTransform().a, H = ()=>canvas.height/ctx.getTransform().d;
+    const W = () => canvas.width  / ctx.getTransform().a;
+    const H = () => canvas.height / ctx.getTransform().d;
 
-    const N = 100;
-    const MAX_SPEED = 1.2;
+    const N               = 100;
+    const MAX_SPEED       = 1.2;
     const NEIGHBOR_RADIUS = 72;
-    const AVOID_RADIUS = 20;
+    const AVOID_RADIUS    = 20;
     const ALIGN = 0.05, COHERE = 0.01, SEPARATE = 0.12;
 
-    const boids = Array.from({length:N}, ()=>({
-      x: Math.random()*W(), y: Math.random()*H(),
-      vx: (Math.random()*2-1)*MAX_SPEED, vy:(Math.random()*2-1)*MAX_SPEED,
-      r: 2 + Math.random()*2
+    const boids = Array.from({ length: N }, () => ({
+      x:  Math.random() * W(),
+      y:  Math.random() * H(),
+      vx: (Math.random() * 2 - 1) * MAX_SPEED,
+      vy: (Math.random() * 2 - 1) * MAX_SPEED,
+      r:  2 + Math.random() * 2,
     }));
 
-    function step(){
-      for(const a of boids){
-        let cx=0, cy=0, avx=0, avy=0, count=0, sx=0, sy=0;
-        for(const b of boids){
-          if(a===b) continue;
-          const dx=b.x-a.x, dy=b.y-a.y;
-          const d2=dx*dx+dy*dy;
-          if(d2>NEIGHBOR_RADIUS*NEIGHBOR_RADIUS) continue;
-          const d=Math.sqrt(d2);
-          count++; cx+=b.x; cy+=b.y; avx+=b.vx; avy+=b.vy;
-          if(d<AVOID_RADIUS){ sx-=dx/(d||1); sy-=dy/(d||1); }
+    function step() {
+      for (const a of boids) {
+        let cx = 0, cy = 0, avx = 0, avy = 0, count = 0, sx = 0, sy = 0;
+        for (const b of boids) {
+          if (a === b) continue;
+          const dx = b.x - a.x, dy = b.y - a.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 > NEIGHBOR_RADIUS * NEIGHBOR_RADIUS) continue;
+          const d = Math.sqrt(d2);
+          count++; cx += b.x; cy += b.y; avx += b.vx; avy += b.vy;
+          if (d < AVOID_RADIUS) { sx -= dx / (d || 1); sy -= dy / (d || 1); }
         }
-        if(count){
-          a.vx += (avx/count - a.vx)*ALIGN;
-          a.vy += (avy/count - a.vy)*ALIGN;
-          a.vx += ((cx/count - a.x))*COHERE;
-          a.vy += ((cy/count - a.y))*COHERE;
-          a.vx += sx*SEPARATE; a.vy += sy*SEPARATE;
+        if (count) {
+          a.vx += (avx / count - a.vx) * ALIGN;
+          a.vy += (avy / count - a.vy) * ALIGN;
+          a.vx += (cx  / count - a.x)  * COHERE;
+          a.vy += (cy  / count - a.y)  * COHERE;
+          a.vx += sx * SEPARATE;
+          a.vy += sy * SEPARATE;
         }
-        const sp=Math.hypot(a.vx,a.vy); if(sp>MAX_SPEED){ a.vx=a.vx/sp*MAX_SPEED; a.vy=a.vy/sp*MAX_SPEED; }
+        const sp = Math.hypot(a.vx, a.vy);
+        if (sp > MAX_SPEED) { a.vx = a.vx / sp * MAX_SPEED; a.vy = a.vy / sp * MAX_SPEED; }
         a.x += a.vx; a.y += a.vy;
-        if(a.x< -10) a.x = W()+10; if(a.x> W()+10) a.x=-10; if(a.y< -10) a.y= H()+10; if(a.y> H()+10) a.y=-10;
+        if (a.x < -10)       a.x = W() + 10;
+        if (a.x > W() + 10)  a.x = -10;
+        if (a.y < -10)       a.y = H() + 10;
+        if (a.y > H() + 10)  a.y = -10;
       }
     }
 
-    function draw(){
-      // dark background
-      const w=W(), h=H();
-      const g=ctx.createLinearGradient(0,0,0,h); g.addColorStop(0,'#0b0f10'); g.addColorStop(1,'#0e1726');
-      ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+    function draw() {
+      const w = W(), h = H();
+      const g = ctx.createLinearGradient(0, 0, 0, h);
+      g.addColorStop(0, '#0b0f10');
+      g.addColorStop(1, '#0e1726');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
 
-      // faint grid (map vibe)
-      ctx.save(); ctx.globalAlpha=0.15; ctx.strokeStyle='rgba(173,188,195,.15)';
-      const step=60;
-      for(let x=0;x<w;x+=step){ ctx.beginPath(); ctx.moveTo(x+.5,0); ctx.lineTo(x+.5,h); ctx.stroke(); }
-      for(let y=0;y<h;y+=step){ ctx.beginPath(); ctx.moveTo(0,y+.5); ctx.lineTo(w,y+.5); ctx.stroke(); }
+      // faint grid
+      ctx.save();
+      ctx.globalAlpha = 0.15;
+      ctx.strokeStyle = 'rgba(173,188,195,.15)';
+      const gs = 60;
+      for (let x = 0; x < w; x += gs) { ctx.beginPath(); ctx.moveTo(x + .5, 0); ctx.lineTo(x + .5, h); ctx.stroke(); }
+      for (let y = 0; y < h; y += gs) { ctx.beginPath(); ctx.moveTo(0, y + .5); ctx.lineTo(w, y + .5); ctx.stroke(); }
       ctx.restore();
 
-      // glow boids
-      for(const a of boids){
+      // glowing boids
+      for (const a of boids) {
         ctx.save();
-        ctx.shadowBlur = 14; ctx.shadowColor = 'rgba(197,199,168,.95)';
-        ctx.fillStyle = 'rgba(197,199,168,.88)';
-        ctx.beginPath(); ctx.arc(a.x, a.y, a.r+0.8, 0, Math.PI*2); ctx.fill();
+        ctx.shadowBlur   = 14;
+        ctx.shadowColor  = 'rgba(255,255,255,.95)';
+        ctx.fillStyle    = 'rgba(255,255,255,.88)';
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, a.r + 0.8, 0, Math.PI * 2);
+        ctx.fill();
         ctx.restore();
       }
     }
 
-    (function loop(){ step(); draw(); requestAnimationFrame(loop); })();
+    (function loop() { step(); draw(); requestAnimationFrame(loop); })();
   })();
   </script>
+
 </body>
 </html>

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Outputs — Emergence</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
+  <style>
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 2ch;
+      margin-bottom: 0;
+      padding-bottom: var(--line-height);
+      border-bottom: calc(var(--border-thickness) * 3) double var(--text-color);
+    }
+    nav a { font-weight: var(--font-weight-medium); }
+
+    section { margin-top: calc(var(--line-height) * 3); }
+    section h2:first-child { margin-top: 0; }
+
+    .callout {
+      border: var(--border-thickness) solid var(--text-color);
+      padding: var(--line-height) 2ch;
+      margin-top: var(--line-height);
+    }
+
+    .callout h3 {
+      font-size: 1rem;
+      margin: 0 0 var(--line-height);
+    }
+
+    .deadline {
+      font-weight: var(--font-weight-bold);
+      font-size: 1.1rem;
+    }
+
+    /* Project cards */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(26ch, 1fr));
+      gap: var(--line-height) 2ch;
+      margin-top: var(--line-height);
+    }
+
+    .project {
+      border: var(--border-thickness) solid var(--text-color);
+      padding: var(--line-height) 2ch;
+    }
+
+    .project h3 {
+      font-size: 1rem;
+      margin: 0 0 calc(var(--line-height) * 0.5);
+    }
+
+    .project .author {
+      font-size: 0.8rem;
+      color: var(--text-color-alt);
+      margin: 0 0 var(--line-height);
+      font-style: italic;
+    }
+
+    .project p {
+      font-size: 0.875rem;
+      margin: 0;
+    }
+
+    footer {
+      margin-top: calc(var(--line-height) * 4);
+      padding-top: var(--line-height);
+      border-top: calc(var(--border-thickness) * 3) double var(--text-color);
+      color: var(--text-color-alt);
+      font-size: 0.825rem;
+    }
+    footer p { margin: 0; }
+
+    .width-min { width: 0%; white-space: nowrap; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">← emergence</a>
+    <a href="reading.html">reading</a>
+    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">zettelkasten ↗</a>
+    <a href="outputs.html"><strong>outputs</strong></a>
+  </nav>
+
+  <div class="header">
+    <h1>Outputs</h1>
+    <p>What we are making together — before, during, and after the residency.</p>
+  </div>
+
+  <hr>
+
+  <!-- ── The Book ─────────────────────────────────────────────── -->
+  <section id="book">
+    <h2>The Book</h2>
+    <p>Following the residency, we are gathering submissions for a post-residency chapbook. The book will document the work, ideas, and questions that emerged from our ten days together at Stroanfreggan House. It is open to all participants and collaborators.</p>
+
+    <div class="callout">
+      <h3>Call for Submissions</h3>
+      <p>We welcome contributions in any form that engages with the themes of the residency: emergence, complexity, the relationship between parts and wholes, generativity, and the conditions under which something new comes into being.</p>
+
+      <p style="margin-top: var(--line-height)"><strong>Accepted formats</strong></p>
+      <ul>
+        <li>Short essay or critical writing (up to 3,000 words)</li>
+        <li>Fiction, poetry, or other literary work</li>
+        <li>Artwork, photographs, or visual documentation</li>
+        <li>Musical score, audio notation, or written description of a musical work</li>
+        <li>Technical or scientific writing</li>
+        <li>Hybrid, experimental, or other formats — please get in touch first</li>
+      </ul>
+
+      <p style="margin-top: var(--line-height)"><strong>Guidelines</strong></p>
+      <ul>
+        <li>Submissions may be new work made during or after the residency, or existing work you feel speaks to the themes.</li>
+        <li>All contributors will retain rights to their own work.</li>
+        <li>Contributions will be lightly edited for consistency. Significant editorial changes will be made in conversation with you.</li>
+        <li>Images should be submitted at 300 dpi or higher where possible.</li>
+      </ul>
+
+      <p style="margin-top: var(--line-height)" class="deadline">Deadline: April 1, 2026</p>
+      <p>Submit via email to the organisers, or drop files into the shared folder distributed during the residency.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- ── The Magazine ──────────────────────────────────────────── -->
+  <section id="magazine">
+    <h2>The Magazine</h2>
+    <p>Beginning in March 2026, we are meeting weekly online for three months to curate a quarterly magazine documenting ongoing work and outcomes from the residency. The magazine will be published digitally and distributed to all participants.</p>
+    <p>If you are a participant and want to contribute to the editorial process, please let the organisers know.</p>
+  </section>
+
+  <hr>
+
+  <!-- ── Existing Work ─────────────────────────────────────────── -->
+  <section id="projects">
+    <h2>Existing Work</h2>
+    <p>Projects and practices that participants and organisers bring to the residency. This page will grow as contributors add their own listings.</p>
+
+    <div class="projects">
+
+      <div class="project">
+        <h3>Speculation Lab</h3>
+        <p class="author">Charlotte Merzbacher</p>
+        <p>A newsletter at the intersection of science, technology, and speculative fiction. Explores how we imagine and misunderstand the future through the lens of biology and AI.</p>
+        <p style="margin-top: calc(var(--line-height) * 0.5)"><a href="https://cjmarten.substack.com/" target="_blank" rel="noopener">substack →</a></p>
+      </div>
+
+      <div class="project">
+        <h3>Loose Δ</h3>
+        <p class="author">Liam Carpenter-Urquhart</p>
+        <p>A newsletter on futuring, forecasting, and the plurality of ways people relate to the future and to nature. Intermittently updated; consistently surprising.</p>
+        <p style="margin-top: calc(var(--line-height) * 0.5)"><a href="https://loose-change.ghost.io/" target="_blank" rel="noopener">ghost →</a></p>
+      </div>
+
+      <div class="project">
+        <h3>PhD Research</h3>
+        <p class="author">Andrew Pelos</p>
+        <p>Graduate research in systems and circuit neuroscience of pain at the University of Washington. Interested in how internal connectivity can organise community and experience.</p>
+        <p style="margin-top: calc(var(--line-height) * 0.5)"><a href="https://www.linkedin.com/in/andypelos/" target="_blank" rel="noopener">linkedin →</a></p>
+      </div>
+
+    </div>
+
+    <p style="margin-top: calc(var(--line-height) * 2); color: var(--text-color-alt); font-size: 0.875rem;">
+      Participants: to add your work here, send a short description and link to the organisers.
+    </p>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> C. J. Merzbacher</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

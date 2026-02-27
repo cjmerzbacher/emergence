@@ -1,0 +1,85 @@
+{
+  "nodes": [
+    {
+      "id": "anderson-more-is-different",
+      "title": "More Is Different",
+      "tags": [
+        "emergence",
+        "physics",
+        "reductionism"
+      ],
+      "links": [
+        "weak-emergence"
+      ],
+      "date": "2026-02-22",
+      "source": "Philip W. Anderson (1972)",
+      "author": "Charlotte",
+      "body": "Anderson argues that at each level of complexity, entirely new properties appear that cannot be predicted from simpler constituents alone.\n\n> \"The ability to reduce everything to simple fundamental laws does not imply the ability to start from those laws and reconstruct the universe.\"\n\nKey claim: the constructionist hypothesis breaks down when confronted with the twin difficulties of scale and complexity. More is not just quantitatively more — it is qualitatively different."
+    },
+    {
+      "id": "eno-generative-music",
+      "title": "On Generative Music",
+      "tags": [
+        "music",
+        "generativity",
+        "systems",
+        "emergence"
+      ],
+      "links": [
+        "weak-emergence",
+        "lewitt-sentences"
+      ],
+      "date": "2026-02-22",
+      "source": "Brian Eno / Gradim & Pestana",
+      "author": "Charlotte",
+      "body": "Eno distinguishes between \"contemplative\" and \"generative\" art — art that generates itself according to rules vs art that is fixed. Generative systems produce emergence: the composer sets up conditions, not outcomes.\n\n> \"I am more interested in making a system that can surprise me than in making a piece that expresses me.\"\n\nThe composer recedes; the system takes over. Resonates with LeWitt's instruction-based conceptual art."
+    },
+    {
+      "id": "lewitt-sentences",
+      "title": "Sentences on Conceptual Art",
+      "tags": [
+        "conceptual-art",
+        "instructions",
+        "systems"
+      ],
+      "links": [
+        "eno-generative-music"
+      ],
+      "date": "2026-02-22",
+      "source": "Sol LeWitt (1969)",
+      "author": "Charlotte",
+      "body": "> \"The idea becomes a machine that makes the art.\"\n\nLeWitt establishes that the concept precedes execution — the work is the set of instructions, reproducible by anyone. The artist is the architect of a system, not the hand that executes it.\n\nConnection to emergence: the instructions are the micro-level rules; the artwork is the macro-level pattern. The instructions cannot predict the aesthetic outcome."
+    },
+    {
+      "id": "weak-emergence",
+      "title": "Weak Emergence",
+      "tags": [
+        "emergence",
+        "philosophy",
+        "complexity"
+      ],
+      "links": [
+        "anderson-more-is-different",
+        "eno-generative-music"
+      ],
+      "date": "2026-02-22",
+      "source": "Mark Bedau",
+      "author": "Charlotte",
+      "body": "Bedau distinguishes weak emergence (in principle reducible but computationally intractable) from strong emergence (irreducible in principle). Most emergence observed in natural systems is weak.\n\nThe macro-level pattern is derivable from micro-level rules, but only by simulation — there is no shortcut. The simulation *is* the explanation.\n\nConnects to Anderson: the breakdown of reductionism in practice, even if not in principle."
+    }
+  ],
+  "edges": [
+    {
+      "source": "anderson-more-is-different",
+      "target": "weak-emergence"
+    },
+    {
+      "source": "eno-generative-music",
+      "target": "weak-emergence"
+    },
+    {
+      "source": "eno-generative-music",
+      "target": "lewitt-sentences"
+    }
+  ]
+}

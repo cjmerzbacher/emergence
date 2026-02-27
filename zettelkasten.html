@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zettelkasten – Emergence Workshop</title>
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
+  <style>
+    nav {
+      margin-bottom: calc(var(--line-height) * 2);
+      padding-bottom: var(--line-height);
+      border-bottom: calc(var(--border-thickness) * 3) double var(--text-color);
+    }
+    nav a {
+      margin-right: 2ch;
+      font-weight: var(--font-weight-medium);
+    }
+
+    /* Graph layout */
+    #layout {
+      display: grid;
+      grid-template-columns: 1fr 26ch;
+      height: 70vh;
+      border: var(--border-thickness) solid var(--text-color);
+      margin-top: calc(var(--line-height) * 2);
+    }
+    #canvas { overflow: hidden; }
+    #canvas svg { width: 100%; height: 100%; display: block; }
+    #panel {
+      border-left: var(--border-thickness) solid var(--text-color);
+      padding: var(--line-height) 1ch;
+      overflow-y: auto;
+      font-size: 0.875rem;
+    }
+    #panel h3 { margin: 0 0 calc(var(--line-height) / 2) 0; font-size: 1rem; }
+    #panel .meta { margin: 0 0 calc(var(--line-height) / 4) 0; opacity: 0.6; }
+    #panel .hint { opacity: 0.5; }
+    #panel .read-link {
+      display: inline-block;
+      margin-top: calc(var(--line-height) / 2);
+    }
+
+    .tag {
+      display: inline-block;
+      border: var(--border-thickness) solid var(--text-color);
+      padding: 0 0.4ch;
+      margin: 0 0.4ch 0.3rem 0;
+      font-size: 0.7rem;
+    }
+    #add-note { margin-top: calc(var(--line-height) * 2); font-size: 0.8rem; opacity: 0.6; }
+    #add-note code { font-size: 0.75rem; }
+
+    /* Note reader */
+    #note-view { display: none; }
+    #note-view.visible { display: block; }
+    #note-view h2 { margin-bottom: calc(var(--line-height) / 2); }
+    #note-view .note-meta { opacity: 0.6; margin-bottom: var(--line-height); }
+    .note-body p  { margin-bottom: calc(var(--line-height) / 2); }
+    .note-body blockquote {
+      border-left: calc(var(--border-thickness) * 3) solid var(--text-color);
+      padding-left: 2ch;
+      margin-left: 0;
+      opacity: 0.75;
+    }
+
+    /* Note list */
+    #note-list { margin-top: calc(var(--line-height) * 3); }
+    .note-item {
+      border: var(--border-thickness) solid var(--text-color);
+      padding: calc(var(--line-height) / 2) 1ch;
+      margin-bottom: var(--line-height);
+      cursor: pointer;
+    }
+    .note-item:hover { background: var(--background-color-alt); }
+    .note-item-title { font-weight: var(--font-weight-bold); margin: 0; }
+    .note-item-meta  { margin: calc(var(--line-height) / 4) 0 0; opacity: 0.6; font-size: 0.8rem; }
+
+    /* Graph */
+    .node circle {
+      fill: var(--background-color);
+      stroke: var(--text-color);
+      stroke-width: 1.5px;
+      cursor: pointer;
+    }
+    .node circle.active { fill: var(--text-color); }
+    .node text {
+      font-family: monospace;
+      font-size: 10px;
+      fill: var(--text-color);
+      pointer-events: none;
+      dominant-baseline: middle;
+    }
+    .node text.active { fill: var(--background-color); }
+    .edge { stroke: var(--text-color); stroke-opacity: 0.2; stroke-width: 1px; }
+    .edge.lit { stroke-opacity: 0.7; }
+
+    @media (max-width: 640px) {
+      #layout { grid-template-columns: 1fr; grid-template-rows: 50vh auto; height: auto; }
+      #panel { border-left: none; border-top: var(--border-thickness) solid var(--text-color); max-height: 35vh; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">← emergence</a>
+    <a href="reading.html">reading</a>
+    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener"><strong>zettelkasten ↗</strong></a>
+    <a href="outputs.html">outputs</a>
+  </nav>
+
+  <div class="header">
+    <h1>Zettelkasten</h1>
+    <p>A shared network of notes, linked by ideas.</p>
+  </div>
+
+  <hr>
+
+  <div id="layout">
+    <div id="canvas"><svg id="svg"></svg></div>
+    <aside id="panel">
+      <p class="hint">Click a node to view note details.</p>
+    </aside>
+  </div>
+
+  <p id="add-note">
+    Add a note: drop a <code>.md</code> file into <code>zettelkasten/</code> with YAML frontmatter
+    (<code>title</code>, <code>tags</code>, <code>links</code>, <code>source</code>, <code>author</code>)
+    and push to rebuild the graph.
+  </p>
+
+  <section id="note-view">
+    <hr>
+    <h2 id="note-view-title"></h2>
+    <p class="note-meta" id="note-view-meta"></p>
+    <div class="note-body" id="note-view-body"></div>
+  </section>
+
+  <hr>
+
+  <section id="note-list">
+    <h2>All Notes</h2>
+    <div id="note-list-items"></div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
+  <script>
+    const canvasEl   = document.getElementById('canvas');
+    const panelEl    = document.getElementById('panel');
+    const noteViewEl = document.getElementById('note-view');
+    const noteListEl = document.getElementById('note-list-items');
+
+    // Exposed so note-list items can trigger graph selection
+    let selectById = null;
+
+    function initGraph(data) {
+      const nodes = data.nodes.map(n => ({ ...n }));
+      const nodeIds = new Set(nodes.map(n => n.id));
+      const edges = (data.edges || [])
+        .filter(e => nodeIds.has(e.source) && nodeIds.has(e.target))
+        .map(e => ({ ...e }));
+
+      const W = canvasEl.clientWidth  || 600;
+      const H = canvasEl.clientHeight || 400;
+
+      const svg = d3.select('#svg').attr('viewBox', `0 0 ${W} ${H}`);
+      const g   = svg.append('g');
+
+      svg.call(d3.zoom().scaleExtent([0.2, 5]).on('zoom', e => g.attr('transform', e.transform)));
+
+      const deg = {};
+      edges.forEach(e => {
+        deg[e.source] = (deg[e.source] || 0) + 1;
+        deg[e.target] = (deg[e.target] || 0) + 1;
+      });
+      const r = d => 5 + (deg[d.id] || 0) * 2;
+
+      const sim = d3.forceSimulation(nodes)
+        .force('link',    d3.forceLink(edges).id(d => d.id).distance(90))
+        .force('charge',  d3.forceManyBody().strength(-260))
+        .force('center',  d3.forceCenter(W / 2, H / 2))
+        .force('collide', d3.forceCollide(d => r(d) + 10));
+
+      const edgeSel = g.append('g')
+        .selectAll('line').data(edges).join('line').attr('class', 'edge');
+
+      const nodeSel = g.append('g')
+        .selectAll('g').data(nodes).join('g').attr('class', 'node')
+        .call(d3.drag()
+          .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+          .on('drag',  (e, d) => { d.fx = e.x; d.fy = e.y; })
+          .on('end',   (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+        )
+        .on('click', (_, d) => select(d));
+
+      nodeSel.append('circle').attr('r', r);
+      nodeSel.append('text').text(d => d.title).attr('x', d => r(d) + 4).attr('y', 0);
+
+      sim.on('tick', () => {
+        edgeSel.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+               .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+        nodeSel.attr('transform', d => `translate(${d.x},${d.y})`);
+      });
+
+      function select(d) {
+        const neighbours = new Set();
+        edges.forEach(e => {
+          const s = e.source.id || e.source;
+          const t = e.target.id || e.target;
+          if (s === d.id) neighbours.add(t);
+          if (t === d.id) neighbours.add(s);
+        });
+
+        nodeSel.selectAll('circle').classed('active', n => n.id === d.id);
+        nodeSel.selectAll('text').classed('active',   n => n.id === d.id);
+        edgeSel.classed('lit', e =>
+          (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id
+        );
+
+        const tags   = (d.tags || []).map(t => `<span class="tag">#${t}</span>`).join('');
+        const linked = [...neighbours].join(', ');
+
+        panelEl.innerHTML = `
+          <h3>${d.title}</h3>
+          ${d.date   ? `<p class="meta">${d.date}</p>`     : ''}
+          ${d.source ? `<p class="meta">${d.source}</p>`   : ''}
+          ${d.author ? `<p class="meta">— ${d.author}</p>` : ''}
+          ${tags     ? `<p style="margin-top:calc(var(--line-height)/2)">${tags}</p>` : ''}
+          ${linked   ? `<p class="meta" style="margin-top:calc(var(--line-height)/2)">Links: ${linked}</p>` : ''}
+          ${d.body   ? `<a class="read-link" href="#note-view">read note ↓</a>` : ''}
+        `;
+
+        // Populate the note reader below the graph
+        document.getElementById('note-view-title').textContent = d.title;
+        const meta = [d.date, d.source, d.author ? `— ${d.author}` : null].filter(Boolean).join(' · ');
+        document.getElementById('note-view-meta').textContent = meta;
+        document.getElementById('note-view-body').innerHTML = d.body ? marked.parse(d.body) : '';
+        noteViewEl.classList.toggle('visible', !!d.body);
+      }
+
+      selectById = id => {
+        const node = nodes.find(n => n.id === id);
+        if (node) select(node);
+      };
+    }
+
+    function buildNoteList(nodes) {
+      noteListEl.innerHTML = nodes.map(n => {
+        const meta = [n.date, n.source].filter(Boolean).join(' · ');
+        const tags = (n.tags || []).map(t => `<span class="tag">#${t}</span>`).join('');
+        return `
+          <div class="note-item" data-id="${n.id}">
+            <p class="note-item-title">${n.title}</p>
+            ${meta ? `<p class="note-item-meta">${meta}</p>` : ''}
+            ${tags ? `<p class="note-item-meta" style="margin-top:0.3rem">${tags}</p>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      noteListEl.addEventListener('click', e => {
+        const item = e.target.closest('.note-item');
+        if (!item || !selectById) return;
+        selectById(item.dataset.id);
+        document.getElementById('layout').scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    fetch('zettelkasten-graph.json')
+      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+      .then(data => { initGraph(data); buildNoteList(data.nodes); })
+      .catch(() => {
+        panelEl.innerHTML = '<p class="hint">No graph data yet.<br>Run <code>npm run build</code> locally, or push to trigger CI.</p>';
+      });
+  </script>
+</body>
+</html>
