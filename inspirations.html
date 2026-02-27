@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inspirations — Emergence</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.classList.add(t);})()</script>
+  <style>
+    html.light { --text-color: #000; --text-color-alt: #666; --background-color: #fff; --background-color-alt: #eee; }
+    html.dark  { --text-color: #fff; --text-color-alt: #aaa; --background-color: #000; --background-color-alt: #111; }
+    .theme-toggle {
+      margin-left: auto; background: none; border: none; cursor: pointer;
+      font: inherit; font-weight: var(--font-weight-medium); color: var(--text-color); padding: 0;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 2ch;
+      margin-bottom: 0;
+      padding-bottom: var(--line-height);
+      border-bottom: calc(var(--border-thickness) * 3) double var(--text-color);
+    }
+    nav a { font-weight: var(--font-weight-medium); }
+
+    section { margin-top: calc(var(--line-height) * 3); }
+    section h2:first-child { margin-top: 0; }
+
+    .label {
+      font-weight: var(--font-weight-bold);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-color-alt);
+      margin: calc(var(--line-height) * 2) 0 calc(var(--line-height) * 0.5);
+    }
+    .label:first-child { margin-top: 0; }
+
+    /* Reference list */
+    .ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .ref-list li {
+      border-top: var(--border-thickness) solid var(--text-color);
+      padding: var(--line-height) 0;
+    }
+    .ref-list li:last-child {
+      border-bottom: var(--border-thickness) solid var(--text-color);
+    }
+    .ref-title {
+      font-weight: var(--font-weight-medium);
+    }
+    .ref-desc {
+      color: var(--text-color-alt);
+      font-size: 0.875rem;
+      margin-top: calc(var(--line-height) * 0.25);
+    }
+
+    /* Feeling tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1ch;
+      margin-top: var(--line-height);
+    }
+    .tag {
+      border: var(--border-thickness) solid var(--text-color-alt);
+      padding: 0 1ch;
+      font-size: 0.8rem;
+      color: var(--text-color-alt);
+    }
+
+    footer {
+      margin-top: calc(var(--line-height) * 4);
+      padding-top: var(--line-height);
+      border-top: calc(var(--border-thickness) * 3) double var(--text-color);
+      color: var(--text-color-alt);
+      font-size: 0.825rem;
+    }
+    footer p { margin: 0; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">← emergence</a>
+    <a href="reading.html">reading</a>
+    <a href="schedule.html">schedule</a>
+    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">notes ↗</a>
+    <a href="outputs.html">outputs</a>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour scheme">◐</button>
+  </nav>
+
+  <div class="header">
+    <h1>Inspirations &amp; Future Curation</h1>
+    <p>Works, references, and ideas that preceded, sparked, and will outlast the residency.</p>
+  </div>
+
+  <hr>
+
+  <p>A workshop generates more ideas than it can execute. These are the things we encountered that lodged themselves — works by others that shaped how we thought, things we wanted to make but didn't get to, and open questions we're still carrying. Consider this a living document.</p>
+
+  <hr>
+
+  <section id="flocking-lights">
+    <h2>Flocking Lights, Turing Patterns</h2>
+    <p>One cluster of ideas we kept circling: collective behavior, emergence from simple rules, and what happens when you make that process visible — or beautiful, or physical.</p>
+
+    <p class="label">Collective motion &amp; simulation</p>
+    <ul class="ref-list">
+      <li>
+        <span class="ref-title"><a href="https://vanhunteradams.com/Pico/Animal_Movement/Boids_Lab.html" target="_blank" rel="noopener">Murmuration computational model ↗</a></span>
+        <p class="ref-desc">Fish schooling behavior was originally modelled by Craig Reynolds in 1986 as <a href="https://en.wikipedia.org/wiki/Boids" target="_blank" rel="noopener">Boids</a>. The same rules — separation, alignment, cohesion — produce the shapes you see in starling murmurations. The schooling behaviour of fish is also exploited on an industrial scale: purse seiner vessels use spotter planes to locate schools, then encircle them with nets.</p>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://krabmaga.github.io/antsforaging/" target="_blank" rel="noopener">Ants foraging ↗</a></span>
+        <p class="ref-desc">Individual agency building into collective macrostructure. A simulation of ant colony foraging behavior.</p>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://en.wikipedia.org/wiki/Kuramoto_model" target="_blank" rel="noopener">Kuramoto model ↗</a></span>
+        <p class="ref-desc">A mathematical model for synchronization — how oscillators with different natural frequencies can lock together through coupling. Applies to fireflies, neurons, power grids.</p>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://cargocollective.com/sagejenson/physarum" target="_blank" rel="noopener">Sage Jenson — Physarum transport simulation ↗</a></span>
+        <p class="ref-desc">Simulation of slime mold (<em>Physarum polycephalum</em>) transport networks. Everything Sage Jenson is doing is probably relevant — see their <a href="https://raw.githubusercontent.com/mxsage/portfolio/main/sage_jenson20220120.pdf" target="_blank" rel="noopener">portfolio PDF</a>.</p>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://everest-pipkin.com/#projects/desirepaths.html" target="_blank" rel="noopener">Everest Pipkin — Desire Paths for Wikipedia ↗</a></span>
+        <p class="ref-desc">A browser extension that tracks users' wandering paths through Wikipedia, making the invisible trails of collective curiosity visible.</p>
+      </li>
+    </ul>
+
+    <p class="label">Art &amp; installation</p>
+    <ul class="ref-list">
+      <li>
+        <span class="ref-title"><a href="https://www.creativeboom.com/inspiration/murmurations-artists-pay-homage-to-flocking-birds-with-cardboard-light-installation/" target="_blank" rel="noopener">Murmurations — cardboard and light installation ↗</a></span>
+        <p class="ref-desc">Artists paying homage to flocking birds through a physical installation in cardboard and light.</p>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://en.darkmatter.berlin/" target="_blank" rel="noopener">Dark Matter Berlin ↗</a></span>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://studiodrift.com/work/shylight/" target="_blank" rel="noopener">Studio Drift — Shylight (Rijksmuseum) ↗</a></span>
+        <p class="ref-desc">Kinetic silk sculptures that open and close like flowers, installed in the Rijksmuseum. Individual units responding to unseen forces in collective choreography.</p>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://www.pursuitofequilibrium.com/#Video-Section" target="_blank" rel="noopener">Ben Strauss — Pursuit of Equilibrium ↗</a></span>
+        <p class="ref-desc">Pendulum-based model for physics art. Physical systems finding their own rhythms.</p>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://www.strandbeest.com/shop" target="_blank" rel="noopener">Theo Jansen — Strandbeest ↗</a></span>
+        <p class="ref-desc">Kinetic sculptures that walk on beaches powered by wind. Emergent locomotion from linked mechanical linkages.</p>
+      </li>
+    </ul>
+
+    <p class="label">Biological computation &amp; organoids</p>
+    <ul class="ref-list">
+      <li>
+        <span class="ref-title"><a href="https://www.diarmidflatley.com/selected-works/simulacra-naturae" target="_blank" rel="noopener">Diarmid Flatley — Simulacra Naturae ↗</a></span>
+        <p class="ref-desc">A collaborative media installation exploring the entanglement of digital morphogenesis and the interplay between biological and artificial intelligences. Brain organoids drive simulations of agent-based ecosystems — flocks, slime molds, termites. Their spontaneous neural activity modulates the behavior of agents, influencing real-time generative visuals, spatial sound, sculptural forms, and living plants.</p>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://www.diarmidflatley.com/selected-works/organoid-protonoesis" target="_blank" rel="noopener">Diarmid Flatley — Organoid Protonoesis ↗</a></span>
+        <p class="ref-desc">A real-time interface connecting spontaneous brain organoid activity with external devices. Neuronal firing data, converted to hyperedges within hypergraphs, are transformed into computational architectural morphologies, generative spatialized sound, mechanical movements, and AI virtual entities. A brain organoid is a three-dimensional organ model produced in the lab from pluripotent stem cells — self-organized structures that mimic aspects of early brain development.</p>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://www.sciencedirect.com/science/article/pii/S0006320718309054" target="_blank" rel="noopener">Collective behavior and conservation biology ↗</a></span>
+        <p class="ref-desc">How schooling and flocking behavior creates vulnerabilities that are exploited by industrial fishing — the flip side of collective intelligence.</p>
+      </li>
+    </ul>
+
+    <p class="label">Glass &amp; material</p>
+    <ul class="ref-list">
+      <li>
+        <span class="ref-title"><a href="https://www.youtube.com/watch?v=5tol9neTmho" target="_blank" rel="noopener">Trilobite Glassworks ↗</a></span>
+        <p class="ref-desc">A woman who left the science research world to become a glass artist. Relevant to the question of what it means to change the medium in which you work with scientific ideas.</p>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://www.reddit.com/r/generative/comments/ule6sh/generative_art_in_glass_two_pieces_i_have/" target="_blank" rel="noopener">Generative art in glass ↗</a></span>
+        <p class="ref-desc">Glass etching to showcase generative patterns — processes made permanent in a fragile medium.</p>
+      </li>
+      <li>
+        <span class="ref-title"><a href="https://www.reddit.com/r/generative/comments/squfkh/glass_study_redux/" target="_blank" rel="noopener">Glass study redux ↗</a></span>
+        <p class="ref-desc">Generative glass video — motion and time encoded in material.</p>
+      </li>
+    </ul>
+
+    <p class="label">What we're after</p>
+    <p>Across all of this, a few feelings keep coming up as the target:</p>
+    <div class="tags">
+      <span class="tag">Awe mixed with personal agency</span>
+      <span class="tag">Contribution that feels important but miniscule</span>
+      <span class="tag">Peace</span>
+      <span class="tag">Immersion</span>
+      <span class="tag">Fabulation</span>
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> C. J. Merzbacher</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){var root=document.documentElement,btn=document.getElementById('theme-toggle');if(!localStorage.getItem('theme'))root.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');btn.addEventListener('click',function(){var d=root.classList.contains('dark');root.classList.toggle('dark',!d);root.classList.toggle('light',d);localStorage.setItem('theme',root.classList.contains('dark')?'dark':'light');});})()
+  </script>
+</body>
+</html>
