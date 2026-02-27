@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Striding Arches — Emergence</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.classList.add(t);})()</script>
+  <style>
+    html.light { --text-color: #000; --text-color-alt: #666; --background-color: #fff; --background-color-alt: #eee; }
+    html.dark  { --text-color: #fff; --text-color-alt: #aaa; --background-color: #000; --background-color-alt: #111; }
+    .theme-toggle {
+      margin-left: auto; background: none; border: none; cursor: pointer;
+      font: inherit; font-weight: var(--font-weight-medium); color: var(--text-color); padding: 0;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 2ch;
+      margin-bottom: 0;
+      padding-bottom: var(--line-height);
+      border-bottom: calc(var(--border-thickness) * 3) double var(--text-color);
+    }
+    nav a { font-weight: var(--font-weight-medium); }
+
+    /* Photo grid */
+    .collage-section {
+      margin-top: calc(var(--line-height) * 3);
+    }
+
+    .collage-section h2 {
+      margin-top: 0;
+      margin-bottom: var(--line-height);
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 0;
+    }
+
+    .photo-grid img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      margin: 0;
+    }
+
+    @media (max-width: 480px) {
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    footer {
+      margin-top: calc(var(--line-height) * 4);
+      padding-top: var(--line-height);
+      border-top: calc(var(--border-thickness) * 3) double var(--text-color);
+      color: var(--text-color-alt);
+      font-size: 0.825rem;
+    }
+    footer p { margin: 0; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">← emergence</a>
+    <a href="reading.html">reading</a>
+    <a href="schedule.html">schedule</a>
+    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">notes ↗</a>
+    <a href="outputs.html">outputs</a>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour scheme">◐</button>
+  </nav>
+
+  <div class="header">
+    <h1>Striding Arches</h1>
+    <p>February 27, 2026 · Cairnhead, Dumfries &amp; Galloway</p>
+  </div>
+
+  <hr>
+
+  <p>On day eight of the residency we walked to the first of the <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.walkhighlands.co.uk/galloway/striding-arches.shtml&ved=2ahUKEwjs24KXofqSAxXQXUEAHXUrB6wQFnoECDEQAQ&usg=AOvVaw3wOpfkIjJ8TSTkGiivLdym" target="_blank" rel="noopener">Striding Arches</a>, a permanent landscape work by <a href="https://andygoldsworthystudio.com" target="_blank" rel="noopener">Andy Goldsworthy</a> — three self-supporting red sandstone arches placed on hilltops around the natural amphitheatre at Cairnhead, designed so that each arch is always visible from the other two.</p>
+
+  <p>Each person chose a single colour — green, brown, or gray — and photographed only objects of that colour throughout the walk. The resulting collages show how form, texture, and presence emerge from a single constraint applied across an entire landscape.</p>
+
+  <hr>
+
+  <!-- Green -->
+  <section class="collage-section" id="green">
+    <h2>Green</h2>
+    <div class="photo-grid">
+      <img src="green_collage/FullSizeRender.JPG" alt="">
+      <img src="green_collage/IMG_9880.JPG" alt="">
+      <img src="green_collage/IMG_9881.JPG" alt="">
+      <img src="green_collage/IMG_9883.JPG" alt="">
+      <img src="green_collage/IMG_9884.JPG" alt="">
+      <img src="green_collage/IMG_9888.JPG" alt="">
+      <img src="green_collage/IMG_9901.JPG" alt="">
+      <img src="green_collage/IMG_9902.JPG" alt="">
+      <img src="green_collage/IMG_9935.JPG" alt="">
+      <img src="green_collage/IMG_9942.JPG" alt="">
+      <img src="green_collage/IMG_9944.JPG" alt="">
+      <img src="green_collage/IMG_9945.JPG" alt="">
+      <img src="green_collage/IMG_9948.JPG" alt="">
+      <img src="green_collage/IMG_9952.JPG" alt="">
+      <img src="green_collage/IMG_9974.JPG" alt="">
+      <img src="green_collage/IMG_9999.JPG" alt="">
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- Brown -->
+  <section class="collage-section" id="brown">
+    <h2>Brown</h2>
+    <div class="photo-grid">
+      <img src="brown_collage/00999428-420a-4474-8993-63e95697c69f.jpg" alt="">
+      <img src="brown_collage/9a3b8507-3454-4b2b-a138-83312b4c6b23.jpg" alt="">
+      <img src="brown_collage/a7ff3240-1081-4f65-b95d-eb130a7e9b31.jpg" alt="">
+      <img src="brown_collage/a843f665-36cd-48a8-9e09-d813532c8c28.jpg" alt="">
+      <img src="brown_collage/cd769a78-9c25-487e-81c2-aff97d5e81b6.jpg" alt="">
+      <img src="brown_collage/e6e7dafc-425e-452a-bd1d-fb189ddfafe6.jpg" alt="">
+      <img src="brown_collage/IMG_9898.jpg" alt="">
+      <img src="brown_collage/IMG_9919.JPG" alt="">
+      <img src="brown_collage/IMG_9924.JPG" alt="">
+      <img src="brown_collage/IMG_9936.JPG" alt="">
+      <img src="brown_collage/IMG_9937.JPG" alt="">
+      <img src="brown_collage/IMG_9947.JPG" alt="">
+      <img src="brown_collage/IMG_9955.JPG" alt="">
+      <img src="brown_collage/IMG_9977.JPG" alt="">
+      <img src="brown_collage/IMG_9981.JPG" alt="">
+      <img src="brown_collage/IMG_9989.JPG" alt="">
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- Gray -->
+  <section class="collage-section" id="gray">
+    <h2>Gray</h2>
+    <div class="photo-grid">
+      <img src="gray_collage/IMG_0003.JPG" alt="">
+      <img src="gray_collage/IMG_0019.JPG" alt="">
+      <img src="gray_collage/IMG_9895.JPG" alt="">
+      <img src="gray_collage/IMG_9910.JPG" alt="">
+      <img src="gray_collage/IMG_9911.JPG" alt="">
+      <img src="gray_collage/IMG_9915.JPG" alt="">
+      <img src="gray_collage/IMG_9920.JPG" alt="">
+      <img src="gray_collage/IMG_9922.JPG" alt="">
+      <img src="gray_collage/IMG_9923.JPG" alt="">
+      <img src="gray_collage/IMG_9938.JPG" alt="">
+      <img src="gray_collage/IMG_9941.JPG" alt="">
+      <img src="gray_collage/IMG_9953.JPG" alt="">
+      <img src="gray_collage/IMG_9983.JPG" alt="">
+      <img src="gray_collage/IMG_9992.JPG" alt="">
+      <img src="gray_collage/IMG_9993.JPG" alt="">
+      <img src="gray_collage/IMG_9996.JPG" alt="">
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> C. J. Merzbacher</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){var root=document.documentElement,btn=document.getElementById('theme-toggle');if(!localStorage.getItem('theme'))root.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');btn.addEventListener('click',function(){var d=root.classList.contains('dark');root.classList.toggle('dark',!d);root.classList.toggle('light',d);localStorage.setItem('theme',root.classList.contains('dark')?'dark':'light');});}())
+  </script>
+</body>
+</html>
