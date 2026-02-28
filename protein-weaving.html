@@ -60,6 +60,21 @@
       color: var(--text-color-alt);
       margin-top: calc(var(--line-height) * 0.5);
     }
+    .fig-half {
+      max-width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .fig-interactive {
+      margin: calc(var(--line-height) * 2) 0;
+      border: var(--border-thickness) solid var(--text-color);
+    }
+    .fig-interactive iframe {
+      width: 100%;
+      height: 520px;
+      display: block;
+      border: none;
+    }
     .fig-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -113,10 +128,10 @@
   <section id="idea">
     <h2>The Idea</h2>
 
-    <p>We were interested in light and shadow. We were also interested in molecular structure at variable scales, as well as memory, and the proteins involved with memory, such as NMDA receptors.</p>
+    <p>We were interested in light and shadow. We were also interested in molecular structure at variable scales, as well as memory. We selected the NMDA receptor as a starting point for a protein modeling project; it is an ion channel that responds only to high-frequency neuronal inputs and plays a cruicial part in the establishment of long-term potentiaion – the closest correlate to memory at the cellular level. </p>
 
-    <div class="fig">
-      <img src="icons/mesh_upsidedown_2.png" alt="Mesh weave pattern upside down, showing projected shadow geometry">
+    <div class="fig fig-half">
+      <img src="images/mesh_upsidedown_2.png" alt="Mesh weave pattern upside down, showing projected shadow geometry">
     </div>
 
     <p>We decided we wanted to create semi-transparent sculptures inspired by protein structures, and started looking into techniques for building them. Two techniques stood out.</p>
@@ -124,7 +139,7 @@
       <p>Our second idea was to use weaving. We were inspired by <a href = "https://www.cave.co.ke/" target ="_blank" rel="noopener">cave_bureau</a>, a Kenyan architecture studio which has (among other projects) used a technique called Kagome weaving (described below) to weave reeds into gallery-sized structures shaped like cave interiors.
 
       <div class="fig">
-         <img src="icons/cave_bureau.jpg" alt="Cave Bureau's woven cave structure at the Louisiana Museum">
+         <img src="images/cave_bureau.jpg" alt="Cave Bureau's woven cave structure at the Louisiana Museum">
          <p class="fig-caption"><a href="https://louisiana.dk/en/exhibition/cave_bureau/" target="_blank" rel="noopener">Cave_bureau at Louisiana Museum ↗</a></p>
       </div>
 
@@ -132,8 +147,8 @@
 
      <p>Kagome weaving is a traditional Japanese weaving technique. Unlike standard weaving, which uses two sets of strands (a warp and a weft) that run perpendicular to one another, Kagome weaving is a triaxial technique. It uses three sets of strands, which intersect with each other at 120 degree angles, creating a repeating pattern of hexagons in their negative space.</p>
 
-    <div class="fig">
-      <img src="icons/kagome_flat_2.JPG" alt="Flat kagome weave pattern showing the hexagonal triaxial structure">
+    <div class="fig fig-half">
+      <img src="images/kagome_flat_2.JPG" alt="Flat kagome weave pattern showing the hexagonal triaxial structure" style="transform: rotate(90deg);">
     </div>
 
     <p>The technique's architectural applications have been developed by a number of architects, mathematicians, and artists, including the cave_bureau, <a href="https://www.researchgate.net/profile/Phil-Ayres-2/publication/340464769_Architectural_Scale_Kagome_Weaving_Design_Methods_and_Fabrication_Concepts/links/5e8ba0134585150839c63152/Architectural-Scale-Kagome-Weaving-Design-Methods-and-Fabrication-Concepts.pdf" target="_blank" rel="noopener">Professor Phil Ayres</a> (an architect at CITA Denmark), and <a href="https://www.instagram.com/alisonmartin57/" target="_blank" rel="noopener">Allison Grace Martin</a> (an artist based in Italy). By introducing new strands into the weave (or withdrawing strands) at particular points, you can bend the curvature of your surface by introducing topological singularities.</p>
@@ -155,27 +170,32 @@
 
     <div class="fig-grid">
       <div class="fig">
-        <img src="icons/crambin.png" alt="Crambin weave render, base level of smoothing">
+        <img src="images/crambin.png" alt="Crambin weave render, base level of smoothing">
         <p class="fig-caption">Base</p>
       </div>
       <div class="fig">
-        <img src="icons/crambin_dense.png" alt="Crambin weave render, dense">
+        <img src="images/crambin_dense.png" alt="Crambin weave render, dense">
         <p class="fig-caption">Dense</p>
       </div>
       <div class="fig">
-        <img src="icons/crambin_denser.png" alt="Crambin weave render, denser">
+        <img src="images/crambin_denser.png" alt="Crambin weave render, denser">
         <p class="fig-caption">Denser</p>
       </div>
+    </div>
+
+    <div class="fig-interactive">
+      <iframe src="images/weaving_triaxial_3d.html" title="Interactive 3D crambin triaxial weave" scrolling="no"></iframe>
+      <p class="fig-caption">Interactive 3D crambin triaxial weave — drag to rotate</p>
     </div>
 
 <p>When we tried to apply the program to the NMDA receptor, a much larger protein with multiple subdomains, we realized that we needed to make several changes to the algorithm to simplify the strand assignment and make such a large weave computationally feasible to render.</p>
 
     <div class="fig-grid-2">
       <div class="fig">
-        <img src="icons/mesh_rotated_1.png" alt="NMDA receptor mesh weave, rotated view">
+        <img src="images/mesh_rotated_1.png" alt="NMDA receptor mesh weave, rotated view">
       </div>
       <div class="fig">
-        <img src="icons/nmda.png" alt="NMDA receptor weave pattern">
+        <img src="images/nmda.png" alt="NMDA receptor weave pattern">
       </div>
     </div>
   </section>
@@ -184,8 +204,8 @@
 
     <p>Because of Charlotte's extensive experience with crochet, we decided that our first test in the physical world should be a crochet pattern. We generated a crochet pattern for crambin that focused on the exterior structure of the protein, and then we made it.</p>
 
-    <div class="fig">
-      <img src="icons/protein-weaving.JPG" alt="Crocheted crambin protein">
+    <div class="fig fig-half">
+      <img src="images/protein-weaving.JPG" alt="Crocheted crambin protein">
     </div>
 
     <p>This pattern captured the larger structure of the protein and some of its interesting features but, given that this is a simple protein, there weren't too many interesting proteins to capture. However, it was clear that the pattern generation succeeded at making things we could build.</p>
@@ -194,13 +214,13 @@
 
       <h3>Experiment 3: Learning Kagome</h3>
 
-      <p>So, we decided to try to make something with triaxial weaving.</p>
+      <p>We next decided to try to learn how to create our own triaxial weaves.</p>
       <p>This was a new craft for all of us, so we started by making flat weaves with paper. You can see the results above, in the Idea section. The next step was to try introducing curvature. This turned out to be a real challenge, both conceptually (wrapping one's head around the math isn't easy) and practically (holding the stands in place while the surface is trying to curve isn't easy either). In the end, we succeeded at creating a curved surface.</p>
 
     
 
-    <div class="fig">
-      <img src="icons/kagome_on_table.JPG" alt="Kagome weave pattern laid out on a table">
+    <div class="fig fig-half">
+      <img src="images/kagome_on_table.JPG" alt="Kagome weave pattern laid out on a table">
     </div>
 
   <section id="next-steps">

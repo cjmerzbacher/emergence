@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Microsoft Office temp files
+~$*
+*.tmp
+
+# Node
+node_modules/
+
+# Build output
+dist/
