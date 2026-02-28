@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Turing Curtains — Emergence</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.classList.add(t);})()</script>
+  <style>
+    html.light { --text-color: #000; --text-color-alt: #666; --background-color: #fff; --background-color-alt: #eee; }
+    html.dark  { --text-color: #fff; --text-color-alt: #aaa; --background-color: #000; --background-color-alt: #111; }
+    .theme-toggle {
+      margin-left: auto; background: none; border: none; cursor: pointer;
+      font: inherit; font-weight: var(--font-weight-medium); color: var(--text-color); padding: 0;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 2ch;
+      margin-bottom: 0;
+      padding-bottom: var(--line-height);
+      border-bottom: calc(var(--border-thickness) * 3) double var(--text-color);
+    }
+    nav a { font-weight: var(--font-weight-medium); }
+
+    section { margin-top: calc(var(--line-height) * 3); }
+    section h2:first-child { margin-top: 0; }
+
+    /* Figures */
+    .fig {
+      margin: calc(var(--line-height) * 2) 0;
+    }
+    .fig img {
+      width: 100%;
+      display: block;
+      margin: 0;
+    }
+    .fig-caption {
+      font-size: 0.8rem;
+      color: var(--text-color-alt);
+      margin-top: calc(var(--line-height) * 0.5);
+    }
+    /* Image collage */
+    .collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2ch;
+      margin: calc(var(--line-height) * 2) 0;
+    }
+    .collage-left { overflow: hidden; }
+    .collage-left img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .collage-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2ch;
+    }
+    .collage-right img:first-child {
+      width: 100%;
+      display: block;
+    }
+    .collage-birds {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .collage-birds img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 480px) {
+      .collage { grid-template-columns: 1fr; }
+    }
+
+    /* Sources grid */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(26ch, 1fr));
+      gap: var(--line-height) 2ch;
+      margin-top: var(--line-height);
+    }
+
+    .source-card {
+      border: var(--border-thickness) solid var(--text-color);
+      padding: var(--line-height) 2ch;
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--line-height) * 0.5);
+    }
+
+    .source-card .source-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-color-alt);
+      margin: 0;
+    }
+
+    .source-card h3 {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .source-card p {
+      font-size: 0.875rem;
+      color: var(--text-color-alt);
+      margin: 0;
+      flex: 1;
+    }
+
+    .source-card a {
+      font-size: 0.875rem;
+    }
+
+    footer {
+      margin-top: calc(var(--line-height) * 4);
+      padding-top: var(--line-height);
+      border-top: calc(var(--border-thickness) * 3) double var(--text-color);
+      color: var(--text-color-alt);
+      font-size: 0.825rem;
+    }
+    footer p { margin: 0; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">← emergence</a>
+    <a href="reading.html">reading</a>
+    <a href="schedule.html">schedule</a>
+    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">notes ↗</a>
+    <a href="outputs.html">outputs</a>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour scheme">◐</button>
+  </nav>
+
+  <div class="header">
+    <h1>Turing Curtains</h1>
+  </div>
+
+  <p><strong>Author:</strong> Charlotte Merzbacher</p>
+
+  <hr>
+
+  <section id="abstract">
+    <h2>Abstract</h2>
+
+    <p>Turing patterns are spontaneous patterns that form from reaction-diffusion equations. They underlie the patterns in leopard spots, zebra stripes, and coral reef structure, and your fingerprints. Murmurations are the same idea made kinetic, and emerge from individuals following local rules, with no one in charge of the whole.</p>
+
+    <p>I aim to use laser cutting to transfer computationally generated Turing and murmuration patterns onto paper and fabric for screen/shade fabrication. The static patterns become dynamic through their interplay with light throughout the day, creating emergent shadows.</p>
+
+    <div class="collage">
+      <div class="collage-left">
+        <img src="abstracts/turing-curtains/laser-cut-pattern.jpg" alt="Laser-cut Turing pattern on paper">
+      </div>
+      <div class="collage-right">
+        <img src="abstracts/turing-curtains/turing-patterns.jpeg" alt="Computationally generated Turing patterns">
+        <div class="collage-birds">
+          <img src="abstracts/turing-curtains/murmurations.jpg.avif" alt="Murmuration of starlings">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <section id="sources">
+    <h2>Sources</h2>
+
+    <div class="sources-grid">
+
+      <div class="source-card">
+        <p class="source-type">Video</p>
+        <h3>Turing Pattern Simulation</h3>
+        <p>A visual demonstration of reaction-diffusion equations generating Turing patterns from scratch.</p>
+        <a href="https://www.youtube.com/watch?v=dhjXMHwPtzs" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+      </div>
+
+      <div class="source-card">
+        <p class="source-type">Blog Post</p>
+        <h3>Laser-Cut Turing Patterns</h3>
+        <p>Jessica Polka's documentation of generating and laser-cutting Turing patterns — a direct precedent for this project.</p>
+        <a href="http://jpolka.blogspot.com/2013/01/laser-cut-turing-patterns.html" target="_blank" rel="noopener">Read post ↗</a>
+      </div>
+
+      <div class="source-card">
+        <p class="source-type">Academic Paper</p>
+        <h3>Turing Patterns &amp; Soft Pneumatic Technology</h3>
+        <p>Research on how Turing-inspired patterning can be applied to soft pneumatic actuators — bridging biological pattern formation and engineered materials.</p>
+        <a href="abstracts/turing-curtains/2024-09-turing-patterns-soft-pneumatic-technology.pdf" target="_blank" rel="noopener">Read PDF ↗</a>
+      </div>
+
+      <div class="source-card">
+        <p class="source-type">Tutorial</p>
+        <h3>Murmurations of Starlings — Boids</h3>
+        <p>V. Hunter Adams' lab guide to simulating murmuration-like flocking behaviour using the Boids algorithm: emergent motion from three simple local rules.</p>
+        <a href="https://vanhunteradams.com/Pico/Animal_Movement/Boids_Lab.html" target="_blank" rel="noopener">Read guide ↗</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> C. J. Merzbacher</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){var root=document.documentElement,btn=document.getElementById('theme-toggle');if(!localStorage.getItem('theme'))root.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');btn.addEventListener('click',function(){var d=root.classList.contains('dark');root.classList.toggle('dark',!d);root.classList.toggle('light',d);localStorage.setItem('theme',root.classList.contains('dark')?'dark':'light');});})()
+  </script>
+</body>
+</html>
