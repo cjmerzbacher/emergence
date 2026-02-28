@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rivers &amp; Memory — Emergence</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.classList.add(t);})()</script>
+  <style>
+    html.light { --text-color: #000; --text-color-alt: #666; --background-color: #fff; --background-color-alt: #eee; }
+    html.dark  { --text-color: #fff; --text-color-alt: #aaa; --background-color: #000; --background-color-alt: #111; }
+    .theme-toggle {
+      margin-left: auto; background: none; border: none; cursor: pointer;
+      font: inherit; font-weight: var(--font-weight-medium); color: var(--text-color); padding: 0;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 2ch;
+      margin-bottom: 0;
+      padding-bottom: var(--line-height);
+      border-bottom: calc(var(--border-thickness) * 3) double var(--text-color);
+    }
+    nav a { font-weight: var(--font-weight-medium); }
+
+    section { margin-top: calc(var(--line-height) * 3); }
+    section h2:first-child { margin-top: 0; }
+
+    /* Pull quote */
+    blockquote {
+      border-left: calc(var(--border-thickness) * 3) solid var(--text-color);
+      margin: calc(var(--line-height) * 2) 0;
+      padding: 0 2ch;
+      color: var(--text-color-alt);
+      font-style: italic;
+    }
+    blockquote p { margin: 0; }
+    blockquote cite {
+      display: block;
+      margin-top: calc(var(--line-height) * 0.5);
+      font-size: 0.8rem;
+      font-style: normal;
+    }
+
+    /* Figures */
+    .fig {
+      margin: calc(var(--line-height) * 2) 0;
+    }
+    .fig img {
+      width: 100%;
+      display: block;
+      margin: 0;
+    }
+    .fig-caption {
+      font-size: 0.8rem;
+      color: var(--text-color-alt);
+      margin-top: calc(var(--line-height) * 0.5);
+    }
+
+    /* Image collage */
+    .collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2ch;
+      margin: calc(var(--line-height) * 2) 0;
+    }
+    .collage-left { overflow: hidden; }
+    .collage-left img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .collage-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2ch;
+    }
+    .collage-right img:first-child {
+      width: 100%;
+      display: block;
+    }
+    .collage-bottom {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .collage-bottom img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 480px) {
+      .collage { grid-template-columns: 1fr; }
+    }
+
+    /* Sources grid */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(26ch, 1fr));
+      gap: var(--line-height) 2ch;
+      margin-top: var(--line-height);
+    }
+
+    .source-card {
+      border: var(--border-thickness) solid var(--text-color);
+      padding: var(--line-height) 2ch;
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--line-height) * 0.5);
+    }
+
+    .source-card .source-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-color-alt);
+      margin: 0;
+    }
+
+    .source-card h3 {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .source-card p {
+      font-size: 0.875rem;
+      color: var(--text-color-alt);
+      margin: 0;
+      flex: 1;
+    }
+
+    .source-card a {
+      font-size: 0.875rem;
+    }
+
+    footer {
+      margin-top: calc(var(--line-height) * 4);
+      padding-top: var(--line-height);
+      border-top: calc(var(--border-thickness) * 3) double var(--text-color);
+      color: var(--text-color-alt);
+      font-size: 0.825rem;
+    }
+    footer p { margin: 0; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">← emergence</a>
+    <a href="reading.html">reading</a>
+    <a href="schedule.html">schedule</a>
+    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">notes ↗</a>
+    <a href="outputs.html">outputs</a>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour scheme">◐</button>
+  </nav>
+
+  <div class="header">
+    <h1>Rivers &amp; Memory</h1>
+  </div>
+
+  <p><strong>Author:</strong> Charlotte Merzbacher</p>
+
+  <hr>
+
+  <section id="abstract">
+    <h2>Abstract</h2>
+
+    <blockquote>
+      <p>"They straightened out the Mississippi River in places, to make room for houses and livable acreage. Occasionally the river floods these places. 'Floods' is the word they use, but in fact it is not flooding; it is remembering. Remembering where it used to be. All water has a perfect memory and is forever trying to get back to where it was. Writers are like that: remembering where we were, what valley we ran through, what the banks were like, the light that was there and the route back to our original place."</p>
+      <cite>— Toni Morrison, <em>The Site of Memory</em></cite>
+    </blockquote>
+
+    <p>River basins contain geological memories of their previous courses. Over the course of its life, a river meanders, winding back and forth across a basin. We can track these meanders from the landscape today, tracing memory and drawing the past out of the present.</p>
+
+    <p>In addition to their "natural" courses, rivers are shaped by human action through dams, canals, and locks. The Amstel is one such river, controlled for centuries by the Dutch to prevent flooding and maximize trade. As a resident of the city, I want to investigate how the topology of the river has changed over time, overlaid on top of the current city map.</p>
+
+    <p>In addition, I want to investigate how rivers can be forgotten. I grew up in the Oakland Hills, where a series of creeks and watershed canyons have been paved over and hidden underground; these rivers break out through potholes, recreate their flows during storms, and are slowly being daylighted through several restoration projects. Mapping these rivers connects my present in Amsterdam with memories of my past in California.</p>
+
+    <div class="collage">
+      <div class="collage-left">
+        <img src="abstracts/rivers-memory/mississippi-river-meander.webp" alt="Harold Fisk's map of Mississippi River meanders">
+      </div>
+      <div class="collage-right">
+        <img src="abstracts/rivers-memory/Is-A-River-Alive-endpapers.jpg" alt="Endpapers from Robert MacFarlane's Is a River Alive?">
+        <div class="collage-bottom">
+          <img src="abstracts/rivers-memory/oakland-creeks-2.jpg" alt="Oakland creeks and watershed">
+        </div>
+      </div>
+    </div>
+
+    <div class="fig">
+      <img src="abstracts/rivers-memory/urn-cambridge.org-id-binary-alt-20241023132541-54094-mediumThumb-S0016774614000419_fig1g.jpg" alt="The natural landscape of Amstelland around 800 AD">
+      <p class="fig-caption">The natural landscape of Amstelland around 800 AD, showing oligotrophic peat ridges, eutrophic peat plains, and the courses of the northern and southern Amstel. From de Bont (2015).</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <section id="sources">
+    <h2>Sources</h2>
+
+    <div class="sources-grid">
+
+      <div class="source-card">
+        <p class="source-type">Maps</p>
+        <h3>Maps of the Lower Mississippi</h3>
+        <p>Harold Fisk's 1944 geological survey maps tracing every historical meander of the Mississippi River — a landmark in visualising a river's memory across time.</p>
+        <a href="https://publicdomainreview.org/collection/maps-of-the-lower-mississippi-harold-fisk/" target="_blank" rel="noopener">View maps ↗</a>
+      </div>
+
+      <div class="source-card">
+        <p class="source-type">Academic Paper</p>
+        <h3>Digging the River: the Amstel Area, 800–1275 AD</h3>
+        <p>C. de Bont reconstructs the pre-urban drainage landscape of Amstelland, tracing how medieval peat reclamation shaped what would become Amsterdam. <em>Netherlands Journal of Geosciences</em>, 2015.</p>
+        <a href="abstracts/rivers-memory/12073-Article Text-83470-1-10-20250103.pdf" target="_blank" rel="noopener">Read PDF ↗</a>
+      </div>
+
+      <div class="source-card">
+        <p class="source-type">Academic Paper</p>
+        <h3>Geology of the Amstel River: Man versus Nature</h3>
+        <p>A companion study examining the long contest between the Amstel's natural course and centuries of Dutch hydraulic engineering — canals, dams, and reclamation. <em>Netherlands Journal of Geosciences</em>.</p>
+        <a href="https://www.cambridge.org/core/journals/netherlands-journal-of-geosciences/article/geology-of-the-amstel-river-in-amsterdam-netherlands-man-versus-nature/81BE1F26A348BF6C4B05313DF4515A40" target="_blank" rel="noopener">Read paper ↗</a>
+      </div>
+
+      <div class="source-card">
+        <p class="source-type">Book</p>
+        <h3>Is a River Alive?</h3>
+        <p>Robert MacFarlane's investigation into the legal personhood of rivers and the idea that rivers think, remember, and act — a philosophical and ecological argument for rivers as living subjects.</p>
+      </div>
+
+      <div class="source-card">
+        <p class="source-type">Article</p>
+        <h3>Oakland Creeks: Restoring Urban Watersheds</h3>
+        <p>The Oaklandside's series on the effort to daylight Oakland's buried creek network — recovering waterways that were paved over in the 20th century and tracing them back into the city's surface.</p>
+        <a href="https://oaklandside.org/2024/01/25/oakland-creeks-series-restoring-urban-watershed/" target="_blank" rel="noopener">Read article ↗</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> C. J. Merzbacher</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){var root=document.documentElement,btn=document.getElementById('theme-toggle');if(!localStorage.getItem('theme'))root.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');btn.addEventListener('click',function(){var d=root.classList.contains('dark');root.classList.toggle('dark',!d);root.classList.toggle('light',d);localStorage.setItem('theme',root.classList.contains('dark')?'dark':'light');});})()
+  </script>
+</body>
+</html>
