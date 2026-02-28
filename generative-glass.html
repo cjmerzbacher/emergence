@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Turing Curtains — Emergence</title>
+  <title>Generative Glass — Emergence</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
   <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
@@ -28,15 +28,6 @@
     section { margin-top: calc(var(--line-height) * 3); }
     section h2:first-child { margin-top: 0; }
 
-    /* Figures */
-    .fig {
-      margin: calc(var(--line-height) * 2) 0;
-    }
-    .fig img {
-      width: 100%;
-      display: block;
-      margin: 0;
-    }
     .format {
       font-size: 0.7rem;
       text-transform: uppercase;
@@ -45,44 +36,35 @@
       margin: 0;
     }
 
+    /* Figures */
+    .fig {
+      margin: calc(var(--line-height) * 2) 0;
+    }
+    .fig img, .fig video {
+      width: 100%;
+      display: block;
+      margin: 0;
+      background: var(--background-color-alt);
+    }
     .fig-caption {
       font-size: 0.8rem;
       color: var(--text-color-alt);
       margin-top: calc(var(--line-height) * 0.5);
     }
-    /* Image collage */
+
+    /* Collage: image left, video right */
     .collage {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2ch;
       margin: calc(var(--line-height) * 2) 0;
     }
-    .collage-left { overflow: hidden; }
-    .collage-left img {
+    .collage img, .collage video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-    }
-    .collage-right {
-      display: flex;
-      flex-direction: column;
-      gap: 2ch;
-    }
-    .collage-right img:first-child {
-      width: 100%;
-      display: block;
-    }
-    .collage-birds {
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
-    }
-    .collage-birds img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      background: var(--background-color-alt);
     }
     @media (max-width: 480px) {
       .collage { grid-template-columns: 1fr; }
@@ -150,67 +132,60 @@
   </nav>
 
   <div class="header">
-    <h1>Turing Curtains</h1>
+    <h1>Generative Glass</h1>
   </div>
 
-  <p class="format">Laser-cut installation</p>
-  <p><strong>Author:</strong> Charlotte Merzbacher</p>
+  <p class="format">Generative art &amp; glass</p>
+  <p><strong>Author:</strong> Andy Pelos</p>
 
   <hr>
 
   <section id="abstract">
     <h2>Abstract</h2>
 
-    <p>Turing patterns are spontaneous patterns that form from reaction-diffusion equations. They underlie the patterns in leopard spots, zebra stripes, and coral reef structure, and your fingerprints. Murmurations are the same idea made kinetic, and emerge from individuals following local rules, with no one in charge of the whole.</p>
+    <p>Glass resists stable categorization. Neither fully solid nor liquid, it is an amorphous material whose apparent stillness masks molecular disorder. This project employs glass as a medium for exploring emergence: the process by which complex properties arise from simple constituents in ways that cannot be predicted from those constituents alone.</p>
 
-    <p>I aim to use laser cutting to transfer computationally generated Turing and murmuration patterns onto paper and fabric for screen/shade fabrication. The static patterns become dynamic through their interplay with light throughout the day, creating emergent shadows.</p>
+    <p>The work begins in code. Computational systems — reaction-diffusion patterns, flocking simulations, self-organizing geometries — generate forms according to simple rules, what Mark Bedau calls weak emergence: the result can only be reached by running the process itself. These forms are rendered as three-dimensional concepts that serve not as blueprints but as scores: open to interpretation, incomplete without performance.</p>
+
+    <p>The performance is glass. Through blowing, etching, and mosaic, generative forms are translated into a physical medium whose behavior exceeds any plan. Jane Bennett argues that matter is not passive stuff awaiting human intention but an active force with its own tendencies and resistances. Molten glass exemplifies this. It flows, sags, cools, and hardens according to dynamics no algorithm encodes and no novice glassblower fully controls. The distance between computational form and physical result is not a failure of execution but the point of the work: a space where two emergent systems — one digital and one material — meet and produce something neither could alone.</p>
+
+    <p>Generative art has a long tradition of relinquishing control to process. Eno designed systems and accepted what followed; LeWitt argued that the side effects an artist cannot imagine become ideas for new work. The algorithm produces forms that transcend its rules. The glass produces objects that transcend the algorithm. The conversation between them, mediated by the limits of the craft, produces something that could not have been designed.</p>
 
     <div class="collage">
-      <div class="collage-left">
-        <img src="abstracts/turing-curtains/laser-cut-pattern.jpg" alt="Laser-cut Turing pattern on paper">
-      </div>
-      <div class="collage-right">
-        <img src="abstracts/turing-curtains/turing-patterns.jpeg" alt="Computationally generated Turing patterns">
-        <div class="collage-birds">
-          <img src="abstracts/turing-curtains/murmurations.jpg.avif" alt="Murmuration of starlings">
-        </div>
-      </div>
+      <img src="abstracts/generative-glass/generative-art-in-glass-two-pieces-i-have-completed-let-me-v0-j3d24qtg8cy81.webp" alt="Two completed generative glass pieces">
+      <video autoplay loop muted playsinline>
+        <source src="abstracts/generative-glass/m2-res_720p.mp4" type="video/mp4">
+        <source src="abstracts/generative-glass/m2-res_360p.mp4" type="video/mp4">
+      </video>
     </div>
   </section>
 
   <hr>
 
   <section id="sources">
-    <h2>Sources</h2>
+    <h2>Inspirations</h2>
 
     <div class="sources-grid">
 
       <div class="source-card">
-        <p class="source-type">Video</p>
-        <h3>Turing Pattern Simulation</h3>
-        <p>A visual demonstration of reaction-diffusion equations generating Turing patterns from scratch.</p>
-        <a href="https://www.youtube.com/watch?v=dhjXMHwPtzs" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+        <p class="source-type">Art Project</p>
+        <h3>Filament Sculptures — LIA</h3>
+        <p>LIA's filament sculptures: generative art translated into physical objects through 3D printing, where the algorithm's logic becomes structural form. A precedent for bridging computational generation and material instantiation.</p>
+        <a href="https://www.liaworks.com/theprojects/filament-sculptures-generative-art-as-physical-object/" target="_blank" rel="noopener">View project ↗</a>
       </div>
 
       <div class="source-card">
-        <p class="source-type">Blog Post</p>
-        <h3>Laser-Cut Turing Patterns</h3>
-        <p>Jessica Polka's documentation of generating and laser-cutting Turing patterns — a direct precedent for this project.</p>
-        <a href="http://jpolka.blogspot.com/2013/01/laser-cut-turing-patterns.html" target="_blank" rel="noopener">Read post ↗</a>
+        <p class="source-type">Essay</p>
+        <h3>Generating and Generating (Eno)</h3>
+        <p>Brian Eno on generative music and the artist's role in designing systems rather than outcomes — accepting what follows as the work, and trusting process over plan.</p>
+        <a href="https://cjmerzbacher.github.io/emergence/reading_list/articles/eno.pdf" target="_blank" rel="noopener">Read essay ↗</a>
       </div>
 
       <div class="source-card">
         <p class="source-type">Academic Paper</p>
-        <h3>Turing Patterns &amp; Soft Pneumatic Technology</h3>
-        <p>Research on how Turing-inspired patterning can be applied to soft pneumatic actuators — bridging biological pattern formation and engineered materials.</p>
-        <a href="abstracts/turing-curtains/2024-09-turing-patterns-soft-pneumatic-technology.pdf" target="_blank" rel="noopener">Read PDF ↗</a>
-      </div>
-
-      <div class="source-card">
-        <p class="source-type">Tutorial</p>
-        <h3>Murmurations of Starlings — Boids</h3>
-        <p>V. Hunter Adams' lab guide to simulating murmuration-like flocking behaviour using the Boids algorithm: emergent motion from three simple local rules.</p>
-        <a href="https://vanhunteradams.com/Pico/Animal_Movement/Boids_Lab.html" target="_blank" rel="noopener">Read guide ↗</a>
+        <h3>Weak Emergence (Bedau)</h3>
+        <p>Mark Bedau's account of weak emergence — the class of phenomena whose properties can only be discovered by running the process that generates them, not derived analytically from initial conditions.</p>
+        <a href="https://cjmerzbacher.github.io/emergence/reading_list/articles/bedau_weak_emergence.pdf" target="_blank" rel="noopener">Read paper ↗</a>
       </div>
 
     </div>

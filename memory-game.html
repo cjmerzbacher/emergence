@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Turing Curtains — Emergence</title>
+  <title>All Water Has Perfect Memory — Emergence</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
   <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
@@ -28,15 +28,6 @@
     section { margin-top: calc(var(--line-height) * 3); }
     section h2:first-child { margin-top: 0; }
 
-    /* Figures */
-    .fig {
-      margin: calc(var(--line-height) * 2) 0;
-    }
-    .fig img {
-      width: 100%;
-      display: block;
-      margin: 0;
-    }
     .format {
       font-size: 0.7rem;
       text-transform: uppercase;
@@ -45,47 +36,30 @@
       margin: 0;
     }
 
-    .fig-caption {
-      font-size: 0.8rem;
+    /* Pull quote */
+    blockquote {
+      border-left: calc(var(--border-thickness) * 3) solid var(--text-color);
+      margin: calc(var(--line-height) * 2) 0;
+      padding: 0 2ch;
       color: var(--text-color-alt);
-      margin-top: calc(var(--line-height) * 0.5);
+      font-style: italic;
     }
-    /* Image collage */
-    .collage {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2ch;
+    blockquote p { margin: 0; }
+    blockquote cite {
+      display: block;
+      margin-top: calc(var(--line-height) * 0.5);
+      font-size: 0.8rem;
+      font-style: normal;
+    }
+
+    /* Figures */
+    .fig {
       margin: calc(var(--line-height) * 2) 0;
     }
-    .collage-left { overflow: hidden; }
-    .collage-left img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .collage-right {
-      display: flex;
-      flex-direction: column;
-      gap: 2ch;
-    }
-    .collage-right img:first-child {
+    .fig img {
       width: 100%;
       display: block;
-    }
-    .collage-birds {
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
-    }
-    .collage-birds img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    @media (max-width: 480px) {
-      .collage { grid-template-columns: 1fr; }
+      margin: 0;
     }
 
     /* Sources grid */
@@ -150,31 +124,26 @@
   </nav>
 
   <div class="header">
-    <h1>Turing Curtains</h1>
+    <h1>All Water Has Perfect Memory</h1>
   </div>
 
-  <p class="format">Laser-cut installation</p>
-  <p><strong>Author:</strong> Charlotte Merzbacher</p>
+  <p class="format">Word game</p>
+  <p><strong>Author:</strong> Liam Carpenter-Urquhart</p>
 
   <hr>
 
   <section id="abstract">
     <h2>Abstract</h2>
 
-    <p>Turing patterns are spontaneous patterns that form from reaction-diffusion equations. They underlie the patterns in leopard spots, zebra stripes, and coral reef structure, and your fingerprints. Murmurations are the same idea made kinetic, and emerge from individuals following local rules, with no one in charge of the whole.</p>
+    <blockquote>
+      <p>"Our greatest creative moments erupt from what our body remembers."</p>
+      <cite>— Toni Morrison, <em>The Site of Memory</em> (1995)</cite>
+    </blockquote>
 
-    <p>I aim to use laser cutting to transfer computationally generated Turing and murmuration patterns onto paper and fabric for screen/shade fabrication. The static patterns become dynamic through their interplay with light throughout the day, creating emergent shadows.</p>
+    <p>We can only access memories through the language we have at hand — and that language changes as the world, and our place in it, changes. This game asks players to transform written memories of a landscape based on changes in the words they're permitted to use. Changes in language will be determined by procedural rules and other players' decisions.</p>
 
-    <div class="collage">
-      <div class="collage-left">
-        <img src="abstracts/turing-curtains/laser-cut-pattern.jpg" alt="Laser-cut Turing pattern on paper">
-      </div>
-      <div class="collage-right">
-        <img src="abstracts/turing-curtains/turing-patterns.jpeg" alt="Computationally generated Turing patterns">
-        <div class="collage-birds">
-          <img src="abstracts/turing-curtains/murmurations.jpg.avif" alt="Murmuration of starlings">
-        </div>
-      </div>
+    <div class="fig">
+      <img src="abstracts/memory-game/fonts-landscape-11513815.jpg" alt="Landscape of fonts and letterforms">
     </div>
   </section>
 
@@ -186,31 +155,10 @@
     <div class="sources-grid">
 
       <div class="source-card">
-        <p class="source-type">Video</p>
-        <h3>Turing Pattern Simulation</h3>
-        <p>A visual demonstration of reaction-diffusion equations generating Turing patterns from scratch.</p>
-        <a href="https://www.youtube.com/watch?v=dhjXMHwPtzs" target="_blank" rel="noopener">Watch on YouTube ↗</a>
-      </div>
-
-      <div class="source-card">
-        <p class="source-type">Blog Post</p>
-        <h3>Laser-Cut Turing Patterns</h3>
-        <p>Jessica Polka's documentation of generating and laser-cutting Turing patterns — a direct precedent for this project.</p>
-        <a href="http://jpolka.blogspot.com/2013/01/laser-cut-turing-patterns.html" target="_blank" rel="noopener">Read post ↗</a>
-      </div>
-
-      <div class="source-card">
-        <p class="source-type">Academic Paper</p>
-        <h3>Turing Patterns &amp; Soft Pneumatic Technology</h3>
-        <p>Research on how Turing-inspired patterning can be applied to soft pneumatic actuators — bridging biological pattern formation and engineered materials.</p>
-        <a href="abstracts/turing-curtains/2024-09-turing-patterns-soft-pneumatic-technology.pdf" target="_blank" rel="noopener">Read PDF ↗</a>
-      </div>
-
-      <div class="source-card">
-        <p class="source-type">Tutorial</p>
-        <h3>Murmurations of Starlings — Boids</h3>
-        <p>V. Hunter Adams' lab guide to simulating murmuration-like flocking behaviour using the Boids algorithm: emergent motion from three simple local rules.</p>
-        <a href="https://vanhunteradams.com/Pico/Animal_Movement/Boids_Lab.html" target="_blank" rel="noopener">Read guide ↗</a>
+        <p class="source-type">Essay</p>
+        <h3>The Site of Memory (Morrison, 1995)</h3>
+        <p>Toni Morrison on the writer's relationship to memory — how imagination is fed by what the body already knows, and how recovering suppressed or lost histories requires excavating the site where memory was made.</p>
+        <a href="https://bpb-us-e2.wpmucdn.com/websites.umass.edu/dist/f/16818/files/2013/03/Morrison_Site-of-Memory.pdf" target="_blank" rel="noopener">Read essay ↗</a>
       </div>
 
     </div>

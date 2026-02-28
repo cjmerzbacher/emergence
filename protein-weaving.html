@@ -28,6 +28,14 @@
     section { margin-top: calc(var(--line-height) * 3); }
     section h2:first-child { margin-top: 0; }
 
+    .format {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-color-alt);
+      margin: 0;
+    }
+
     .label {
       font-weight: var(--font-weight-bold);
       font-size: 0.75rem;
@@ -96,8 +104,9 @@
 
   <div class="header">
     <h1>Protein Weaving</h1>
-    <p>Workshop Output · Emergence, February 2026</p>
   </div>
+
+  <p class="format">Textile &amp; software</p>
 
   <hr>
 
@@ -135,6 +144,10 @@
 
     <p>The Cave_bureau weave was created in collaboration with Professor Phil Ayres, an architect at CITA Denmark, and <a href="https://www.instagram.com/alisonmartin57/" target="_blank" rel="noopener">Allison Grace Martin</a>, an Italy-based artist. We read two of their papers focused on developing mathematical principles for architectural-scale Kagome weaving. Specifically, Martin introduces what she calls "singularities" in the weave: polygons with more or fewer sides which induce positive or negative curvature in the weave structure.</p>
 
+    <div class="fig">
+      <img src="icons/kagome_on_table.JPG" alt="Kagome weave pattern laid out on a table">
+    </div>
+
     <p>The papers we read:</p>
     <ul>
       <li><a href="http://www.florarobotica.eu/wp-content/uploads/2018/10/Triaxial-Weave_AAG_2018.pdf" target="_blank" rel="noopener">Triaxial Weave, AAG 2018</a></li>
@@ -166,10 +179,6 @@
         <img src="icons/crambin_denser.png" alt="Crambin weave render, denser">
         <p class="fig-caption">Denser</p>
       </div>
-    </div>
-
-    <div class="fig">
-      <img src="icons/kagome_on_table.JPG" alt="Kagome weave pattern laid out on a table">
     </div>
 
     <p>We then generated a crochet pattern with a high globularity and crocheted it in real life. This pattern captured the larger structure of the protein and some of its lumpiness but, given that this is a simple protein, was not particularly interesting. However, the pattern generation worked and produced a legible and mathematically consistent pattern.</p>

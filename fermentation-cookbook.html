@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Turing Curtains — Emergence</title>
+  <title>Deviant Cookbook — Emergence</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
   <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
@@ -28,15 +28,6 @@
     section { margin-top: calc(var(--line-height) * 3); }
     section h2:first-child { margin-top: 0; }
 
-    /* Figures */
-    .fig {
-      margin: calc(var(--line-height) * 2) 0;
-    }
-    .fig img {
-      width: 100%;
-      display: block;
-      margin: 0;
-    }
     .format {
       font-size: 0.7rem;
       text-transform: uppercase;
@@ -45,47 +36,22 @@
       margin: 0;
     }
 
-    .fig-caption {
-      font-size: 0.8rem;
-      color: var(--text-color-alt);
-      margin-top: calc(var(--line-height) * 0.5);
-    }
-    /* Image collage */
-    .collage {
+    /* Video grid */
+    .video-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2ch;
       margin: calc(var(--line-height) * 2) 0;
     }
-    .collage-left { overflow: hidden; }
-    .collage-left img {
+    .video-grid video {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 1;
       object-fit: cover;
       display: block;
-    }
-    .collage-right {
-      display: flex;
-      flex-direction: column;
-      gap: 2ch;
-    }
-    .collage-right img:first-child {
-      width: 100%;
-      display: block;
-    }
-    .collage-birds {
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
-    }
-    .collage-birds img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      background: var(--background-color-alt);
     }
     @media (max-width: 480px) {
-      .collage { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: 1fr; }
     }
 
     /* Sources grid */
@@ -150,67 +116,62 @@
   </nav>
 
   <div class="header">
-    <h1>Turing Curtains</h1>
+    <h1>Deviant Cookbook</h1>
+    <p>Fermented Forms Across Traditions</p>
   </div>
 
-  <p class="format">Laser-cut installation</p>
-  <p><strong>Author:</strong> Charlotte Merzbacher</p>
+  <p class="format">Cookbook</p>
+  <p><strong>Author:</strong> Andy Pelos</p>
 
   <hr>
 
   <section id="abstract">
     <h2>Abstract</h2>
 
-    <p>Turing patterns are spontaneous patterns that form from reaction-diffusion equations. They underlie the patterns in leopard spots, zebra stripes, and coral reef structure, and your fingerprints. Murmurations are the same idea made kinetic, and emerge from individuals following local rules, with no one in charge of the whole.</p>
+    <p>Fermentation is emergence you can eat. Microbial communities transform simple substrates into flavors, textures, and preservation properties that no individual organism could produce, through processes that cannot be shortcutted or fully predicted. Every fermentation tradition encodes knowledge about these processes not as biochemistry but as practice, passed between people through instruction, correction, and shared meals. This project collects fermentation practices across multiple cultural traditions through conversation with practitioners and experts, assembling them into a cookbook that is also an investigation into how emergent processes carry cultural knowledge.</p>
 
-    <p>I aim to use laser cutting to transfer computationally generated Turing and murmuration patterns onto paper and fabric for screen/shade fabrication. The static patterns become dynamic through their interplay with light throughout the day, creating emergent shadows.</p>
+    <p>Kyla Wazana Tompkins argues that fermentation, rot, and intoxication are united by their capacity for unpredictable transformation, and that this material "deviance" has been weaponized against minoritized communities through the hygienic ordering of the modern state. The Pasteurian turn didn't just discover germs; it reorganized who was allowed to manage the boundary between life and decay. Fermentation traditions that survived this ordering carry within them a refusal: an insistence on working with microbial life rather than against it, on trusting processes that smell wrong, look wrong, and behave unpredictably by the standards of industrial food production.</p>
 
-    <div class="collage">
-      <div class="collage-left">
-        <img src="abstracts/turing-curtains/laser-cut-pattern.jpg" alt="Laser-cut Turing pattern on paper">
-      </div>
-      <div class="collage-right">
-        <img src="abstracts/turing-curtains/turing-patterns.jpeg" alt="Computationally generated Turing patterns">
-        <div class="collage-birds">
-          <img src="abstracts/turing-curtains/murmurations.jpg.avif" alt="Murmuration of starlings">
-        </div>
-      </div>
+    <p>Mel Chen's concept of animacy illuminates what is at stake in this trust. Chen traces how the boundary between animate and inanimate is politically constructed, with consequences that fall along lines of race, sexuality, and disability. Fermentation sits at this boundary: matter that is neither dead nor alive in any simple sense, but teeming with agency that Western epistemology struggles to categorize. Jane Bennett calls this vibrant matter. Tompkins calls it deviant. The practitioners who maintain these traditions simply call it food.</p>
+
+    <p>The cookbook form is deliberate. Recipes are instructions that must be performed, whose results depend on conditions the author cannot control. A recipe for miso or tepache or sauerkraut is a set of rules for generating emergence.</p>
+
+    <div class="video-grid">
+      <video autoplay loop muted playsinline>
+        <source src="abstracts/fermentation-cookbook/yeast_bloom.mp4" type="video/mp4">
+      </video>
+      <video autoplay loop muted playsinline>
+        <source src="abstracts/fermentation-cookbook/dough_rise.mp4" type="video/mp4">
+      </video>
     </div>
   </section>
 
   <hr>
 
   <section id="sources">
-    <h2>Sources</h2>
+    <h2>Inspirations</h2>
 
     <div class="sources-grid">
 
       <div class="source-card">
-        <p class="source-type">Video</p>
-        <h3>Turing Pattern Simulation</h3>
-        <p>A visual demonstration of reaction-diffusion equations generating Turing patterns from scratch.</p>
-        <a href="https://www.youtube.com/watch?v=dhjXMHwPtzs" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+        <p class="source-type">Book</p>
+        <h3>Deviant Matter (Tompkins)</h3>
+        <p>Kyla Wazana Tompkins on fermentation, rot, and intoxication as forms of material deviance — and how the hygienic ordering of the modern state weaponized this deviance against minoritized communities.</p>
+        <a href="https://www.jstor.org/stable/jj.27461500" target="_blank" rel="noopener">View on JSTOR ↗</a>
       </div>
 
       <div class="source-card">
-        <p class="source-type">Blog Post</p>
-        <h3>Laser-Cut Turing Patterns</h3>
-        <p>Jessica Polka's documentation of generating and laser-cutting Turing patterns — a direct precedent for this project.</p>
-        <a href="http://jpolka.blogspot.com/2013/01/laser-cut-turing-patterns.html" target="_blank" rel="noopener">Read post ↗</a>
+        <p class="source-type">Book</p>
+        <h3>Animacies (Chen)</h3>
+        <p>Mel Chen's account of how the animate/inanimate boundary is politically constructed along lines of race, sexuality, and disability — and what it means to locate agency in matter that Western epistemology cannot categorize.</p>
+        <a href="https://www.dukeupress.edu/animacies" target="_blank" rel="noopener">View at Duke UP ↗</a>
       </div>
 
       <div class="source-card">
-        <p class="source-type">Academic Paper</p>
-        <h3>Turing Patterns &amp; Soft Pneumatic Technology</h3>
-        <p>Research on how Turing-inspired patterning can be applied to soft pneumatic actuators — bridging biological pattern formation and engineered materials.</p>
-        <a href="abstracts/turing-curtains/2024-09-turing-patterns-soft-pneumatic-technology.pdf" target="_blank" rel="noopener">Read PDF ↗</a>
-      </div>
-
-      <div class="source-card">
-        <p class="source-type">Tutorial</p>
-        <h3>Murmurations of Starlings — Boids</h3>
-        <p>V. Hunter Adams' lab guide to simulating murmuration-like flocking behaviour using the Boids algorithm: emergent motion from three simple local rules.</p>
-        <a href="https://vanhunteradams.com/Pico/Animal_Movement/Boids_Lab.html" target="_blank" rel="noopener">Read guide ↗</a>
+        <p class="source-type">Poetry</p>
+        <h3>Mother Tongue</h3>
+        <p>A collection from Goldline Press exploring language, heritage, and the transmission of knowledge between generations — a formal inspiration for a cookbook as a vehicle of cultural memory.</p>
+        <a href="https://dornsife.usc.edu/goldlinepress/mother-tongue/" target="_blank" rel="noopener">View at Goldline Press ↗</a>
       </div>
 
     </div>

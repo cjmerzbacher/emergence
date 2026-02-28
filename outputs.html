@@ -151,6 +151,14 @@
       color: var(--text-color);
       margin: 0;
     }
+
+    .output-body .output-format {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-color-alt);
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -220,6 +228,7 @@
       <div class="output" id="striding-arches-output">
         <img class="output-img" src="icons/striding-arches.JPG" alt="Striding Arches colour walk">
         <div class="output-body">
+          <p class="output-format">Photo walk</p>
           <h3>Striding Arches — Colour Walk</h3>
           <p>Three collages — green, brown, and gray — from a walk to Andy Goldsworthy's Striding Arches at Cairnhead. Each person photographed only objects of one colour.</p>
           <p><a href="striding-arches.html">View collages →</a></p>
@@ -229,6 +238,7 @@
       <div class="output" id="protein-weaving">
         <img class="output-img" src="icons/protein-weaving.JPG" alt="Protein weaving">
         <div class="output-body">
+          <p class="output-format">Textile &amp; software</p>
           <h3>Protein Weaving</h3>
           <p>Kagome weaving, crochet proteins, and topology-shifting surfaces — an experiment in making something <em>really</em> organic.</p>
           <p><a href="protein-weaving.html">Read more →</a></p>
@@ -238,6 +248,7 @@
       <div class="output" id="zettelkasten-output">
         <img class="output-img" src="icons/zettelkasten.jpg" alt="Zettelkasten notes graph">
         <div class="output-body">
+          <p class="output-format">Shared notes</p>
           <h3>Zettelkasten</h3>
           <p>A shared network of notes, annotations, and connections built before and during the residency.</p>
           <p><a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">Browse notes ↗</a></p>
@@ -253,22 +264,13 @@
   <!-- ── Future Catalog Entries ────────────────────────────────── -->
   <section id="future-entries">
     <h1>Future Catalog Entries</h1>
-    <p>Pages in progress — some nearly done, some still just an idea.</p>
-
+    
     <div class="output-grid">
-
-      <a class="output" href="inspirations.html" id="inspirations-output">
-        <div class="output-img-placeholder">INSPIRATIONS</div>
-        <div class="output-body">
-          <h3>Inspirations &amp; Future Curation</h3>
-          <p>Works, references, and ideas that preceded, sparked, and will outlast the residency — flocking lights, organoids, Kagome glass, and more.</p>
-          <p class="output-link">Browse →</p>
-        </div>
-      </a>
 
       <a class="output" href="turing-curtains.html" id="turing-curtains-output">
         <img class="output-img" src="abstracts/turing-curtains/laser-cut-pattern.jpg" alt="Laser-cut Turing pattern">
         <div class="output-body">
+          <p class="output-format">Laser-cut installation</p>
           <h3>Turing Curtains</h3>
           <p>Laser-cut reaction-diffusion and murmuration patterns on paper and fabric — static structure made dynamic through light.</p>
           <p class="output-link">Read more →</p>
@@ -278,6 +280,7 @@
       <a class="output" href="rivers-memory.html" id="rivers-memory-output">
         <img class="output-img" src="abstracts/rivers-memory/mississippi-river-meander.webp" alt="Harold Fisk's Mississippi River meander map">
         <div class="output-body">
+          <p class="output-format">Mapping &amp; essay</p>
           <h3>Rivers &amp; Memory</h3>
           <p>Tracing the geological memory of rivers — from the Mississippi's meanders to the buried creeks of Oakland and the engineered Amstel.</p>
           <p class="output-link">Read more →</p>
@@ -287,8 +290,54 @@
       <a class="output" href="story-cone.html" id="story-cone-output">
         <img class="output-img" src="abstracts/story-cone/hypercone.jpg" alt="Simon Thomas's Hypercone">
         <div class="output-body">
+          <p class="output-format">Academic article</p>
           <h3>Re-dimensionalizing the Futures Cone</h3>
           <p>Extending the futures cone into high-dimensional spaces to surface the worldviews that shape which futures we even imagine.</p>
+          <p class="output-link">Read more →</p>
+        </div>
+      </a>
+
+      <a class="output" href="flocking-lights.html" id="flocking-lights-output">
+        <img class="output-img" src="abstracts/flocking-lights/flocking-lights-cardboard.jpg" alt="Cardboard murmuration light installation">
+        <div class="output-body">
+          <p class="output-format">Installation concept</p>
+          <h3>Flocking Lights</h3>
+          <p>Murmuration behavior made physical — lights that flock, diffuse, and self-organize through local interactions and obstruction.</p>
+          <p class="output-link">Read more →</p>
+        </div>
+      </a>
+
+      <a class="output" href="fermentation-cookbook.html" id="fermentation-output">
+        <video class="output-img" autoplay loop muted playsinline>
+          <source src="abstracts/fermentation-cookbook/dough_rise.mp4" type="video/mp4">
+        </video>
+        <div class="output-body">
+          <p class="output-format">Cookbook</p>
+          <h3>Deviant Cookbook</h3>
+          <p>A cookbook as emergence — collecting fermentation practices across cultural traditions and the microbial life that Western food systems tried to suppress.</p>
+          <p class="output-link">Read more →</p>
+        </div>
+      </a>
+
+      <a class="output" href="generative-glass.html" id="generative-glass-output">
+        <video class="output-img" autoplay loop muted playsinline>
+          <source src="abstracts/generative-glass/m2-res_720p.mp4" type="video/mp4">
+          <source src="abstracts/generative-glass/m2-res_360p.mp4" type="video/mp4">
+        </video>
+        <div class="output-body">
+          <p class="output-format">Generative art &amp; glass</p>
+          <h3>Generative Glass</h3>
+          <p>Where two emergent systems meet: computational forms generated by simple rules, translated into a material that exceeds any plan.</p>
+          <p class="output-link">Read more →</p>
+        </div>
+      </a>
+
+      <a class="output" href="memory-game.html" id="memory-game-output">
+        <img class="output-img" src="abstracts/memory-game/fonts-landscape-11513815.jpg" alt="Landscape of letterforms">
+        <div class="output-body">
+          <p class="output-format">Word game</p>
+          <h3>All Water Has Perfect Memory</h3>
+          <p>A collaborative word game in which players transform written memories of a landscape as the language they're permitted to use changes.</p>
           <p class="output-link">Read more →</p>
         </div>
       </a>

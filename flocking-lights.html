@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Turing Curtains — Emergence</title>
+  <title>Flocking Lights — Emergence</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
   <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
@@ -28,15 +28,6 @@
     section { margin-top: calc(var(--line-height) * 3); }
     section h2:first-child { margin-top: 0; }
 
-    /* Figures */
-    .fig {
-      margin: calc(var(--line-height) * 2) 0;
-    }
-    .fig img {
-      width: 100%;
-      display: block;
-      margin: 0;
-    }
     .format {
       font-size: 0.7rem;
       text-transform: uppercase;
@@ -45,47 +36,21 @@
       margin: 0;
     }
 
-    .fig-caption {
-      font-size: 0.8rem;
-      color: var(--text-color-alt);
-      margin-top: calc(var(--line-height) * 0.5);
-    }
-    /* Image collage */
-    .collage {
+    /* Image grid */
+    .img-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2ch;
       margin: calc(var(--line-height) * 2) 0;
     }
-    .collage-left { overflow: hidden; }
-    .collage-left img {
+    .img-grid img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .collage-right {
-      display: flex;
-      flex-direction: column;
-      gap: 2ch;
-    }
-    .collage-right img:first-child {
-      width: 100%;
-      display: block;
-    }
-    .collage-birds {
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
-    }
-    .collage-birds img {
-      width: 100%;
-      height: 100%;
+      aspect-ratio: 1;
       object-fit: cover;
       display: block;
     }
     @media (max-width: 480px) {
-      .collage { grid-template-columns: 1fr; }
+      .img-grid { grid-template-columns: 1fr; }
     }
 
     /* Sources grid */
@@ -150,67 +115,55 @@
   </nav>
 
   <div class="header">
-    <h1>Turing Curtains</h1>
+    <h1>Flocking Lights</h1>
   </div>
 
-  <p class="format">Laser-cut installation</p>
-  <p><strong>Author:</strong> Charlotte Merzbacher</p>
+  <p class="format">Installation concept</p>
+  <p><strong>Authors:</strong> Andy Pelos, Charlotte Merzbacher &amp; Liam Carpenter-Urquhart</p>
 
   <hr>
 
   <section id="abstract">
     <h2>Abstract</h2>
 
-    <p>Turing patterns are spontaneous patterns that form from reaction-diffusion equations. They underlie the patterns in leopard spots, zebra stripes, and coral reef structure, and your fingerprints. Murmurations are the same idea made kinetic, and emerge from individuals following local rules, with no one in charge of the whole.</p>
+    <p>Flocking and murmuration behavior describes how signals propagate through collections of agents following only local rules — no conductor, no plan, just emergence. We want to make lights that show these behaviors dynamically, taking cues from two modes: the structure of the light itself changing shape over time (as in Studio Drift's Shylight or Theo Jansen's Strandbeest), or patterns diffusing and spreading across a field of lights.</p>
 
-    <p>I aim to use laser cutting to transfer computationally generated Turing and murmuration patterns onto paper and fabric for screen/shade fabrication. The static patterns become dynamic through their interplay with light throughout the day, creating emergent shadows.</p>
+    <p>A third possibility comes from Dark Matter: mobile opaque elements moving in front of a constant light source, their interactions producing self-organizing shadow patterns. Rather than lights that move, lights that are obscured — emergence through subtraction.</p>
 
-    <div class="collage">
-      <div class="collage-left">
-        <img src="abstracts/turing-curtains/laser-cut-pattern.jpg" alt="Laser-cut Turing pattern on paper">
-      </div>
-      <div class="collage-right">
-        <img src="abstracts/turing-curtains/turing-patterns.jpeg" alt="Computationally generated Turing patterns">
-        <div class="collage-birds">
-          <img src="abstracts/turing-curtains/murmurations.jpg.avif" alt="Murmuration of starlings">
-        </div>
-      </div>
+    <div class="img-grid">
+      <img src="abstracts/flocking-lights/flocking-lights-cardboard.jpg" alt="Cardboard murmuration light installation">
+      <img src="abstracts/flocking-lights/shylight.jpg" alt="Studio Drift's Shylight installation">
+      <img src="abstracts/flocking-lights/dark-matter.jpg" alt="Dark Matter Berlin">
+      <img src="abstracts/flocking-lights/organoid_protonoesis.jpg" alt="Organoid Protonoesis by Diarmid Flatley" style="object-position: left center;">
     </div>
   </section>
 
   <hr>
 
   <section id="sources">
-    <h2>Sources</h2>
+    <h2>Sources &amp; Inspiration</h2>
 
     <div class="sources-grid">
 
       <div class="source-card">
-        <p class="source-type">Video</p>
-        <h3>Turing Pattern Simulation</h3>
-        <p>A visual demonstration of reaction-diffusion equations generating Turing patterns from scratch.</p>
-        <a href="https://www.youtube.com/watch?v=dhjXMHwPtzs" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+        <p class="source-type">Art Installation</p>
+        <h3>Murmurations — Cardboard Light Installation</h3>
+        <p>An installation paying homage to flocking birds through suspended cardboard forms whose collective arrangement produces emergent murmuration-like patterns in light and shadow.</p>
+        <a href="https://www.creativeboom.com/inspiration/murmurations-artists-pay-homage-to-flocking-birds-with-cardboard-light-installation/" target="_blank" rel="noopener">Read more ↗</a>
       </div>
 
       <div class="source-card">
-        <p class="source-type">Blog Post</p>
-        <h3>Laser-Cut Turing Patterns</h3>
-        <p>Jessica Polka's documentation of generating and laser-cutting Turing patterns — a direct precedent for this project.</p>
-        <a href="http://jpolka.blogspot.com/2013/01/laser-cut-turing-patterns.html" target="_blank" rel="noopener">Read post ↗</a>
+        <p class="source-type">Art Installation</p>
+        <h3>Dark Matter</h3>
+        <p>Dark Matter Berlin: mobile physical elements positioned in front of constant light sources, generating self-organizing shadow patterns through their interactions. Emergence through obstruction rather than illumination.</p>
+        <a href="https://en.darkmatter.berlin/" target="_blank" rel="noopener">Visit site ↗</a>
       </div>
 
       <div class="source-card">
-        <p class="source-type">Academic Paper</p>
-        <h3>Turing Patterns &amp; Soft Pneumatic Technology</h3>
-        <p>Research on how Turing-inspired patterning can be applied to soft pneumatic actuators — bridging biological pattern formation and engineered materials.</p>
-        <a href="abstracts/turing-curtains/2024-09-turing-patterns-soft-pneumatic-technology.pdf" target="_blank" rel="noopener">Read PDF ↗</a>
-      </div>
-
-      <div class="source-card">
-        <p class="source-type">Tutorial</p>
-        <h3>Murmurations of Starlings — Boids</h3>
-        <p>V. Hunter Adams' lab guide to simulating murmuration-like flocking behaviour using the Boids algorithm: emergent motion from three simple local rules.</p>
-        <a href="https://vanhunteradams.com/Pico/Animal_Movement/Boids_Lab.html" target="_blank" rel="noopener">Read guide ↗</a>
+        <p class="source-type">Art &amp; Science Project</p>
+        <h3>Organoid Protonoesis</h3>
+        <p>Diarmid Flatley's real-time interface connecting spontaneous brain organoid activity to external devices — translating emergent neural firing patterns into architectural morphologies, generative sound, mechanical movement, and AI virtual entities.</p>
+        <a href="https://www.diarmidflatley.com/selected-works/organoid-protonoesis" target="_blank" rel="noopener">View project ↗</a>
       </div>
 
     </div>
