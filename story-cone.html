@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Re-dimensionalizing the Futures Cone — Emergence</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/reset.css">
+  <link rel="stylesheet" href="node_modules/@owickstrom/the-monospace-web/src/index.css">
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.classList.add(t);})()</script>
+  <style>
+    html.light { --text-color: #000; --text-color-alt: #666; --background-color: #fff; --background-color-alt: #eee; }
+    html.dark  { --text-color: #fff; --text-color-alt: #aaa; --background-color: #000; --background-color-alt: #111; }
+    .theme-toggle {
+      margin-left: auto; background: none; border: none; cursor: pointer;
+      font: inherit; font-weight: var(--font-weight-medium); color: var(--text-color); padding: 0;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 2ch;
+      margin-bottom: 0;
+      padding-bottom: var(--line-height);
+      border-bottom: calc(var(--border-thickness) * 3) double var(--text-color);
+    }
+    nav a { font-weight: var(--font-weight-medium); }
+
+    section { margin-top: calc(var(--line-height) * 3); }
+    section h2:first-child { margin-top: 0; }
+
+    /* Figures */
+    .fig {
+      margin: calc(var(--line-height) * 2) 0;
+    }
+    .fig img {
+      width: 100%;
+      display: block;
+      margin: 0;
+    }
+    .fig-caption {
+      font-size: 0.8rem;
+      color: var(--text-color-alt);
+      margin-top: calc(var(--line-height) * 0.5);
+    }
+
+    /* Image collage */
+    .collage {
+      margin: calc(var(--line-height) * 2) 0;
+    }
+    .collage-top img {
+      width: 100%;
+      display: block;
+    }
+    .collage-bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2ch;
+      margin-top: 2ch;
+    }
+    .collage-bottom-row img {
+      width: 100%;
+      display: block;
+    }
+    @media (max-width: 480px) {
+      .collage-bottom-row { grid-template-columns: 1fr; }
+    }
+
+    /* Sources grid */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(26ch, 1fr));
+      gap: var(--line-height) 2ch;
+      margin-top: var(--line-height);
+    }
+
+    .source-card {
+      border: var(--border-thickness) solid var(--text-color);
+      padding: var(--line-height) 2ch;
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--line-height) * 0.5);
+    }
+
+    .source-card .source-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-color-alt);
+      margin: 0;
+    }
+
+    .source-card h3 {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .source-card p {
+      font-size: 0.875rem;
+      color: var(--text-color-alt);
+      margin: 0;
+      flex: 1;
+    }
+
+    .source-card a {
+      font-size: 0.875rem;
+    }
+
+    footer {
+      margin-top: calc(var(--line-height) * 4);
+      padding-top: var(--line-height);
+      border-top: calc(var(--border-thickness) * 3) double var(--text-color);
+      color: var(--text-color-alt);
+      font-size: 0.825rem;
+    }
+    footer p { margin: 0; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">← emergence</a>
+    <a href="reading.html">reading</a>
+    <a href="schedule.html">schedule</a>
+    <a href="https://cjmerzbacher.github.io/zettelkasten/" target="_blank" rel="noopener">notes ↗</a>
+    <a href="outputs.html">outputs</a>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour scheme">◐</button>
+  </nav>
+
+  <div class="header">
+    <h1>Re-dimensionalizing the Futures Cone</h1>
+  </div>
+
+  <p><strong>Authors:</strong> Charlotte Merzbacher &amp; Liam Carpenter-Urquhart</p>
+  <p><strong>Format:</strong> Academic article</p>
+
+  <hr>
+
+  <section id="abstract">
+    <h2>Abstract</h2>
+
+    <p>The futures cone is a heuristic framework that describes what future possibilities people believe to be probable, plausible, and desirable from the perspective of the present moment. When used to guide collective storytelling about the future (e.g. in a futures workshop), the model is useful for helping people articulate their assumptions about what is most (un)likely. However, it has been criticized for favoring dominant projections regarding what "probable" means.</p>
+
+    <p>This paper will extend the futures cone into high-dimensional spaces: by framing futures as existing within high-dimensional spaces, the work highlights how different worldviews can generate overlapping yet distinct projections of potential outcomes. Concepts such as the "curse of dimensionality" are reinterpreted to explain the tendency of foresight and futures storytelling to privilege certain "desirable" narratives while neglecting the full breadth of possibility. The paper proposes that adopting a multidimensional lens can improve reflexivity in futures thinking and open new pathways for inclusive scenario construction.</p>
+
+    <div class="collage">
+      <div class="collage-top">
+        <img src="abstracts/story-cone/futurescone.png" alt="The Futures Cone diagram">
+      </div>
+      <div class="collage-bottom-row">
+        <img src="abstracts/story-cone/hypercone.jpg" alt="Simon Thomas's Hypercone">
+        <img src="abstracts/story-cone/time_tree.jpg" alt="The Entangled Time Tree">
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <section id="sources">
+    <h2>Sources &amp; Inspiration</h2>
+
+    <div class="sources-grid">
+
+      <div class="source-card">
+        <p class="source-type">Essay</p>
+        <h3>The Futures Cone, Use and History</h3>
+        <p>Joseph Voros's canonical account of the futures cone framework — its origins in foresight practice and how it maps possibility space from the present moment outward. The starting point for this paper's argument.</p>
+        <a href="https://thevoroscope.com/2017/02/24/the-futures-cone-use-and-history/" target="_blank" rel="noopener">Read essay ↗</a>
+      </div>
+
+      <div class="source-card">
+        <p class="source-type">Academic Paper</p>
+        <h3>Entangled Time Tree</h3>
+        <p>Terry et al. (2024) introduce the Entangled Time Tree as a decolonial alternative to the futures cone — centering non-linear, relational, and Indigenous conceptions of time and future imaginaries of nature. <em>Environmental Science &amp; Policy</em>.</p>
+        <a href="https://www.sciencedirect.com/science/article/pii/S1462901123002642" target="_blank" rel="noopener">Read paper ↗</a>
+      </div>
+
+      <div class="source-card">
+        <p class="source-type">Lecture Notes</p>
+        <h3>Thinking in High Dimensions</h3>
+        <p>Jonathan Shewchuk's notes on reasoning about high-dimensional geometry — covering counterintuitive properties of high-dimensional spaces including the curse of dimensionality, concentration of measure, and the geometry of hyperspheres.</p>
+        <a href="https://people.eecs.berkeley.edu/~jrs/highd/" target="_blank" rel="noopener">Read notes ↗</a>
+      </div>
+
+      <div class="source-card">
+        <p class="source-type">Academic Paper</p>
+        <h3>Understanding Multidimensional Projections</h3>
+        <p>A tutorial paper on how algorithms like t-SNE and Least-Square Projection map high-dimensional data into visual 2D/3D spaces — covering the mathematics of Laplacian matrices, Kullback-Leibler divergence, and PCA that underlie these methods.</p>
+        <a href="https://arxiv.org/pdf/2207.10800" target="_blank" rel="noopener">Read paper ↗</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> C. J. Merzbacher</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){var root=document.documentElement,btn=document.getElementById('theme-toggle');if(!localStorage.getItem('theme'))root.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');btn.addEventListener('click',function(){var d=root.classList.contains('dark');root.classList.toggle('dark',!d);root.classList.toggle('light',d);localStorage.setItem('theme',root.classList.contains('dark')?'dark':'light');});})()
+  </script>
+</body>
+</html>
