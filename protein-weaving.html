@@ -113,58 +113,45 @@
   <section id="idea">
     <h2>The Idea</h2>
 
-    <p>We were interested in light and shadow, in the ways in which 3D shapes create intersecting and dynamic patterns when projected onto 2D surfaces. We were also interested in molecular structure at variable scales, including proteins involved with memory, such as NMDA receptors.</p>
+    <p>We were interested in light and shadow. We were also interested in molecular structure at variable scales, as well as memory, and the proteins involved with memory, such as NMDA receptors.</p>
 
     <div class="fig">
       <img src="icons/mesh_upsidedown_2.png" alt="Mesh weave pattern upside down, showing projected shadow geometry">
     </div>
 
-    <p>We decided that we wanted to create semi-transparent sculptures inspired by protein structures. We started researching methods for rendering these structures in a process-oriented manner.</p>
-  </section>
+    <p>We decided we wanted to create semi-transparent sculptures inspired by protein structures, and started looking into techniques for building them. Two techniques stood out.</p>
+      <p>Our first idea was to use crochet - we were inspired by <a href="https://ruthasawa.com/" target="_blank" rel="noopener">Ruth Asawa's wire-looped art</a>, which does an excellent job of keeping its structure and letting light shine through. After finding <a href="https://jpolka.blogspot.com/2014/02/lessons-from-crocheting-alcohol.html" target="_blank" rel="noopener">Jessica Polka's crochet protein patterns</a>, we knew the approach could work for us.</p>
+      <p>Our second idea was to use weaving. We were inspired by <a href = "https://www.cave.co.ke/" target ="_blank" rel="noopener">cave_bureau</a>, a Kenyan architecture studio which has (among other projects) used a technique called Kagome weaving (described below) to weave reeds into gallery-sized structures shaped like cave interiors.
 
-  <hr>
+      <div class="fig">
+         <img src="icons/cave_bureau.jpg" alt="Cave Bureau's woven cave structure at the Louisiana Museum">
+         <p class="fig-caption"><a href="https://louisiana.dk/en/exhibition/cave_bureau/" target="_blank" rel="noopener">Cave_bureau at Louisiana Museum ↗</a></p>
+      </div>
 
-  <section id="methods">
-    <h2>The Methods</h2>
+     <h3>What is Kagome weaving?</h3>
 
-    <p>One initial idea was to use crochet. Charlotte has crocheted for years and is heavily inspired by <a href="https://ruthasawa.com/" target="_blank" rel="noopener">Ruth Asawa's wire-looped art</a>, from growing up visiting it in local San Francisco museums. We also found <a href="https://jpolka.blogspot.com/2014/02/lessons-from-crocheting-alcohol.html" target="_blank" rel="noopener">Jessica Polka's crochet protein structure</a>, which showed that the approach was tractable.</p>
-
-    <p>Two years ago, Liam and Charlotte visited the Louisiana Museum outside of Copenhagen and went to an exhibit by the Kenyan design studio Cave_bureau, where they wove a huge structure of a cave interior out of reeds using a technique called Kagome weaving.</p>
-
-    <div class="fig">
-      <img src="icons/cave_bureau.jpg" alt="Cave Bureau's woven cave structure at the Louisiana Museum">
-      <p class="fig-caption"><a href="https://louisiana.dk/en/exhibition/cave_bureau/" target="_blank" rel="noopener">Cave_bureau at Louisiana Museum ↗</a></p>
-    </div>
-
-    <p>Kagome weaving is a traditional triaxial weaving technique from Japan. In standard weaving, there are two sets of strands — a warp and a weft — that run perpendicular to one another. In triaxial weaving, three sets of strands intersect with each other at 120 degrees, leading to hexagons:</p>
+     <p>Kagome weaving is a traditional Japanese weaving technique. Unlike standard weaving, which uses two sets of strands (a warp and a weft) that run perpendicular to one another, Kagome weaving is a triaxial technique. It uses three sets of strands, which intersect with each other at 120 degree angles, creating a repeating pattern of hexagons in their negative space.</p>
 
     <div class="fig">
       <img src="icons/kagome_flat_2.JPG" alt="Flat kagome weave pattern showing the hexagonal triaxial structure">
     </div>
 
-    <p>The Cave_bureau weave was created in collaboration with Professor Phil Ayres, an architect at CITA Denmark, and <a href="https://www.instagram.com/alisonmartin57/" target="_blank" rel="noopener">Allison Grace Martin</a>, an Italy-based artist. We read two of their papers focused on developing mathematical principles for architectural-scale Kagome weaving. Specifically, Martin introduces what she calls "singularities" in the weave: polygons with more or fewer sides which induce positive or negative curvature in the weave structure.</p>
+    <p>The technique's architectural applications have been developed by a number of architects, mathematicians, and artists, including the cave_bureau, <a href="https://www.researchgate.net/profile/Phil-Ayres-2/publication/340464769_Architectural_Scale_Kagome_Weaving_Design_Methods_and_Fabrication_Concepts/links/5e8ba0134585150839c63152/Architectural-Scale-Kagome-Weaving-Design-Methods-and-Fabrication-Concepts.pdf" target="_blank" rel="noopener">Professor Phil Ayres</a> (an architect at CITA Denmark), and <a href="https://www.instagram.com/alisonmartin57/" target="_blank" rel="noopener">Allison Grace Martin</a> (an artist based in Italy). By introducing new strands into the weave (or withdrawing strands) at particular points, you can bend the curvature of your surface by introducing topological singularities.</p>
 
-    <div class="fig">
-      <img src="icons/kagome_on_table.JPG" alt="Kagome weave pattern laid out on a table">
-    </div>
-
-    <p>The papers we read:</p>
-    <ul>
-      <li><a href="http://www.florarobotica.eu/wp-content/uploads/2018/10/Triaxial-Weave_AAG_2018.pdf" target="_blank" rel="noopener">Triaxial Weave, AAG 2018</a></li>
-      <li><a href="https://www.researchgate.net/profile/Phil-Ayres-2/publication/340464769_Architectural_Scale_Kagome_Weaving_Design_Methods_and_Fabrication_Concepts/links/5e8ba0134585150839c63152/Architectural-Scale-Kagome-Weaving-Design-Methods-and-Fabrication-Concepts.pdf" target="_blank" rel="noopener">Architectural Scale Kagome Weaving: Design Methods and Fabrication Concepts</a></li>
-    </ul>
   </section>
 
   <hr>
 
-  <section id="experiments">
-    <h2>The Experiments</h2>
+  <section id="methods">
+    <h2>The Experiments</h2>   
+
+      <h3>Experiment 1: Digital Groundwork</h3>
 
     <p>We created a Python package that takes a protein shape file (from PDB, in CIF format) and generates three different types of patterns: a quadrature weave, a Kagome-style triaxial weave, or a crochet pattern. In addition, you can create your own Kagome patterns by adding individual singularities to the mesh and visualizing how that changes the overall shape.</p>
 
     <p>You can try it out for yourself here: <a href="https://github.com/cjmerzbacher/protein-weaving" target="_blank" rel="noopener">github.com/cjmerzbacher/protein-weaving ↗</a></p>
 
-    <p>We started by working with <a href="https://www.rcsb.org/structure/1CRN" target="_blank" rel="noopener">crambin</a>, a small 48-amino-acid plant peptide with a relatively simple structure (two alpha helices and a beta sheet). The level of smoothing and gap-filling applied to the PDB file affects the visual outputs:</p>
+    <p>Our first tests used <a href="https://www.rcsb.org/structure/1CRN" target="_blank" rel="noopener">crambin</a>, a small 48-amino-acid plant peptide with a relatively simple structure (two alpha helices and a beta sheet). The level of smoothing and gap-filling applied to the PDB file affects the visual outputs:</p>
 
     <div class="fig-grid">
       <div class="fig">
@@ -181,13 +168,7 @@
       </div>
     </div>
 
-    <p>We then generated a crochet pattern with a high globularity and crocheted it in real life. This pattern captured the larger structure of the protein and some of its lumpiness but, given that this is a simple protein, was not particularly interesting. However, the pattern generation worked and produced a legible and mathematically consistent pattern.</p>
-
-    <div class="fig">
-      <img src="icons/protein-weaving.JPG" alt="Crocheted crambin protein">
-    </div>
-
-    <p>Moving on to the NMDA receptor, a much larger protein with multiple subdomains, we had to make several changes to the algorithm to simplify the strand assignment and make such a large weave computationally feasible to render.</p>
+<p>When we tried to apply the program to the NMDA receptor, a much larger protein with multiple subdomains, we realized that we needed to make several changes to the algorithm to simplify the strand assignment and make such a large weave computationally feasible to render.</p>
 
     <div class="fig-grid-2">
       <div class="fig">
@@ -199,12 +180,37 @@
     </div>
   </section>
 
-  <hr>
+      <h3>Experiment 2: Crochet</h3>
+
+    <p>Because of Charlotte's extensive experience with crochet, we decided that our first test in the physical world should be a crochet pattern. We generated a crochet pattern for crambin that focused on the exterior structure of the protein, and then we made it.</p>
+
+    <div class="fig">
+      <img src="icons/protein-weaving.JPG" alt="Crocheted crambin protein">
+    </div>
+
+    <p>This pattern captured the larger structure of the protein and some of its interesting features but, given that this is a simple protein, there weren't too many interesting proteins to capture. However, it was clear that the pattern generation succeeded at making things we could build.</p>
+
+    <p>However, the surface of the yarn is too tight for light to shine through, precluding us from doing anything interesting with shadow. Our original follow-up idea was to use the crochet patterns to make something with wire. However, while Ruth Asawa's work is colloquially called crochet, it's actually a looping technique. Because that looping technique is much less well-studied than crochet, we have not yet been able to extend our python program to include it.
+
+      <h3>Experiment 3: Learning Kagome</h3>
+
+      <p>So, we decided to try to make something with triaxial weaving.</p>
+      <p>This was a new craft for all of us, so we started by making flat weaves with paper. You can see the results above, in the Idea section. The next step was to try introducing curvature. This turned out to be a real challenge, both conceptually (wrapping one's head around the math isn't easy) and practically (holding the stands in place while the surface is trying to curve isn't easy either). In the end, we succeeded at creating a curved surface.</p>
+
+    
+
+    <div class="fig">
+      <img src="icons/kagome_on_table.JPG" alt="Kagome weave pattern laid out on a table">
+    </div>
 
   <section id="next-steps">
     <h2>The Next Steps</h2>
-
-    <p>We are still working on the algorithm, improving performance and output rendering. Furthermore, finding globular structures for more interesting and relevant proteins (like the NMDA receptor) that can be converted into tangible crochet or woven outputs is key. We are still playing with the parameters to find optimal ones that balance design fidelity with weaving tractability.</p>
+    <p>There's a lot left to do: here's some directions the project might go next.</p>
+    <ul>
+      <li>We are still working on the algorithm, improving performance and output rendering. We'll need to play with the parameters to find an optimal balance between design fidelity and weaving tractability.</li>
+      <li>We want to improve our Kagome technique to the point that we can actually weave a protein structure.</li>
+      <li>We want to make an animation that we can project through a woven surface. The code we made that generates Kagome surfaces based on the location of singularities may be one step toward that. Shadow depends on both form and light - we want to play with both.</li>
+    </ul>
   </section>
 
   <footer>
