@@ -1,0 +1,552 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-BoldItalic;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Menlo-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red97\green182\blue180;\red171\green216\blue255;
+}
+{\*\expandedcolortbl;;\csgray\c0;\cssrgb\c44514\c75859\c75806;\cssrgb\c72102\c87821\c100000;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\i\b\fs28 \cf2 \ul \ulc2 \CocoaLigature0 Rivers and Memory \'97 Data Gathering Plan
+\f1\i0\b0 \ulnone                                       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Context
+\f1\b0                                                                       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  Art project exploring rivers as repositories of memory, inspired by Toni     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  Morrison's image of water "remembering where it used to be." Three cities:   \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  Oakland Hills (personal history, culverted creeks), Amsterdam (the Amstel    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  shaped by Dutch water engineering), and London (rich lost-rivers tradition). \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2   Goal: 
+\f2\b print/static
+\f1\b0  
+\f2\b maps
+\f1\b0  layering historical river courses over current city \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2   geography. Data pipeline is 
+\f2\b code-based
+\f1\b0  (Python/GIS).                        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  Output vision: high-quality printed maps showing ghost rivers beneath        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  present-day streets \'97 the geological and social memory of water.             \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  ---                                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Project
+\f1\b0  
+\f2\b Directory
+\f1\b0  
+\f2\b Structure
+\f1\b0                                                   \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  rivers-memory/                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    data/                                                                      \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2      oakland/                                                                 \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2      amsterdam/                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2      london/                                                                  \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    scripts/                                                                   \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2      fetch_oakland.py                                                         \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2      fetch_amsterdam.py                                                       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2      fetch_london.py                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2      render_map.py                                                            \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    output/                                                                    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2      maps/                                                                    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    sources.md                                                                 \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  ---                                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Data
+\f1\b0  
+\f2\b Sources
+\f1\b0  
+\f2\b by
+\f1\b0  
+\f2\b City
+\f1\b0                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Oakland
+\f1\b0  
+\f2\b Hills
+\f1\b0                                                                 \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Primary
+\f1\b0  
+\f2\b datasets:
+\f1\b0                                                             \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Oakland
+\f1\b0  
+\f2\b Museum
+\f1\b0  
+\f2\b of
+\f1\b0  
+\f2\b California
+\f1\b0  
+\f2\b Watershed
+\f1\b0  
+\f2\b Map
+\f1\b0  \'97 interactive map showing       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  historical vs. current creek paths, open/culverted/channelized status        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://explore.museumca.org/creeks/MapOak.html\cf2                           \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Exports: use browser DevTools or contact museum for GeoJSON/shapefile    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b City
+\f1\b0  
+\f2\b of
+\f1\b0  
+\f2\b Oakland
+\f1\b0  
+\f2\b Interactive
+\f1\b0  
+\f2\b Creeks
+\f1\b0  
+\f2\b Map
+\f1\b0  \'97 official culverted creek layer    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://www.oaklandca.gov/Community/.../Interactive-Oakland-Creeks-Map\cf2    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Oakland
+\f1\b0  
+\f2\b Open
+\f1\b0  
+\f2\b Data
+\f1\b0  
+\f2\b Portal
+\f1\b0  
+\f2\b (ArcGIS)
+\f1\b0  \'97 download creek shapefiles directly     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://oakland-oakgis.opendata.arcgis.com/\cf2                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b USGS
+\f1\b0  
+\f2\b National
+\f1\b0  
+\f2\b Hydrography
+\f1\b0  
+\f2\b Dataset
+\f1\b0  
+\f2\b (NHD)
+\f1\b0  \'97 federal stream data at 1:24,000  \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  scale, includes buried/altered channels                                      \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://data.cnra.ca.gov/dataset/national-hydrography-dataset-nhd\cf2         \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Download via USGS National Map Downloader by HUC watershed unit (Oakland \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2   = HUC 18050004)                                                             \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Alameda
+\f1\b0  
+\f2\b County
+\f1\b0  
+\f2\b Creek
+\f1\b0  
+\f2\b Map
+\f1\b0  
+\f2\b (PDF/GIS)
+\f1\b0  \'97 detailed historical + modern          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  watershed                                                                    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    -                                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  \cf4 https://deh.acgov.org/landwater-assets/docs/Oakland-Berkeley-Creek-Map.pdf\cf2    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Hidden
+\f1\b0  
+\f2\b Hydrology
+\f1\b0  
+\f2\b Project
+\f1\b0  \'97 "Lost Creeks of the Bay Area" with              \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  georeferenced culvert data                                                   \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://www.hiddenhydrology.org/lost-creeks-of-the-bay-area-part-i/\cf2       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Five
+\f1\b0  
+\f2\b Creeks
+\f1\b0  
+\f2\b Center
+\f1\b0  
+\f2\b historic
+\f1\b0  
+\f2\b maps
+\f1\b0 : \cf4 https://www.fivecreeks.org/maps/\cf2          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Key
+\f1\b0  
+\f2\b creeks
+\f1\b0  
+\f2\b to
+\f1\b0  
+\f2\b trace:
+\f1\b0                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - Sausal Creek (3 mi total, ~2 mi culverted; WPA channelized 1939-40)        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - Temescal Creek (first culverted 1871; runs under Grove-Shafter Freeway)    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - Peralta Creek (crosses under I-580, I-880, BART entirely underground)      \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - Glen Echo, Lion, Arroyo Viejo                                              \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Narrative
+\f1\b0  
+\f2\b resource:
+\f1\b0  Oaklandside creek series (\cf4 https://oaklandside.org/2024/0\cf2  \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  \cf4 1/25/oakland-creeks-series-restoring-urban-watershed/\cf2 )                       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  ---                                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Amsterdam
+\f1\b0  
+\f2\b /
+\f1\b0  
+\f2\b Amstel
+\f1\b0                                                            \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Primary
+\f1\b0  
+\f2\b datasets:
+\f1\b0                                                             \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b AHN4
+\f1\b0  
+\f2\b LiDAR
+\f1\b0  
+\f2\b elevation
+\f1\b0  
+\f2\b data
+\f1\b0  \'97 0.5m resolution DTM for all Netherlands (CC-0) \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Portal: \cf4 https://www.ahn.nl/\cf2                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Via Google Earth Engine: \cf4 AHN/AHN4\cf2  dataset \'97 river valleys show as        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  topographic memory even under paved city                                     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - R package: \cf4 rAHNextract\cf2  (\cf4 https://jellest.github.io/rAHNextract/\cf2 )          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Amsterdam
+\f1\b0  
+\f2\b Time
+\f1\b0  
+\f2\b Machine
+\f1\b0  \'97 historical map tiles (1625, 1724, 1876, 1909,     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  1943, 1985), importable into QGIS                                            \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://www.amsterdamtimemachine.nl/data/\cf2                                 \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Amsterdam
+\f1\b0  
+\f2\b Open
+\f1\b0  
+\f2\b Geodata
+\f1\b0  
+\f2\b Portal
+\f1\b0  \'97 city GIS layers including historical       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  datasets                                                                     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://maps.amsterdam.nl/open_geodata/?LANG=en\cf2                           \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Kadaster
+\f1\b0  
+\f2\b "Tijdreis"
+\f1\b0  
+\f2\b (Time
+\f1\b0  
+\f2\b Travel)
+\f1\b0  \'97 topographic maps 1815\'962015 with        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  slider, shows waterway changes                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Access via \cf4 https://www.kadaster.nl/\cf2                                       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b PDOK
+\f1\b0  
+\f2\b National
+\f1\b0  
+\f2\b Geo
+\f1\b0  
+\f2\b Register
+\f1\b0  \'97 Dutch national geospatial infrastructure,     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  WMS/WFS services                                                             \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://www.nationaalgeoregister.nl/\cf2                                      \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Rijkswaterstaat
+\f1\b0  
+\f2\b Open
+\f1\b0  
+\f2\b Data
+\f1\b0  \'97 current + historical water management data,    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  Python library \cf4 ddlpy\cf2                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://www.rijkswaterstaat.nl/zakelijk/open-data\cf2                         \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://github.com/Deltares/ddlpy\cf2                                         \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Stadsarchief
+\f1\b0  
+\f2\b Amsterdam
+\f1\b0  \'97 digitized historical maps (incl. 17th-century     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  canal belt development)                                                      \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://www.stadsarchief.amsterdam/\cf2                                       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Key
+\f1\b0  
+\f2\b historical
+\f1\b0  
+\f2\b facts
+\f1\b0  
+\f2\b to
+\f1\b0  
+\f2\b map:
+\f1\b0                                                  \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - Pre-medieval: two separate river systems connected artificially 10th-13th  \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  c. to create modern Amstel                                                   \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 17th c.: concentric canal ring engineered over 50 years (city size x4);    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  ~50% of original water lost to landfill                                      \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - Today: 25% of Amsterdam surface is still water; Waternet manages pumps,    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  locks, sluices                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Academic
+\f1\b0  
+\f2\b sources
+\f1\b0  
+\f2\b (already
+\f1\b0  
+\f2\b in
+\f1\b0  
+\f2\b abstract):
+\f1\b0                                       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - "Digging the river: historical geography of the Amstel area 800\'961275 AD"   \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  (Cambridge NJG)                                                              \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - "Geology of the Amstel river: Man versus nature" (Cambridge NJG)           \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  ---                                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b London
+\f1\b0                                                                        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Primary
+\f1\b0  
+\f2\b datasets:
+\f1\b0                                                             \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Paul
+\f1\b0  
+\f2\b Talling's
+\f1\b0  
+\f2\b londonslostrivers.com
+\f1\b0  \'97 comprehensive maps + walking routes \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2   for each river                                                              \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://www.londonslostrivers.com/\cf2                                        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Layers
+\f1\b0  
+\f2\b of
+\f1\b0  
+\f2\b London
+\f1\b0  \'97 GIS-based historical mapping, georectified maps from    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  late 17th c. onward, downloadable datasets                                   \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://www.layersoflondon.org/map/overlays/environment\cf2                   \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Hidden
+\f1\b0  
+\f2\b Hydrology
+\f1\b0  
+\f2\b \'97
+\f1\b0  
+\f2\b London
+\f1\b0  \'97 geoarchaeological culvert data                 \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://www.hiddenhydrology.org/category/city/london/\cf2                     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b London
+\f1\b0  
+\f2\b Datastore
+\f1\b0  \'97 GIS boundary files and environmental datasets           \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://data.london.gov.uk/\cf2                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b OpenStreetMap
+\f1\b0  \'97 culverted waterways tagged \cf4 tunnel=culvert\cf2 , extractable via \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2   Overpass API                                                                \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b London
+\f1\b0  
+\f2\b Metropolitan
+\f1\b0  
+\f2\b Archives
+\f1\b0  \'97 65,000+ maps incl. water/river thematic     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  maps, historical water company records                                       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://search.lma.gov.uk/\cf2                                                \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b MOLA
+\f1\b0  
+\f2\b (Museum
+\f1\b0  
+\f2\b of
+\f1\b0  
+\f2\b London
+\f1\b0  
+\f2\b Archaeology)
+\f1\b0  \'97 geoarchaeological deposit models     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  reconstructing buried river landscapes; Walbrook excavation data             \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 https://mola.iro.bl.uk/\cf2                                                   \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Key
+\f1\b0  
+\f2\b rivers
+\f1\b0  
+\f2\b to
+\f1\b0  
+\f2\b trace:
+\f1\b0                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - Fleet (largest subterranean river; culverted as Victorian sewer)           \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - Walbrook (disappeared 1440\'961600; Roman artifacts preserved in waterlogged  \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  sediment)                                                                    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - Effra (South London; underground since 1840s)                              \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - Tyburn (beneath Buckingham Palace; culverted 1827\'961871)                    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - Westbourne, Neckinger                                                      \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Books:
+\f1\b0  Paul Talling "London's Lost Rivers"; Tom Bolton "London's Lost        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  Rivers: A Walker's Guide" (vols. 1\'962)                                        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  ---                                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Data
+\f1\b0  
+\f2\b Pipeline
+\f1\b0  
+\f2\b (Python/GIS)
+\f1\b0                                                    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Tools
+\f1\b0                                                                         \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Python
+\f1\b0 : \cf4 geopandas\cf2 , \cf4 shapely\cf2 , \cf4 fiona\cf2 , \cf4 rasterio\cf2 , \cf4 requests\cf2 , \cf4 overpy\cf2  (OSM         \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  Overpass)                                                                    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b QGIS
+\f1\b0 : visual inspection, georeferencing scanned historical maps            \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Cartopy
+\f1\b0  or 
+\f2\b Matplotlib
+\f1\b0  
+\f2\b +
+\f1\b0  
+\f2\b contextily
+\f1\b0 : compositing final print maps           \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Google
+\f1\b0  
+\f2\b Earth
+\f1\b0  
+\f2\b Engine
+\f1\b0  (for AHN4 LiDAR Netherlands)                           \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Step-by-step
+\f1\b0  
+\f2\b pipeline
+\f1\b0  
+\f2\b per
+\f1\b0  
+\f2\b city
+\f1\b0                                                \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  1. 
+\f2\b Download
+\f1\b0  
+\f2\b base
+\f1\b0  
+\f2\b layers
+\f1\b0                                                       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Current street/building footprint: OpenStreetMap via \cf4 osmnx\cf2                \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Modern waterways: NHD (Oakland), PDOK/TOP10NL (Amsterdam), OS Open Data  \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  (London)                                                                     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  2. 
+\f2\b Gather
+\f1\b0  
+\f2\b historical
+\f1\b0  
+\f2\b river
+\f1\b0  
+\f2\b geometries
+\f1\b0                                         \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Oakland: NHD modified channels + Oakland Museum GeoJSON + Hidden         \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  Hydrology data                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Amsterdam: Amsterdam Time Machine WMS tiles + AHN4 DEM (trace            \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  paleochannels from elevation)                                                \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - London: Layers of London GIS export + OSM \cf4 tunnel=culvert\cf2  Overpass query  \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  3. 
+\f2\b Georeference
+\f1\b0  
+\f2\b scanned
+\f1\b0  
+\f2\b historical
+\f1\b0  
+\f2\b maps
+\f1\b0  (QGIS) where vector data doesn't     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  exist                                                                        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Stadsarchief maps for Amstel pre-1625                                    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Rocque's 1746 London map (via "Locating London's Past")                  \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  4. 
+\f2\b Classify
+\f1\b0  
+\f2\b river
+\f1\b0  
+\f2\b status
+\f1\b0                                                      \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - \cf4 open\cf2  / \cf4 culverted\cf2  / \cf4 channelized\cf2  / \cf4 historic_only\cf2  \'97 encode as line style in \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2   output                                                                      \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  5. 
+\f2\b Render
+\f1\b0  
+\f2\b print
+\f1\b0  
+\f2\b map
+\f1\b0                                                           \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Each city: one A2/A1 map at ~300dpi                                      \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Layers: historical ghost rivers (dashed/faded) + current waterways       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  (solid) + street grid (light grey) + culvert markers                         \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2    - Export: SVG for fine print editing in Illustrator, PNG for proofing      \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  ---                                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Thematic
+\f1\b0  
+\f2\b Connections
+\f1\b0  
+\f2\b to
+\f1\b0  
+\f2\b Develop
+\f1\b0                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Oakland
+\f1\b0 : personal memory \'97 childhood landscape, the politics of hiding     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  water (freeway construction, redlining, flood control)                       \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b Amsterdam
+\f1\b0 : engineered memory \'97 the Amstel as a human creation; the canal   \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  ring as infrastructure of empire                                             \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  - 
+\f2\b London
+\f1\b0 : urban amnesia \'97 Victorian culverting; the Fleet/Walbrook as        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  literally London's sewage past                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  These could become three panels / a triptych with consistent visual language \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2   across cities.                                                              \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  ---                                                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  
+\f2\b Verification
+\f1\b0  
+\f2\b /
+\f1\b0  
+\f2\b Testing
+\f1\b0                                                        \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2                                                                               \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  1. \cf4 python\cf2  \cf4 scripts/fetch_oakland.py\cf2  \'97 outputs \cf4 data/oakland/creeks.geojson\cf2 ,    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  spot-check against Oakland Museum interactive map                            \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  2. \cf4 python\cf2  \cf4 scripts/fetch_amsterdam.py\cf2  \'97 outputs AHN4 DEM tile + Time Machine  \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  WMS snapshot; verify Amstel is visible in elevation model                    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  3. \cf4 python\cf2  \cf4 scripts/fetch_london.py\cf2  \'97 outputs OSM culvert lines + Layers of    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  London export; verify Fleet appears                                          \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  4. \cf4 python\cf2  \cf4 scripts/render_map.py\cf2  \cf4 --city\cf2  \cf4 oakland\cf2  \'97 outputs                     \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  \cf4 output/maps/oakland_preview.png\cf2 ; check that historical and current layers    \cf3 \uc0\u9474 \cf2 \
+\cf3 \uc0\u9474 \cf2  are correctly differentiated                }
